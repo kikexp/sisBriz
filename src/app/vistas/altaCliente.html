@@ -1,0 +1,201 @@
+<div class="content-wrapper">
+  <div class="row">
+    <div class="col-md-12 grid-margin stretch-card">
+      <div class="card">
+        <div class="card-body">
+          <h4 class="card-title">Nuevo Cliente</h4>
+          
+          <form class="forms-sample" #formCliente="ngForm" (ngSubmit)="altaCliente()">
+            <div class="row">
+              <div class="col-md-6">
+                <div class="form-group">
+                <label for="Nombre">Nombre</label>
+                <input type="text" class="form-control" id="Nombre" placeholder="Nombre" name="nomb"
+                [(ngModel)]="cliente.nombre">
+                </div>
+              </div>
+              <div class="col-md-6">
+                <div class="form-group">
+                  <label for="Apellido">Apellido</label>
+                  <input type="text" class="form-control" id="Apellido" placeholder="Apellido" name="apellido" #apellido="ngModel" [(ngModel)]="cliente.apellido" >
+                </div>
+              </div>
+            </div>
+            
+            <div class="row">
+              <div class="col-md-6">
+                <div class="form-group">
+                  <label for="Documento">Documento</label>
+                    <div class="row">
+                        <div class="col-md-3">
+                          <select name="docTipo" #docTipo="ngModel" [(ngModel)]="cliente.docTipo"  class="form-control form-control-sm">
+                          <option value="dni">DNI</option>
+                          <option value="lc">LC</option>
+                          <option value="le">LE</option>
+                          <option value="pasaporte">PASAPORTE</option>
+                          </select>
+                        </div>
+                        <div class="col-md-8">
+                          <input type="number" class="form-control" placeholder="Numero" name="dni" #dni="ngModel" [(ngModel)]="cliente.dni">
+                        </div>
+                    </div>
+                </div>
+              </div>
+              <div class="col-md-6">
+                <div class="form-group">
+                  <label for="">Celular</label>
+                  <input type="number" class="form-control" id="Celular" placeholder="Celular" name="celular" #celular="ngModel" [(ngModel)]="cliente.celular">
+                </div>
+              </div>
+            </div>
+
+            <div class="row">
+              <div class="col-md-6">
+                <div class="form-group">
+                  
+                  <label for="telAlternativo">Telefono Alternativo 1</label>
+                  <input type="number" class="form-control" id="telAlternativo" placeholder="Telefono Alternativo 1" name="telefono" #telefono="ngModel" [(ngModel)]="cliente.telefono">
+                </div>
+              </div>
+              <div class="col-md-6">
+                <div class="form-group">
+                  <label for="telAlternativo2">Email</label>
+                  <input type="email" class="form-control" id="telAlternativo2" placeholder="Email" name="email" #email="ngModel" [(ngModel)]="cliente.email">
+                </div>
+              </div>
+            </div>
+            
+            <div class="form-group">
+              <label>Domicilio Actual</label>
+              <input type="text" class="form-control" placeholder="Domicilio" name="domicilio" #domicilio="ngModel" [(ngModel)]="cliente.domicilio">
+              
+            </div>
+            <div class="row">
+              <div class="col-md-8">
+                <div class="form-group">
+                  <label for="Ciudad">Cuidad</label>
+                  <input type="text" class="form-control" id="Cuidad" placeholder="Cuidad" name="ciudad" #ciudad="ngModel" [(ngModel)]="cliente.ciudad">
+                </div>
+              </div>
+              <div class="col-md-4">
+                <div class="form-group">
+                  <label for="cp">CP</label>
+                  <input type="text" class="form-control" id="cp" placeholder="Codigo Postal" name="cPostal" #cPostal="ngModel" [(ngModel)]="cliente.cPostal"> 
+                </div>
+              </div>
+            </div>
+            <div class="form-group">
+              <label for="cuit">C.U.I.T</label>
+              <input type="number" class="form-control" id="cuit" placeholder="Numero" name="cuit" #cuit="ngModel" [(ngModel)]="cliente.cuit">
+            </div>
+            <div class="row">
+              <div class="col-md-3">
+                <div class="form-group">
+                  <label for="Estado Civil">Estado Civil</label>
+                  <select class="form-control form-control-sm" name="estadoCivil" #estadoCivil="ngModel" [(ngModel)]="cliente.estadoCivil">
+                  <option value="Casado">Casado</option>
+                  <option value="Soltero">Soltero</option>
+                  <option value="Divorciado">Divorciado</option>                
+                  </select>                  
+                </div>
+
+              </div>
+              <div class="col-md-4">
+                <div class="form-group">                  
+                  <label for="cp">Profesión</label>
+                  <input type="text" class="form-control" id="cp" placeholder="Profesion" name="profesion" #profesion="ngModel" [(ngModel)]="cliente.profesion"> 
+                </div>
+              </div>           
+            </div>
+            <div class=" form-group">
+              <br>
+              <div class="form-group">
+                  <label for="fecNac">Fecha de nacimiento</label>
+              </div>
+              <mat-form-field>
+                <input matInput id="fecNac" [matDatepicker]="picker" placeholder="Seleccionar" name="fecNac" #fecNac="ngModel" [(ngModel)]="cliente.fecNac">
+                <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                <mat-datepicker #picker></mat-datepicker>
+              </mat-form-field> 
+              
+            </div>
+            <div class="form-group">
+                      <label for="iva">Condición frente al IVA</label>
+                      <div class="row">
+                        <mat-radio-group name="condIva" #condIva="ngModel" [(ngModel)]="cliente.condIva">
+                         <div>  
+                            <mat-radio-button
+                                  class="example-margin"
+                                  value="Resp. Inscripto"
+                                  
+                                  [labelPosition]="after"
+                                  [disabled]="false">
+                                  Resp. Inscripto
+                             </mat-radio-button> 
+                          </div>
+                          <div>
+                            <mat-radio-button
+                                  class="example-margin"
+                                  value="Resp. Monotributo"
+                                  
+                                  [labelPosition]="after"
+                                  [disabled]="false">
+                                  Resp. Monotributo
+                                </mat-radio-button> 
+                          </div>
+                          <div>
+                            <mat-radio-button
+                                  class="example-margin"
+                                  value="Consumidor Final"
+                                  
+                                  [labelPosition]="after"
+                                  [disabled]="false">
+                                  Consumidor Final
+                                </mat-radio-button> 
+                          </div>
+                          <div>
+                            <mat-radio-button
+                                  class="example-margin"
+                                  value="Exento"
+                                  
+                                  [labelPosition]="after"
+                                  [disabled]="false">
+                                  Exento
+                                </mat-radio-button> 
+                          </div>
+                          <div>
+                            <mat-radio-button
+                                  class="example-margin"
+                                  value="No responsable"
+                                  
+                                  [labelPosition]="after"
+                                  [disabled]="false">
+                                  No responsable
+                                </mat-radio-button> 
+                          </div>
+                        </mat-radio-group>
+                       
+                      </div>
+                      
+                    </div>
+            <div class="row">
+              <div class="col-md-2">
+                <label for="obs">Observaciones</label>
+              </div>
+              <div class="col-md-4">
+                <textarea name="obs" id="" cols="20" rows="7" name="obs" #obs="ngModel" [(ngModel)]="cliente.obs"></textarea>
+              </div>
+
+            </div>
+            <br> 
+
+            <input type="submit" value="Guardar" class="btn btn-success mr-2">
+            
+            <button class="btn btn-light" [routerLink]="['/tablaClientes']">Cancelar</button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>   
+</div>
+

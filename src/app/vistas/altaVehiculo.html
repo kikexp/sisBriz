@@ -1,0 +1,263 @@
+<div class="content-wrapper">
+
+  <div class="row">
+     <div class="col-md-12 grid-margin stretch-card">
+      <div class="card">
+        <div class="card-body">
+          <h4 class="card-title">Nuevo Vehiculo</h4>
+          
+          <form class="forms-sample">
+            <div class="form-group">
+              <div class="form-group">
+                <label for="FechaIngreso">Fecha de ingreso</label>
+              </div>
+              <mat-form-field>
+                <input matInput id="FechaIngreso" [matDatepicker]="picker" placeholder="Seleccionar">
+                <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                <mat-datepicker #picker></mat-datepicker>
+              </mat-form-field> 
+            </div>
+            <div class="form-group">
+              <label for="Marca">Marca</label>
+              <input type="text" class="form-control" id="Marca" placeholder="Marca">
+            </div>
+            <div class="row">
+              <div class="col-md-6">
+                <div class="form-group">
+                  <label for="Modelo">Modelo</label>
+                  <input type="text" class="form-control" id="Modelo" placeholder="Modelo">
+                </div>
+              </div>
+              <div class="col-md-3">
+                <div class="form-group">
+                  <label for="Año">Año</label>
+                  <input type="number" class="form-control" id="Año" placeholder="Año">
+                </div>
+              </div>
+            </div>
+            
+            <div class="row">
+              <div class="col-md-5">
+                <div class="form-group">
+                  <label for="Dominio">Dominio</label>
+                  <input type="text" class="form-control" id="Dominio" placeholder="Dominio">
+                </div>     
+              </div>
+              <div class="col-md-5">
+                <div class="form-group">
+                  <label for="Numero de Chasis">Numero de Chasis</label>
+                  <input type="text" class="form-control" id="Numero de Chasis" placeholder="Numero de Chasis">
+                </div>
+              </div>
+            </div>
+            
+            <br>
+            <hr>
+            <h4>Documentación recibida</h4>
+
+            <form class="form-sample">
+              <div class="col-md-7">
+                <div class="form-group">
+                  <div class="column">
+                    <div>
+                      <mat-checkbox
+                        class="example-margin"
+                        [(ngModel)]="Titulo" name="Titulo"
+                        
+                        [labelPosition]="after"
+                        [disabled]="false">
+                        Titulo
+                      </mat-checkbox> 
+                    </div>
+                    <div>
+                      <mat-checkbox
+                        class="example-margin"
+                        [(ngModel)]="CedulaVerde" name="CedulaVerde"
+                        [(indeterminate)]="indeterminate"
+                        [labelPosition]="labelPosition"
+                        [disabled]="disabled">
+                        Cedula Verde
+                      </mat-checkbox> 
+                    </div>
+                    <div>
+                      <mat-checkbox
+                        class="example-margin"
+                        [(ngModel)]="Formulario" name="Formulario"
+                        [(indeterminate)]="indeterminate"
+                        [labelPosition]="labelPosition"
+                        [disabled]="disabled">
+                        Formulario 08 Firmado
+                      </mat-checkbox> 
+                    </div>
+                    <div>
+                      <mat-checkbox
+                        class="example-margin"
+                        [(ngModel)]="ImpAuto" name="ImpAuto"
+                        [(indeterminate)]="indeterminate"
+                        [labelPosition]="labelPosition"
+                        [disabled]="disabled">
+                        Imp. Parque Autom.
+                      </mat-checkbox>
+                    </div>
+                    <div>
+                      <mat-checkbox
+                        class="example-margin"
+                        [(ngModel)]="VerPol" name="VerPol"
+                        [(indeterminate)]="indeterminate"
+                        [labelPosition]="labelPosition"
+                        [disabled]="disabled">
+                        Verificación policial
+                      </mat-checkbox>
+                    </div>
+                    <div>
+                      <mat-checkbox
+                        class="example-margin"
+                        [(ngModel)]="EstadoDom" name="EstadoDom"
+                        [(indeterminate)]="indeterminate"
+                        [labelPosition]="labelPosition"
+                        [disabled]="disabled">
+                        Estado Dominio c/13i
+                      </mat-checkbox> 
+                    </div>
+                    <div>
+                      <mat-checkbox
+                        class="example-margin"
+                        [(ngModel)]="Prenda" name="Prenda"
+                        [(indeterminate)]="indeterminate"
+                        [labelPosition]="labelPosition"
+                        [disabled]="disabled">
+                        Prenda
+                      </mat-checkbox>
+                    </div>
+                    <div>
+                      <mat-checkbox
+                        class="example-margin"
+                        [(ngModel)]="Rto" name="Rto"
+                        [(indeterminate)]="indeterminate"
+                        [labelPosition]="labelPosition"
+                        [disabled]="disabled">
+                        RTO
+                      </mat-checkbox> 
+                    </div>
+
+                  </div>
+                  
+                  
+                </div>
+
+              </div>
+
+            </form>
+            <hr>
+            <h4>Vehículo</h4>
+            <form class="form-sample">
+
+             <div class="col-md-7">
+              <div class="form-group">
+                <div>
+                  <mat-checkbox
+                        class="example-margin"
+                        [(ngModel)]="Gnc" name="Gnc"
+                        
+                        [labelPosition]="after"
+                        [disabled]="false">
+                        Cedula GNC
+                      </mat-checkbox> 
+                </div>
+                <div>
+                  <mat-checkbox
+                        class="example-margin"
+                        [(ngModel)]="DuplicadoLlave" name="DuplicadoLlave"
+                        
+                        [labelPosition]="after"
+                        [disabled]="false">
+                        Duplicado Llave
+                      </mat-checkbox> 
+                </div>
+                <div>
+                  <mat-checkbox
+                        class="example-margin"
+                        [(ngModel)]="Manuales" name="Manuales"
+                        
+                        [labelPosition]="after"
+                        [disabled]="false">
+                        Manuales
+                      </mat-checkbox> 
+                </div>
+                <div>
+                  <mat-checkbox
+                        class="example-margin"
+                        [(ngModel)]="CodRadio" name="CodRadio"
+                        
+                        [labelPosition]="after"
+                        [disabled]="false">
+                        Codigo de Radio
+                      </mat-checkbox> 
+                </div>
+              </div>
+                
+             </div> 
+              
+            </form>
+            <hr>
+            <h4>Herramientas</h4>
+            <form class="form-sample">
+              <div class="col-md-7">
+                <div class="form-group">
+                  <div class="column">
+                    <div>                
+                      <mat-checkbox
+                        class="example-margin"
+                        [(ngModel)]="RuedaAuxilio" name="RuedaAuxilio"
+                        
+                        [labelPosition]="after"
+                        [disabled]="false">
+                        Rueda de Auxilio
+                      </mat-checkbox> 
+                    </div>
+                    <div>
+                      <mat-checkbox
+                        class="example-margin"
+                        [(ngModel)]="LlaveRueda" name="LlaveRueda"
+                        
+                        [labelPosition]="after"
+                        [disabled]="false">
+                        Llave rueda
+                      </mat-checkbox> 
+                    </div>
+                
+                    <div>
+                      <mat-checkbox
+                        class="example-margin"
+                        [(ngModel)]="Gato" name="Gato"
+                        
+                        [labelPosition]="after"
+                        [disabled]="false">
+                        Gato
+                      </mat-checkbox> 
+                    </div>
+                  </div>
+                </div>
+              </div> 
+              <hr>
+              <div class="row">
+                <div class="col-md-2">
+                  <label for="obs">Observaciones</label>
+                </div>
+                <div class="col-md-4">
+                  <textarea name="obs" id="" cols="20" rows="7"></textarea>
+                </div>
+
+              </div>
+            <br>              
+            </form>
+            <br>
+            <button type="submit" class="btn btn-success mr-2">Guardar</button>
+            <button class="btn btn-light">Cancelar</button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+   
+</div>
