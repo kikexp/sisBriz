@@ -5,7 +5,7 @@ import { ModuleWithProviders } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 
 import { AppComponent } from './app.component'
-import { index } from './componentes/indexComponente'
+//import { index } from './componentes/indexComponente'
 import { tablaClientesComponente } from './componentes/tablaClientesComponente';
 import { tablaVehiculosComponente } from './componentes/tablaVehiculosComponente';
 import { altaClienteComponente } from './componentes/altaClienteComponente';
