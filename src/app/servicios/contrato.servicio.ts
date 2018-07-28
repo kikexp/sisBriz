@@ -15,7 +15,7 @@ import { Ruta } from '../rutaglobal';
 
 @Injectable()
 
-export class ClienteServicio {
+export class ContratoServicio {
 
 	public url:string;
 
@@ -26,38 +26,38 @@ export class ClienteServicio {
 	}
 
 
-	getClientes(){
+	getContratos(){
 		let headers = new Headers({"Content-Type":"application/json",
                                "Authorization": localStorage.getItem("id")});
-		return this._http.get( this.url + "/verClientes", {headers: headers}).map(res => res.json());
+		return this._http.get( this.url + "/verContratos", {headers: headers}).map(res => res.json());
 
 	}
 
 
-	getCliente(idCliente){
+	getContrato(idContrato){
 		let headers = new Headers({"Content-Type":"application/json",
                                "Authorization": localStorage.getItem("id")});
-		return this._http.get( this.url + "verCliente/"+ idCliente, {headers: headers}).map(res => res.json());
+		return this._http.get( this.url + "verContrato/"+ idContrato, {headers: headers}).map(res => res.json());
 	}
 
 
-	postCliente(cliente){
+	postContrato(contrato){
 
-		let parametros = JSON.stringify(cliente);	
+		let parametros = JSON.stringify(contrato);	
 
 		let headers = new Headers({"Content-Type":"application/json","Authorization": localStorage.getItem("id")})
 
 		//console.log("paramtros", parametros, headers);
 
-		return this._http.post(this.url + "altaCliente", parametros, {headers: headers}).map(resultado => resultado.json())	
+		return this._http.post(this.url + "altaContrato", parametros, {headers: headers}).map(resultado => resultado.json())	
 	}
 
-	putCliente(cliente){
-		let parametros = JSON.stringify(cliente);
+	putContrato(Contrato){
+		let parametros = JSON.stringify(Contrato);
 		
 		let headers = new Headers({"Content-Type":"application/json","Authorization": localStorage.getItem("id")});
 
-		return this._http.put(this.url + "actualizarCliente/" + cliente._id, cliente, {headers: headers}).map(resultado => resultado.json())	
+		return this._http.put(this.url + "actualizarContrato/" + Contrato._id, Contrato, {headers: headers}).map(resultado => resultado.json())	
 	}
 
 	
@@ -66,5 +66,3 @@ export class ClienteServicio {
 
 	
 }
-
-

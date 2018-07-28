@@ -10,7 +10,12 @@ import { tablaClientesComponente } from './componentes/tablaClientesComponente';
 import { tablaVehiculosComponente } from './componentes/tablaVehiculosComponente';
 import { altaClienteComponente } from './componentes/altaClienteComponente';
 import { altaVehiculoComponente } from './componentes/altaVehiculoComponente';
+
+import { tablaContratoComponente } from './componentes/tablaContratoComponente';
 import { altaContratoComponente } from './componentes/altaContratoComponente';
+
+
+import { tablaChequesComponente } from './componentes/tablaChequesComponente';
 import { altaChequeComponente } from './componentes/altaChequeComponente';
 
 
@@ -18,11 +23,19 @@ const appRoutes: Routes = [
 
 	{ path: '', component: tablaClientesComponente},
 	{ path: "tablaClientes", component: tablaClientesComponente},
-	{ path: "tablaVehiculos", component: tablaVehiculosComponente},
 	{ path: "altaCliente", component: altaClienteComponente},
+	{ path: "detalleCliente/:id", component: altaClienteComponente},
+
+	{ path: "tablaVehiculos", component: tablaVehiculosComponente},
 	{ path: "altaVehiculo", component: altaVehiculoComponente},
+	{ path: "detalleVehiculo/:id", component: altaVehiculoComponente},
+	
+	{ path: "tablaContratos", component: tablaContratoComponente},
 	{ path: "altaContrato", component: altaContratoComponente},
+
+	{ path: "tablaCheques", component: tablaChequesComponente},
 	{ path: "altaCheque", component: altaChequeComponente}
+	
 ]
 
 // Exportamos una variable constante llamada appRoutingProviders que va a ser un Array con objeto de cualquier tipo

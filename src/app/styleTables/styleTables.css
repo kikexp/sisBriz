@@ -1,0 +1,71 @@
+/* Structure */
+table {
+  width: 100%;
+}
+
+.mat-column-Modelo{
+	font-size: 14px;
+	width: 15%;
+}
+.mat-column-Marca{
+	font-size: 14px;
+	width: 15%;
+}
+.mat-column-Dominio{
+	font-size: 14px;
+	width: 15%;
+}
+.mat-column-Año{
+	font-size: 14px;
+	width: 10%;
+}
+.mat-column-Precio{
+	font-size: 14px;
+	width: 25%;
+	padding-right: 20px
+}
+.mat-form-field {
+  font-size: 14px;
+  width: 100%;
+}
+
+.mat-column-indice{
+	width: 10%;
+}
+
+.mat-column-entregador{
+	padding-left: 20px;
+	margin-right: 10%;
+}
+.mat-column-numero{
+	width: 15%;
+}
+
+.mat-column-monto{
+	width: 10%;
+}
+
+.mat-column-fechaentrega{
+	width: 10%;
+	padding-left: 40px;
+	padding-right: 50px;
+}
+
+.mat-column-detalle{
+	width: 10%;
+	padding-left: 20px;
+}
+
+.mat-form-field{
+	width: 50%;
+}
+
+.mat-column-nombre{
+	padding-left: 20px;
+	margin-right: 10%;
+}
+
+.mat-column-apellido{
+	padding-left: 20px;
+	margin-right: 10%;
+}

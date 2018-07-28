@@ -25,22 +25,37 @@ export class VehiculoServicio {
 
 
 	getVehiculos(){
-		return this._http.get( this.url + "verVehiculos").map(res => res.json());
+		let headers = new Headers({"Content-Type":"application/json",
+                               "Authorization": localStorage.getItem("id")});
+		return this._http.get( this.url + "/verVehiculos", {headers: headers}).map(res => res.json());
 
 	}
 
 
-	postVehiculos(url, cliente){
+	postVehiculos(vehiculo){
 
-		let parametros = JSON.stringify(cliente);	
+		let parametros = JSON.stringify(vehiculo);	
 
-		let headers = new Headers({"Content-Type":"application/json"})
+		let headers = new Headers({"Content-Type":"application/json","Authorization": localStorage.getItem("id")})
 
 		console.log("paramtros", parametros, headers);
 
 		return this._http.post(this.url + "altaVehiculo", parametros, {headers: headers}).map(resultado => resultado.json())	
 	}
 
+	getVehiculo(idVehiculo){
+		let headers = new Headers({"Content-Type":"application/json",
+                               "Authorization": localStorage.getItem("id")});
+		return this._http.get( this.url + "verVehiculo/"+ idVehiculo, {headers: headers}).map(res => res.json());
+	}
+
+	putVehiculo(vehiculo){
+		let parametros = JSON.stringify(vehiculo);
+		
+		let headers = new Headers({"Content-Type":"application/json","Authorization": localStorage.getItem("id")});
+
+		return this._http.put(this.url + "actualizarVehiculo/" + vehiculo._id, vehiculo, {headers: headers}).map(resultado => resultado.json())	
+	}
 
 
 	

@@ -15,8 +15,7 @@ import { Ruta } from '../rutaglobal';
 
 @Injectable()
 
-export class ClienteServicio {
-
+export class  ChequesServicio {
 	public url:string;
 
 	constructor(private _http:Http){
@@ -25,46 +24,35 @@ export class ClienteServicio {
 	
 	}
 
-
-	getClientes(){
+	getCheques(){
 		let headers = new Headers({"Content-Type":"application/json",
                                "Authorization": localStorage.getItem("id")});
-		return this._http.get( this.url + "/verClientes", {headers: headers}).map(res => res.json());
 
+		return this._http.get(this.url + "verCheques", {headers: headers}).map(res=> res.json());
+	}
+
+	getCheque(idCheque){
+		let headers = new Headers({"Content-Type":"application/json",
+                               "Authorization": localStorage.getItem("id")});
+		return this._http.get( this.url + "verCheque/"+ idCheque, {headers: headers}).map(res => res.json());
 	}
 
 
-	getCliente(idCliente){
-		let headers = new Headers({"Content-Type":"application/json",
-                               "Authorization": localStorage.getItem("id")});
-		return this._http.get( this.url + "verCliente/"+ idCliente, {headers: headers}).map(res => res.json());
-	}
+	postCheque(Cheque){
 
-
-	postCliente(cliente){
-
-		let parametros = JSON.stringify(cliente);	
+		let parametros = JSON.stringify(Cheque);	
 
 		let headers = new Headers({"Content-Type":"application/json","Authorization": localStorage.getItem("id")})
 
-		//console.log("paramtros", parametros, headers);
 
-		return this._http.post(this.url + "altaCliente", parametros, {headers: headers}).map(resultado => resultado.json())	
+		return this._http.post(this.url + "altaCheque", parametros, {headers: headers}).map(resultado => resultado.json())	
 	}
 
-	putCliente(cliente){
-		let parametros = JSON.stringify(cliente);
+	putCheque(Cheque){
+		let parametros = JSON.stringify(Cheque);
 		
 		let headers = new Headers({"Content-Type":"application/json","Authorization": localStorage.getItem("id")});
 
-		return this._http.put(this.url + "actualizarCliente/" + cliente._id, cliente, {headers: headers}).map(resultado => resultado.json())	
+		return this._http.put(this.url + "actualizarCheque/" + Cheque._id, Cheque, {headers: headers}).map(resultado => resultado.json())	
 	}
-
-	
-
-
-
-	
 }
-
-

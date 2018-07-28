@@ -9,10 +9,12 @@ import { VehiculoServicio } from '../servicios/vehiculo.servicio';
 
 //RUTAS
 import { Ruta } from '../rutaglobal';
+import {Router} from '@angular/router';
 
 @Component({
 	selector: "tablaVehiculosComponente",
 	templateUrl: "../vistas/tablaVehiculos.html",
+	styleUrls: ["../styleTables/styleTables.css"],
 	providers: [VehiculoServicio]
 	
 })
@@ -21,12 +23,12 @@ export class tablaVehiculosComponente implements OnInit{
 
 	public url: string;
 
-	displayedColumns = ['Marca', 'Modelo', 'Dominio', 'Numero de Chasis'];
+	displayedColumns = ['indice','Marca', 'Modelo', 'Dominio', 'Numero de Chasis', 'Año', 'Precio', 'detalle'];
 
 	dataSource: MatTableDataSource<Vehiculos>
 	
 
-	constructor(private _vehiculoServicio: VehiculoServicio){		
+	constructor(private _vehiculoServicio: VehiculoServicio, private router: Router){		
 	}
 	@ViewChild(MatPaginator) paginator: MatPaginator;
 	@ViewChild(MatSort) sort: MatSort;
@@ -34,6 +36,8 @@ export class tablaVehiculosComponente implements OnInit{
 	ngOnInit() {
 		this._vehiculoServicio.getVehiculos().subscribe(
 			res => {
+
+				console.log(res);
 
 				this.dataSource = new MatTableDataSource<Vehiculos>(res.mostrarVehiculos);
 				this.dataSource.paginator = this.paginator;
@@ -50,4 +54,14 @@ export class tablaVehiculosComponente implements OnInit{
 			})
 		
 	 }
+
+	 applyFilter(filterValue: string) {
+		    filterValue = filterValue.trim(); // Remove whitespace
+		    filterValue = filterValue.toLowerCase(); // MatTableDataSource defaults to lowercase matches
+		    this.dataSource.filter = filterValue;
+	}
+
+	detalleVehiculo(vehiculo){
+		this.router.navigate(['/detalleVehiculo/'+ vehiculo]);
+	}
 }

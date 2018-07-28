@@ -2,10 +2,10 @@ import { Component,OnInit, ViewChild } from '@angular/core';
 import {MatPaginator, MatSort, MatTableDataSource} from '@angular/material';
 
 //MODELOS
-import { Clientes } from '../modelos/clientes.modelo';
+import { Cheques } from '../modelos/cheque.modelo';
 
 //SERVICIOS
-import { ClienteServicio } from '../servicios/cliente.servicio';
+import { ChequesServicio } from '../servicios/cheques.servicio';
 
 //RUTAS
 import { Ruta } from '../rutaglobal';
@@ -13,40 +13,37 @@ import {Router} from '@angular/router';
 
 
 @Component({
-	selector: "tablaClientesComponente",
-	templateUrl: "../vistas/tablaClientes.html",
+	selector: "tablaCheques",
+	templateUrl: "../vistas/tablaCheques.html",
 	styleUrls: ["../styleTables/styleTables.css"],
-	providers: [ClienteServicio]
+	providers: [ChequesServicio]
 	
 })
 
-export class tablaClientesComponente implements OnInit {
-	//public listaClientes;
+export class tablaChequesComponente implements OnInit {
+
 	public url: string;
 
-	displayedColumns = ['indice','nombre', 'apellido', 'dni','detalle'];
+	displayedColumns = ['indice','numero','entregador', 'monto', 'fechaentrega', 'detalle'];
 
-	dataSource: MatTableDataSource<Clientes>
+	dataSource: MatTableDataSource<Cheques>
 	
 
-	constructor(private _clienteServicio: ClienteServicio, private router: Router){		
+	constructor(private _chequesServicio: ChequesServicio, private router: Router){		
 	}
 
 	@ViewChild(MatPaginator) paginator: MatPaginator;
 	@ViewChild(MatSort) sort: MatSort;	
 
 	ngOnInit() {
-		this._clienteServicio.getClientes().subscribe(
+		
+		this._chequesServicio.getCheques().subscribe(
 			res => {
+				console.log(res);
 
-				this.dataSource = new MatTableDataSource<Clientes>(res.mostrarClientes);
+				this.dataSource = new MatTableDataSource<Cheques>(res.mostrarCheques);
 				this.dataSource.paginator = this.paginator;
 				this.dataSource.sort = this.sort;
-				console.log(this.sort);
-				console.log(this.dataSource);
-				
-				console.log(this.dataSource.sort)
-
 				
 			},
 			err => {
@@ -62,8 +59,8 @@ export class tablaClientesComponente implements OnInit {
 		    this.dataSource.filter = filterValue;
 		  }
 
-	detalleCliente(cliente){
-		this.router.navigate(['/detalleCliente/'+ cliente]);
+	detalleCheque(cheque){
+		this.router.navigate(['/detalleCliente/'+ cheque]);
 	}
-	
+
 }

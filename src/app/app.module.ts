@@ -32,7 +32,11 @@ import { tablaClientesComponente } from './componentes/tablaClientesComponente';
 import { tablaVehiculosComponente } from './componentes/tablaVehiculosComponente';
 import { altaClienteComponente } from './componentes/altaClienteComponente';
 import { altaVehiculoComponente } from './componentes/altaVehiculoComponente';
+
+import { tablaContratoComponente } from './componentes/tablaContratoComponente';
 import { altaContratoComponente } from './componentes/altaContratoComponente';
+
+import { tablaChequesComponente } from './componentes/tablaChequesComponente';
 import { altaChequeComponente } from './componentes/altaChequeComponente';
 import { loginComponente } from './componentes/loginComponente';
 
@@ -53,7 +57,9 @@ import { routing, appRoutingProviders } from './app.rutas';
     altaVehiculoComponente,
     altaContratoComponente,
     altaChequeComponente,
-    loginComponente
+    loginComponente,
+    tablaChequesComponente,
+    tablaContratoComponente
   ],
   imports: [
     BrowserModule,
@@ -70,7 +76,8 @@ import { routing, appRoutingProviders } from './app.rutas';
     MatRadioModule,
     MatTableModule,
     MatPaginatorModule,
-    MatSortModule
+    MatSortModule,
+    ReactiveFormsModule
   ],
   providers: [appRoutingProviders],
   bootstrap: [AppComponent]
