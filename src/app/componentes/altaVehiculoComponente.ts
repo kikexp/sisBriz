@@ -23,6 +23,7 @@ export class altaVehiculoComponente implements OnInit{
 	public impAuto = [];
 	public vehiculo: Vehiculos;
 	public parmUrl;
+	after = 'after';
 
 	constructor(private _vehiculoServicio:VehiculoServicio, private _location: Location, private route: ActivatedRoute, private router: Router){
 		this.vehiculo = new Vehiculos("","","",null,"","",null,null,false,false,false,[{}],false,false,false,false,false,false,false,false,false,false,false,"",true,null);
