@@ -24,7 +24,8 @@ export class Vehiculos {
 		public llaveRueda: boolean,
 		public gato: boolean,
 		public observaciones: String,
-		public estado: boolean){
+		public estado: boolean,
+		public precioCompra: number){
 
 	}
 }

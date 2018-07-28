@@ -25,7 +25,7 @@ export class altaVehiculoComponente implements OnInit{
 	public parmUrl;
 
 	constructor(private _vehiculoServicio:VehiculoServicio, private _location: Location, private route: ActivatedRoute, private router: Router){
-		this.vehiculo = new Vehiculos("","","",null,"","",null,null,false,false,false,[{}],false,false,false,false,false,false,false,false,false,false,false,"",true);
+		this.vehiculo = new Vehiculos("","","",null,"","",null,null,false,false,false,[{}],false,false,false,false,false,false,false,false,false,false,false,"",true,null);
 		//this.url = Ruta.url;
 		debugger;
 		this.route.params.subscribe( params => this.parmUrl= params['id']);

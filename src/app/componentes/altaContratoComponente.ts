@@ -34,14 +34,16 @@ export class altaContratoComponente {
 	public banderaConyuge = false;
 	public mensajeC;
 	public mensajeV;
-	public mensajeCon;
-
+	public mensajeCon
+	Sena = false;
+	Contado = false;
+	Finan = false;
 	constructor(private _vehiculoServicio:VehiculoServicio,private _location: Location,private _clienteServicio: ClienteServicio, private _contratoServicio: ContratoServicio
 		){
-		this.cliente = new Clientes("","","","",null,null,null,null,"","","","","","","",null,"");
-		this.conyuge = new Clientes("","","","",null,null,null,null,"","","","","","","",null,"")
-		this.vehiculo = new Vehiculos("","","",null,"","",null,null,false,false,false,[{}],false,false,false,false,false,false,false,false,false,false,false,"",false);
-		this.usado = new Vehiculos("","","",null,"","",null,null,false,false,false,[{}],false,false,false,false,false,false,false,false,false,false,false,"",true);
+		this.cliente = new Clientes("","","","",null,null,null,null,"","","","","","","",null,"","");
+		this.conyuge = new Clientes("","","","",null,null,null,null,"","","","","","","",null,"","")
+		this.vehiculo = new Vehiculos("","","",null,"","",null,null,false,false,false,[{}],false,false,false,false,false,false,false,false,false,false,false,"",false,null);
+		this.usado = new Vehiculos("","","",null,"","",null,null,false,false,false,[{}],false,false,false,false,false,false,false,false,false,false,false,"",true,null);
 		this.contrato = new Contrato(null, "",[""], null, null, null, null,"",null,null, "","");
 		debugger;
 	}
@@ -60,7 +62,7 @@ export class altaContratoComponente {
 			err =>{
 				console.log(err);
 				this.mensajeC = JSON.parse(err._body).mensaje;
-				this.cliente = new Clientes("","","","",null,null,null,null,"","","","","","","",null,"");
+				this.cliente = new Clientes("","","","",null,null,null,null,"","","","","","","",null,"","");
 			}
 
 			);
@@ -230,6 +232,8 @@ export class altaContratoComponente {
 
 
 	}
+
+	labelPosition = 'after'
 
 
 

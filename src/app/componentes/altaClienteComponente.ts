@@ -24,9 +24,9 @@ export class altaClienteComponente implements OnInit{
 	public cliente: Clientes;
 	public url:string;
 	public parmUrl;
-
+	public mensajeC;
 	constructor(private _clienteServicio:ClienteServicio, private _location: Location, private route: ActivatedRoute, private router: Router){
-		this.cliente = new Clientes("","","","",null,null,null,null,"","","","","","","",null,"");
+		this.cliente = new Clientes("","","","",null,null,null,null,"","","","","","","",null,"","");
 		this.url = Ruta.url;
 
 		this.route.params.subscribe( params => this.parmUrl= params['id']);
@@ -82,6 +82,27 @@ export class altaClienteComponente implements OnInit{
 				this._location.back();
 			}
 			)
+	}
+
+
+
+	buscarCliente (clientePrm){
+		//console.log("entra");
+		this.mensajeC = null;
+		this._clienteServicio.getCliente(clientePrm).subscribe(
+
+			res=> {
+				console.log(res)
+				this.cliente = res.cliente;
+				
+			},
+			err =>{
+				console.log(err);
+				this.mensajeC = JSON.parse(err._body).mensaje;
+				this.cliente = new Clientes("","","","",null,null,null,null,"","","","","","","",null,"","");
+			}
+
+			);
 	}
 
 }

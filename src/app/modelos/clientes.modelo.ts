@@ -18,7 +18,8 @@ constructor(
 	public estadoCivil:string,
 	public profesion:string,
 	public fecNac: Date,
-	public condIva:string
+	public condIva:string,
+	public obs: string
 
 	){}
 	

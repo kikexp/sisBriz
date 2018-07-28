@@ -26,7 +26,7 @@ import { ClienteServicio } from '../servicios/cliente.servicio';
 export class altaChequeComponente {
 
 	public cheque: Cheques;
-	private cliente: Clientes;
+	public cliente: Clientes;
 	public url:string;
 	public parmUrl;
 	public librador;
@@ -34,7 +34,7 @@ export class altaChequeComponente {
 
 	constructor(private fb:FormBuilder, private _chequeServicio:ChequesServicio, private _clienteServicio: ClienteServicio, private _location: Location, private route: ActivatedRoute, private router: Router){
 		this.cheque = new Cheques(null,"","",null,null,"",{},"","","");
-		this.cliente = new Clientes("","","","",null,null,null,null,"","","","","","","",null,"");
+		this.cliente = new Clientes("","","","",null,null,null,null,"","","","","","","",null,"","");
 		this.librador = {nombre: null, contacto: null,direccion: null}
 		this.url = Ruta.url;
 
