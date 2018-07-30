@@ -2,12 +2,12 @@ const express = require('express');
 const app = express();
 const path = require('path');
 
-app.use(express.static( __dirname + '/dist/aplikacja' ));
+app.use(express.static( __dirname + '/dist/SisBriz' ));
 
 app.listen(process.env.PORT || 8080);
 
 app.get('/*', function(req, res){
-	res.sendFile(path.join(__dirname + '/dist/aplikacja/index.html'))
+	res.sendFile(path.join(__dirname + '/dist/SisBriz/index.html'))
 })
 
 console.log('console listening');
