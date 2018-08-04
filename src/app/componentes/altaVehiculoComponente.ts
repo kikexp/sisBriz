@@ -28,7 +28,6 @@ export class altaVehiculoComponente implements OnInit{
 	constructor(private _vehiculoServicio:VehiculoServicio, private _location: Location, private route: ActivatedRoute, private router: Router){
 		this.vehiculo = new Vehiculos("","","",null,"","",null,null,false,false,false,[{}],false,false,false,false,false,false,false,false,false,false,false,"",true,null);
 		//this.url = Ruta.url;
-		debugger;
 		this.route.params.subscribe( params => this.parmUrl= params['id']);
 		
 	}
@@ -39,12 +38,12 @@ export class altaVehiculoComponente implements OnInit{
 			this._vehiculoServicio.getVehiculo(this.parmUrl).subscribe(
 
 			res=> {
-				console.log(res)
+				
 				this.vehiculo = res.vehiculo;
 				
 			},
 			err =>{
-				console.log("No pasa nada");
+				console.log(err);
 			}
 
 			);
@@ -54,13 +53,13 @@ export class altaVehiculoComponente implements OnInit{
 
 
 	altaVehiculo(){
-		debugger;
+		
 		delete this.vehiculo._id;
 		this._vehiculoServicio.postVehiculos(this.vehiculo).subscribe(
 			res => {
 				alert("Vehiculo guardado");
 				this._location.back();
-				console.log("guardado", res);
+				
 
 
 			},

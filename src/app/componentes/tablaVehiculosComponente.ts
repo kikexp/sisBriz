@@ -42,10 +42,6 @@ export class tablaVehiculosComponente implements OnInit{
 				this.dataSource = new MatTableDataSource<Vehiculos>(res.mostrarVehiculos);
 				this.dataSource.paginator = this.paginator;
 				this.dataSource.sort = this.sort;
-				console.log(this.sort);
-				console.log(this.dataSource);
-				
-				console.log(this.dataSource.sort)
 
 				
 			},
