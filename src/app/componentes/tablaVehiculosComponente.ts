@@ -23,7 +23,7 @@ export class tablaVehiculosComponente implements OnInit{
 
 	public url: string;
 
-	displayedColumns = ['indice','Marca', 'Modelo', 'Dominio', 'Numero de Chasis', 'Año', 'Precio', 'detalle'];
+	displayedColumns = ['indice','Marca', 'Modelo', 'Dominio', 'NumerodeChasis', 'Anio', 'Precio', 'detalle'];
 
 	dataSource: MatTableDataSource<Vehiculos>
 	
