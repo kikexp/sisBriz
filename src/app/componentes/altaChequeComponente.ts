@@ -33,7 +33,7 @@ export class altaChequeComponente {
 	
 
 	constructor(private fb:FormBuilder, private _chequeServicio:ChequesServicio, private _clienteServicio: ClienteServicio, private _location: Location, private route: ActivatedRoute, private router: Router){
-		this.cheque = new Cheques(null,"","",null,null,"",{},"","","");
+		this.cheque = new Cheques("",null,"","",null,null,"",{},"","","", true);
 		this.cliente = new Clientes("","","","",null,null,null,null,"","","","","","","",null,"","");
 		this.librador = {nombre: null, contacto: null,direccion: null}
 		this.url = Ruta.url;
@@ -75,6 +75,7 @@ export class altaChequeComponente {
 		this.cheque.librador = this.librador;
 		this.cheque.entregador = this.cliente._id;
 		console.log(this.cheque);
+		delete this.cheque._id;
 		this._chequeServicio.postCheque(this.cheque).subscribe(
 			res => {
 				alert("Cheque guardado");

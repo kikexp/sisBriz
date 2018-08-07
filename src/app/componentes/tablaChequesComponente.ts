@@ -1,5 +1,6 @@
 import { Component,OnInit, ViewChild } from '@angular/core';
 import {MatPaginator, MatSort, MatTableDataSource} from '@angular/material';
+import {Location} from '@angular/common';
 
 //MODELOS
 import { Cheques } from '../modelos/cheque.modelo';
@@ -24,12 +25,12 @@ export class tablaChequesComponente implements OnInit {
 
 	public url: string;
 
-	displayedColumns = ['indice','numero','entregador', 'monto', 'fechaentrega', 'detalle'];
+	displayedColumns = ['indice','numero','entregador', 'monto', 'fechaentrega', 'detalle', 'eliminar'];
 
 	dataSource: MatTableDataSource<Cheques>
 	
 
-	constructor(private _chequesServicio: ChequesServicio, private router: Router){		
+	constructor(private _chequesServicio: ChequesServicio, private router: Router, private _location: Location){		
 	}
 
 	@ViewChild(MatPaginator) paginator: MatPaginator;
@@ -61,6 +62,21 @@ export class tablaChequesComponente implements OnInit {
 
 	detalleCheque(cheque){
 		this.router.navigate(['/detalleCliente/'+ cheque]);
+	}
+
+	eliminarCheque(cheque){
+		if(confirm("Seguro desea eliminar?")){
+			cheque.estado = false;
+			this._chequesServicio.putCheque(cheque).subscribe(
+			res=> {
+				alert("Cheque eliminado");
+				window.location.reload();
+				console.log("guardado", res);
+
+			}
+			)
+		}
+		
 	}
 
 }

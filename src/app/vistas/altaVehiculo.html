@@ -6,7 +6,7 @@
         <div class="card-body">
           <h4 class="card-title">Nuevo Vehiculo</h4>
           
-          <form class="forms-sample" #formVehiculo="ngForm" (ngSubmit)="altaVehiculo()">
+          <form class="forms-sample" #formVehiculo="ngForm">
             <div class="form-group">
               <div class="form-group">
                 <label for="FechaIngreso">Fecha de ingreso</label>
@@ -104,58 +104,6 @@
                         [disabled]="disabled">
                         Formulario 08 Firmado
                       </mat-checkbox> 
-                    </div>
-                    <div>
-                      <!--<mat-checkbox
-                        class="example-margin"
-                        name="impParque" [(ngModel)]="impParque"
-                        [(indeterminate)]="indeterminate"
-                        [labelPosition]="labelPosition"
-                        [disabled]="disabled">
-                        Imp. Parque Autom.
-                      </mat-checkbox>-->
-                      <!--<div *ngIf="HabilitarImpAuto">
-                        <mat-checkbox
-                          class="example-margin"
-                          [(ngModel)]="ImpAuto[1]" name="ImpAuto"
-                          [(indeterminate)]="indeterminate"
-                          [labelPosition]="labelPosition"
-                          [disabled]="disabled">
-                          {{a1}}
-                        </mat-checkbox>
-                        <mat-checkbox
-                          class="example-margin"
-                          [(ngModel)]="ImpAuto[2]" name="ImpAuto"
-                          [(indeterminate)]="indeterminate"
-                          [labelPosition]="labelPosition"
-                          [disabled]="disabled">
-                          {{a2}}
-                        </mat-checkbox>
-                        <mat-checkbox
-                          class="example-margin"
-                          [(ngModel)]="ImpAuto[3]" name="ImpAuto"
-                          [(indeterminate)]="indeterminate"
-                          [labelPosition]="labelPosition"
-                          [disabled]="disabled">
-                          {{a3}}
-                        </mat-checkbox>
-                        <mat-checkbox
-                          class="example-margin"
-                          [(ngModel)]="ImpAuto[4]" name="ImpAuto"
-                          [(indeterminate)]="indeterminate"
-                          [labelPosition]="labelPosition"
-                          [disabled]="disabled">
-                          {{a4}}
-                        </mat-checkbox>
-                        <mat-checkbox
-                          class="example-margin"
-                          [(ngModel)]="ImpAuto[5]" name="ImpAuto"
-                          [(indeterminate)]="indeterminate"
-                          [labelPosition]="labelPosition"
-                          [disabled]="disabled">
-                          {{a5}}
-                        </mat-checkbox>
-                      </div>-->
                     </div>
                   </div>
                   <div class="column">
@@ -318,7 +266,7 @@
             <span style="float: right;">
               <button *ngIf="parmUrl" class="btn btn-success mr-2" (click)="guardarDetalleVehiculo(vehiculo)">Guardar detalle</button>
 
-              <input *ngIf="!parmUrl" type="submit" value="Guardar" class="btn btn-success mr-2">
+              <button *ngIf="!parmUrl" type="submit" value="Guardar" class="btn btn-success mr-2" (click)="altaVehiculo()">Guardar</button>
             
               <button class="btn btn-light" [routerLink]="['/tablaVehiculos']">Cancelar</button>
             </span>

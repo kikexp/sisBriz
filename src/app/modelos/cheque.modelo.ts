@@ -1,5 +1,6 @@
 export class Cheques {
 	constructor(
+		public _id: string,
 		public numero: number,
 		public banco: string,
 		public monto: string,
@@ -9,6 +10,7 @@ export class Cheques {
 		public librador: {},
 		public entregador: {},
 		public concepto: string,
-		public observaciones: string
+		public observaciones: string,
+		public estado: boolean
 		){}
 }

@@ -45,7 +45,7 @@ export class altaContratoComponente {
 		this.vehiculo = new Vehiculos("","","",null,"","",null,null,false,false,false,[{}],false,false,false,false,false,false,false,false,false,false,false,"",false,null);
 		this.usado = new Vehiculos("","","",null,"","",null,null,false,false,false,[{}],false,false,false,false,false,false,false,false,false,false,false,"",true,null);
 		this.contrato = new Contrato(null, "",[""], null, null, null, null,"",null,null, "","");
-		debugger;
+		
 	}
 
 	buscarCliente (clientePrm){
@@ -115,7 +115,7 @@ export class altaContratoComponente {
 			}
 			else{
 				if(this.hConyuge && !this.banderaConyuge){
-					debugger;
+					
 					delete this.conyuge._id;
 					this._clienteServicio.postCliente(this.conyuge).subscribe(
 						res => {						
@@ -130,15 +130,14 @@ export class altaContratoComponente {
 			}
 		}
 		else{
-			debugger;
+			
 			delete this.cliente._id;
 			this._clienteServicio.postCliente(this.cliente).subscribe(
 				res => {				
 					console.log("cliente guardado", res);
 
 					this.contrato.propietarios.push(res.clienteGuardado._id);
-					debugger
-
+					
 				},
 				err => {
 					console.log("error", err);
@@ -149,7 +148,7 @@ export class altaContratoComponente {
 			}
 			else{
 				if(this.hConyuge && !this.banderaConyuge){
-					debugger;
+					
 					delete this.conyuge._id;
 					this._clienteServicio.postCliente(this.conyuge).subscribe(
 						resp => {						
@@ -170,7 +169,7 @@ export class altaContratoComponente {
 		if(this.Usado){
 			delete this.usado._id;
 			console.log(this.usado);
-			debugger;
+			
 			this._vehiculoServicio.postVehiculos(this.usado).subscribe(
 				res => {
 					console.log("usado guardado", res);
@@ -184,6 +183,8 @@ export class altaContratoComponente {
 							this._contratoServicio.postContrato(this.contrato).subscribe(
 								res =>{
 									console.log("contrato guardado");
+									alert("Venta realizada");
+									this._location.back();
 								},
 								err => {
 									console.log("error al guardar contrato")
@@ -204,7 +205,7 @@ export class altaContratoComponente {
 		}
 		else{
 			this.vehiculo.estado = false;
-			debugger;
+			
 			this._vehiculoServicio.putVehiculo(this.vehiculo).subscribe(
 				res =>{
 					console.log("vehiculo dado de baja",res);
