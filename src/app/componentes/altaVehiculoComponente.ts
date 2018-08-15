@@ -36,7 +36,7 @@ export class altaVehiculoComponente implements OnInit{
 	after = 'after';
 
 	constructor(private _vehiculoServicio:VehiculoServicio, private _clienteServicio: ClienteServicio, private _location: Location, private route: ActivatedRoute, private router: Router){
-		this.vehiculo = new Vehiculos("","","",null,"","",null,null,false,false,false,[{anio:"", cuotas:[]}],false,false,false,false,false,false,false,false,false,false,false,"",true,null,{Clientes});
+		this.vehiculo = new Vehiculos("","","",null,"","",null,null,false,false,false,[{anio:"", cuotas:[]}],false,false,false,false,false,false,false,false,false,false,false,"",true,null,{dni:"",nombre:"",apellido:"", celular:"", email:"", domicilio:""});
 		this.cliente = new Clientes("","","","",null,null,null,null,"","","","","","","",null,"","");
 		//this.url = Ruta.url;
 		this.route.params.subscribe( params => this.parmUrl= params['id']);
