@@ -25,7 +25,8 @@ export class Vehiculos {
 		public gato: boolean,
 		public observaciones: String,
 		public estado: boolean,
-		public precioCompra: number){
+		public precioCompra: number,
+		public vendedor: string){
 
 	}
 }

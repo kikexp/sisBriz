@@ -42,8 +42,8 @@ export class altaContratoComponente {
 		){
 		this.cliente = new Clientes("","","","",null,null,null,null,"","","","","","","",null,"","");
 		this.conyuge = new Clientes("","","","",null,null,null,null,"","","","","","","",null,"","")
-		this.vehiculo = new Vehiculos("","","",null,"","",null,null,false,false,false,[{}],false,false,false,false,false,false,false,false,false,false,false,"",false,null);
-		this.usado = new Vehiculos("","","",null,"","",null,null,false,false,false,[{}],false,false,false,false,false,false,false,false,false,false,false,"",true,null);
+		this.vehiculo = new Vehiculos("","","",null,"","",null,null,false,false,false,[{}],false,false,false,false,false,false,false,false,false,false,false,"",false,null,"");
+		this.usado = new Vehiculos("","","",null,"","",null,null,false,false,false,[{}],false,false,false,false,false,false,false,false,false,false,false,"",true,null,"");
 		this.contrato = new Contrato(null, "",[""], null, null, null, null,"",null,null, "","");
 		
 	}

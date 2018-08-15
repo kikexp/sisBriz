@@ -105,7 +105,9 @@
                         Formulario 08 Firmado
                       </mat-checkbox> 
                     </div>
+
                   </div>
+                  
                   <div class="column">
                       <div>
                         <mat-checkbox
@@ -146,7 +148,94 @@
                           RTO
                         </mat-checkbox> 
                       </div>
+                      <br>
+                      
+                      
                     </div>
+                    <div class="column example-margin">
+                          <p>Imp. Parque Automotor</p>
+                          <div class="row">
+                            <div class="col-md-5">
+                              <input type="number" class="form-control" id="Anio" placeholder="Año" name="anio" [(ngModel)]="imp.anio" style="padding-right: 10px">
+                              
+                            </div>
+                            <div class="col-md-5">
+                              <button (click)="guardarImp(imp)" class="btn btn-success mr-2">Agregar año</button>
+                            </div>
+                            
+                            
+                          </div>
+                          <br>
+                          <div class="row">
+                            
+                            <mat-form-field>
+                                <mat-select placeholder="Seleccione año" [(ngModel)]="impues" name="selec">
+                                  <mat-option *ngFor="let i of impAuto" [value]="i">
+                                    {{i.anio}}
+                                  </mat-option>
+                                </mat-select>
+                              </mat-form-field>
+                          </div>
+                          
+                          <div class="row" *ngIf="impues">
+                            <div class="column">
+
+                                <mat-checkbox
+                                  class="example-margin"
+                                  name="cuotaUno"
+                                  [(ngModel)]="impues.cuotas[0]"
+                                  [(indeterminate)]="indeterminate"
+                                  [labelPosition]="labelPosition"
+                                  [disabled]="disabled">
+                                 Cuota 1
+                                </mat-checkbox>
+                            </div>
+                            <div class="column">
+                                <mat-checkbox
+                                  class="example-margin"
+                                  name="cuotaDos"
+                                  [(ngModel)]="impues.cuotas[1]"
+                                  [(indeterminate)]="indeterminate"
+                                  [labelPosition]="labelPosition"
+                                  [disabled]="disabled">
+                                 Cuota 2
+                                </mat-checkbox>
+                            </div>
+                            <div class="column">
+                                <mat-checkbox
+                                  class="example-margin"
+                                  name="cuotatres"
+                                  [(ngModel)]="impues.cuotas[2]"
+                                  [(indeterminate)]="indeterminate"
+                                  [labelPosition]="labelPosition"
+                                  [disabled]="disabled">
+                                 Cuota 3
+                                </mat-checkbox>
+                            </div>
+                            <div class="column">
+                                <mat-checkbox
+                                  class="example-margin"
+                                  name="cuotaCuatro"
+                                  [(ngModel)]="impues.cuotas[3]"
+                                  [(indeterminate)]="indeterminate"
+                                  [labelPosition]="labelPosition"
+                                  [disabled]="disabled">
+                                 Cuota 4
+                                </mat-checkbox>
+                            </div>
+                            <div class="column">
+                                <mat-checkbox
+                                  class="example-margin"
+                                  name="cuotaCinco"
+                                  [(ngModel)]="impues.cuotas[4]"
+                                  [(indeterminate)]="indeterminate"
+                                  [labelPosition]="labelPosition"
+                                  [disabled]="disabled">
+                                 Cuota 5
+                                </mat-checkbox>
+                            </div> 
+                          </div>                       
+                        </div>
                   </div>
                   
                 </div>
@@ -248,6 +337,87 @@
                   </div>              
                 </div>
               </div>
+            </div>
+           <hr>
+            <h4 class="card-title"> 
+              Datos del cliente
+            </h4>
+            <!--Tipo y numero-->
+            <div class="row">
+              <div class="col-md-6">
+                <div class="form-group">
+                  <label for="Dni">DNI</label>
+                    <div class="row">
+                      <div class="col-md-3">
+                        <select class="form-control form-control-sm">
+                        <option value="">DNI</option>
+                        <option value="">LC</option>
+                        <option value="">LE</option>
+                        <option value="">PASAPORTE</option>
+                        </select>
+                      </div>
+                      <div class="col-md-8">
+                        <input type="number" class="form-control" placeholder="Numero" name="dni" #dni="ngModel" [(ngModel)]="cliente.dni">
+                      </div>
+                      <div class="col-md-1">
+                        <button (click)="buscarCliente(cliente.dni)" type="button" class="btn btn-light"><i class="fas fa-search"></i></button>
+                        
+                      </div>
+                      <p *ngIf="mensajeC" [ngStyle]="{'color':'red',
+                        'font-size': '14px',
+                        'margin': '10px'}">{{mensajeC}}</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!--Nombre y apellido-->
+            <div class="row">
+              <div class="col-md-6">
+                <div class="form-group">
+                <label for="Nombre">Nombre</label>
+                <input type="text" class="form-control" id="Nombre" placeholder="Nombre" name="nomb"
+                [(ngModel)]="cliente.nombre">
+                </div>
+              </div>
+              <div class="col-md-6">
+                <div class="form-group">
+                  <label for="Apellido">Apellido</label>
+                  <input type="text" class="form-control" id="Apellido" placeholder="Apellido" name="apellido" #apellido="ngModel" [(ngModel)]="cliente.apellido">
+                </div>
+              </div>
+            </div>
+            
+            <!--Contacto-->
+            <div class="row">                 
+              <div class="col-md-6">
+                <div class="form-group">
+                  <label for="">Celular</label>
+                  <input type="number" class="form-control" id="Celular" placeholder="Celular" name="celular" #celular="ngModel" [(ngModel)]="cliente.celular" >
+                </div>
+              </div>
+            </div>
+
+            <div class="row">
+              <div class="col-md-6">
+                <div class="form-group">
+                  
+                  <label for="telAlternativo">Telefono Alternativo 1</label>
+                  <input type="number" class="form-control" id="telAlternativo" placeholder="Telefono Alternativo 1" name="telefono" #telefono="ngModel" [(ngModel)]="cliente.telefono" >
+                </div>
+              </div>
+              <div class="col-md-6">
+                <div class="form-group">
+                  <label for="telAlternativo2">Email</label>
+                  <input type="email" class="form-control" id="telAlternativo2" placeholder="Email" name="email" #email="ngModel" [(ngModel)]="cliente.email" >
+                </div>
+              </div>
+            </div>
+            
+            <div class="form-group">
+              <label>Domicilio Actual</label>
+              <input type="text" class="form-control" placeholder="Domicilio" name="domicilio" #domicilio="ngModel" [(ngModel)]="cliente.domicilio">
+              
             </div>
             <hr>
                   <div class="row">

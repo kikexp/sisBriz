@@ -17,6 +17,7 @@ import {MatRadioModule} from '@angular/material/radio';
 import {MatTableModule} from '@angular/material/table';
 import {MatPaginatorModule} from '@angular/material/paginator';
 import {MatSortModule} from '@angular/material/sort';
+import { MatSelectModule } from '@angular/material';
 
 
 //import {MatToolbarModule} from '@angular/material/toolbar';
@@ -77,7 +78,8 @@ import { routing, appRoutingProviders } from './app.rutas';
     MatTableModule,
     MatPaginatorModule,
     MatSortModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    MatSelectModule
   ],
   providers: [appRoutingProviders],
   bootstrap: [AppComponent]

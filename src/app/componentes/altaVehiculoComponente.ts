@@ -6,6 +6,8 @@ import {ActivatedRoute, Router} from "@angular/router";
 
 
 import { Vehiculos } from '../modelos/vehiculos.modelo';
+import { Clientes } from '../modelos/clientes.modelo';
+import { ClienteServicio } from '../servicios/cliente.servicio';
 
 //SERVICIOS
 import { VehiculoServicio } from '../servicios/vehiculo.servicio';
@@ -14,21 +16,30 @@ import { VehiculoServicio } from '../servicios/vehiculo.servicio';
 @Component ({
 	selector: 'altaVehiculoComponente',
 	templateUrl: '../vistas/altaVehiculo.html',
-	providers: [VehiculoServicio]
+	providers: [VehiculoServicio,ClienteServicio]
 })
 
 export class altaVehiculoComponente implements OnInit{
 
 	public HabilitarImpAuto;
-	public impAuto = [];
+	public cliente: Clientes;
+	public banderaCliente = false;
+	public mensajeC;
+	public impAuto: [{}];
 	public vehiculo: Vehiculos;
 	public parmUrl;
+	public imp = {
+		anio: '',
+		cuotas: [{valor: false}, {valor: false}, {valor: false}, {valor: false}, {valor: false}]
+	}
 	after = 'after';
 
-	constructor(private _vehiculoServicio:VehiculoServicio, private _location: Location, private route: ActivatedRoute, private router: Router){
-		this.vehiculo = new Vehiculos("","","",null,"","",null,null,false,false,false,[{}],false,false,false,false,false,false,false,false,false,false,false,"",true,null);
+	constructor(private _vehiculoServicio:VehiculoServicio, private _clienteServicio: ClienteServicio, private _location: Location, private route: ActivatedRoute, private router: Router){
+		this.vehiculo = new Vehiculos("","","",null,"","",null,null,false,false,false,[{}],false,false,false,false,false,false,false,false,false,false,false,"",true,null,"");
+		this.cliente = new Clientes("","","","",null,null,null,null,"","","","","","","",null,"","");
 		//this.url = Ruta.url;
 		this.route.params.subscribe( params => this.parmUrl= params['id']);
+		//this.impAuto = [{}];
 		
 	}
 
@@ -40,6 +51,23 @@ export class altaVehiculoComponente implements OnInit{
 			res=> {
 				
 				this.vehiculo = res.vehiculo;
+				this._clienteServicio.getCliente(this.vehiculo.vendedor).subscribe(
+
+					res=> {
+						console.log(res)
+						this.cliente = res.cliente;
+						this.banderaCliente = true
+
+					},
+					err =>{
+						console.log(err);
+						this.mensajeC = JSON.parse(err._body).mensaje;
+						this.cliente = new Clientes("","","","",null,null,null,null,"","","","","","","",null,"","");
+					}
+
+				);
+
+				this.impAuto = this.vehiculo.impParque;
 				
 			},
 			err =>{
@@ -55,6 +83,7 @@ export class altaVehiculoComponente implements OnInit{
 	altaVehiculo(){
 		
 		delete this.vehiculo._id;
+		this.vehiculo.impParque = this.impAuto;
 		this._vehiculoServicio.postVehiculos(this.vehiculo).subscribe(
 			res => {
 				alert("Vehiculo guardado");
@@ -70,6 +99,8 @@ export class altaVehiculoComponente implements OnInit{
 	}
 
 	guardarDetalleVehiculo(vehiculo){
+		this.vehiculo.impParque = this.impAuto;
+		this.vehiculo.vendedor = this.cliente._id;
 		this._vehiculoServicio.putVehiculo(vehiculo).subscribe(
 			res =>{
 				alert("Vehiculo modificado");
@@ -80,6 +111,37 @@ export class altaVehiculoComponente implements OnInit{
 				this._location.back();
 			}
 			)
+	}
+
+	guardarImp(prm){
+		prm.cuotas=[{valor: false}, {valor: false}, {valor: false}, {valor: false}, {valor: false}];
+		console.log(this.impAuto);	
+		this.impAuto.push(prm);
+		console.log(this.impAuto);
+		this.imp = {
+			anio: '',
+			cuotas: [{valor: false}, {valor: false}, {valor: false}, {valor: false}, {valor: false}]
+		}	
+	}
+
+	buscarCliente (clientePrm){
+		//console.log("entra");
+		this.mensajeC = null;
+		this._clienteServicio.getCliente(clientePrm).subscribe(
+
+			res=> {
+				console.log(res)
+				this.cliente = res.cliente;
+				this.banderaCliente = true
+
+			},
+			err =>{
+				console.log(err);
+				this.mensajeC = JSON.parse(err._body).mensaje;
+				this.cliente = new Clientes("","","","",null,null,null,null,"","","","","","","",null,"","");
+			}
+
+			);
 	}
 
 
