@@ -28,6 +28,7 @@ export class altaVehiculoComponente implements OnInit{
 	public impAuto: [{}];
 	public vehiculo: Vehiculos;
 	public parmUrl;
+	impues;
 	public imp = {
 		anio: '',
 		cuotas: [{valor: false}, {valor: false}, {valor: false}, {valor: false}, {valor: false}]
