@@ -42,8 +42,8 @@ export class altaContratoComponente {
 		){
 		this.cliente = new Clientes("","","","",null,null,null,null,"","","","","","","",null,"","");
 		this.conyuge = new Clientes("","","","",null,null,null,null,"","","","","","","",null,"","")
-		this.vehiculo = new Vehiculos("","","",null,"","",null,null,false,false,false,[{anio:"", cuotas:[]}],false,false,false,false,false,false,false,false,false,false,false,"",true,null,{});
-		this.usado = new Vehiculos("","","",null,"","",null,null,false,false,false,[{anio:"", cuotas:[]}],false,false,false,false,false,false,false,false,false,false,false,"",true,null,{});
+		this.vehiculo = new Vehiculos("","","",null,"","",null,null,false,false,false,[{anio:"", cuotas:[]}],false,false,false,false,false,false,false,false,false,false,false,"",true,null,{dni:null,nombre:"",apellido:"", celular:null, email:"", domicilio:""});
+		this.usado = new Vehiculos("","","",null,"","",null,null,false,false,false,[{anio:"", cuotas:[]}],false,false,false,false,false,false,false,false,false,false,false,"",true,null,{dni:null,nombre:"",apellido:"", celular:null, email:"", domicilio:""});
 		this.contrato = new Contrato(null, "",[""], null, null, null, null,"",null,null, "","");
 		
 	}

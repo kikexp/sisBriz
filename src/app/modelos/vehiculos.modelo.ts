@@ -26,7 +26,7 @@ export class Vehiculos {
 		public observaciones: String,
 		public estado: boolean,
 		public precioCompra: number,
-		public vendedor: {}){
+		public vendedor: {dni: number, nombre: string,apellido: string, celular: number, email: string ,domicilio: string }){
 
 	}
 }
