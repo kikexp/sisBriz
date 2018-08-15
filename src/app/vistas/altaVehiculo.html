@@ -170,7 +170,7 @@
                             
                             <mat-form-field>
                                 <mat-select placeholder="Seleccione año" [(ngModel)]="impues" name="selec">
-                                  <mat-option *ngFor="let i of impAuto" [value]="i">
+                                  <mat-option *ngFor="let i of vehiculo.impParque" [value]="i">
                                     {{i.anio}}
                                   </mat-option>
                                 </mat-select>
@@ -234,6 +234,9 @@
                                  Cuota 5
                                 </mat-checkbox>
                             </div> 
+                            <div class="col-md-5">
+                              <button (click)="eliminarImp(impues)" class="btn btn-danger mr-2">Eliminar año</button>
+                            </div>
                           </div>                       
                         </div>
                   </div>
@@ -357,10 +360,10 @@
                         </select>
                       </div>
                       <div class="col-md-8">
-                        <input type="number" class="form-control" placeholder="Numero" name="dni" #dni="ngModel" [(ngModel)]="cliente.dni">
+                        <input type="number" class="form-control" placeholder="Numero" name="dni" #dni="ngModel" [(ngModel)]="vehiculo.vendedor.dni">
                       </div>
                       <div class="col-md-1">
-                        <button (click)="buscarCliente(cliente.dni)" type="button" class="btn btn-light"><i class="fas fa-search"></i></button>
+                        <button (click)="buscarCliente(vehiculo.vendedor.dni)" type="button" class="btn btn-light"><i class="fas fa-search"></i></button>
                         
                       </div>
                       <p *ngIf="mensajeC" [ngStyle]="{'color':'red',
@@ -371,7 +374,7 @@
               </div>
             </div>
 
-            <!--Nombre y apellido-->
+            <!--Nombre y apellido
             <div class="row">
               <div class="col-md-6">
                 <div class="form-group">
@@ -388,7 +391,7 @@
               </div>
             </div>
             
-            <!--Contacto-->
+            Contacto
             <div class="row">                 
               <div class="col-md-6">
                 <div class="form-group">
@@ -417,6 +420,62 @@
             <div class="form-group">
               <label>Domicilio Actual</label>
               <input type="text" class="form-control" placeholder="Domicilio" name="domicilio" #domicilio="ngModel" [(ngModel)]="cliente.domicilio">
+              
+            </div>-->
+
+
+
+
+
+
+
+            <<!--detalle cliente-->
+            <!--Nombre y apellido-->
+            <div class="row">
+              <div class="col-md-6">
+                <div class="form-group">
+                <label for="Nombre">Nombre</label>
+                <input type="text" class="form-control" id="Nombre" placeholder="Nombre" name="nomb"
+                [(ngModel)]="vehiculo.vendedor.nombre">
+                </div>
+              </div>
+              <div class="col-md-6">
+                <div class="form-group">
+                  <label for="Apellido">Apellido</label>
+                  <input type="text" class="form-control" id="Apellido" placeholder="Apellido" name="apellido" #apellido="ngModel" [(ngModel)]="vehiculo.vendedor.apellido">
+                </div>
+              </div>
+            </div>
+            
+            <!--Contacto-->
+            <div class="row">                 
+              <div class="col-md-6">
+                <div class="form-group">
+                  <label for="">Celular</label>
+                  <input type="number" class="form-control" id="Celular" placeholder="Celular" name="celular" #celular="ngModel" [(ngModel)]="vehiculo.vendedor.celular" >
+                </div>
+              </div>
+            </div>
+
+            <div class="row">
+              <div class="col-md-6">
+                <div class="form-group">
+                  
+                  <label for="telAlternativo">Telefono Alternativo 1</label>
+                  <input type="number" class="form-control" id="telAlternativo" placeholder="Telefono Alternativo 1" name="telefono" #telefono="ngModel" [(ngModel)]="vehiculo.vendedor.telefono" >
+                </div>
+              </div>
+              <div class="col-md-6">
+                <div class="form-group">
+                  <label for="telAlternativo2">Email</label>
+                  <input type="email" class="form-control" id="telAlternativo2" placeholder="Email" name="email" #email="ngModel" [(ngModel)]="vehiculo.vendedor.email" >
+                </div>
+              </div>
+            </div>
+            
+            <div class="form-group">
+              <label>Domicilio Actual</label>
+              <input type="text" class="form-control" placeholder="Domicilio" name="domicilio" #domicilio="ngModel" [(ngModel)]="vehiculo.vendedor.domicilio">
               
             </div>
             <hr>

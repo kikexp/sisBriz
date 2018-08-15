@@ -42,8 +42,8 @@ export class altaContratoComponente {
 		){
 		this.cliente = new Clientes("","","","",null,null,null,null,"","","","","","","",null,"","");
 		this.conyuge = new Clientes("","","","",null,null,null,null,"","","","","","","",null,"","")
-		this.vehiculo = new Vehiculos("","","",null,"","",null,null,false,false,false,[{}],false,false,false,false,false,false,false,false,false,false,false,"",false,null,"");
-		this.usado = new Vehiculos("","","",null,"","",null,null,false,false,false,[{}],false,false,false,false,false,false,false,false,false,false,false,"",true,null,"");
+		this.vehiculo = new Vehiculos("","","",null,"","",null,null,false,false,false,[{anio:"", cuotas:[]}],false,false,false,false,false,false,false,false,false,false,false,"",true,null,{});
+		this.usado = new Vehiculos("","","",null,"","",null,null,false,false,false,[{anio:"", cuotas:[]}],false,false,false,false,false,false,false,false,false,false,false,"",true,null,{});
 		this.contrato = new Contrato(null, "",[""], null, null, null, null,"",null,null, "","");
 		
 	}
@@ -121,6 +121,7 @@ export class altaContratoComponente {
 						res => {						
 							console.log("conyuge guardado");
 							this.contrato.propietarios.push(res.cliente._id);
+							this.vehiculo.vendedor = res.cliente;
 						},
 						err => {
 							console.log("error", err);
@@ -137,6 +138,7 @@ export class altaContratoComponente {
 					console.log("cliente guardado", res);
 
 					this.contrato.propietarios.push(res.clienteGuardado._id);
+					this.vehiculo.vendedor = res.cliente;
 					
 				},
 				err => {
@@ -175,6 +177,7 @@ export class altaContratoComponente {
 					console.log("usado guardado", res);
 					idUsado = res.vehiculoGuardado._id;
 					this.vehiculo.estado = false;
+					
 					this._vehiculoServicio.putVehiculo(this.vehiculo).subscribe(
 						res =>{
 							console.log("vehiculo dado de baja",res);

@@ -11,7 +11,7 @@ export class Vehiculos {
 		public titulo: boolean,
 		public cedulaVerde: boolean,
 		public formularioFirmado: boolean,
-		public impParque: [{}],
+		public impParque: [{ anio: string, cuotas: any[]}],
 		public verPolicial: boolean,
 		public estadoDom: boolean,
 		public prenda: boolean,
@@ -26,7 +26,7 @@ export class Vehiculos {
 		public observaciones: String,
 		public estado: boolean,
 		public precioCompra: number,
-		public vendedor: string){
+		public vendedor: {}){
 
 	}
 }

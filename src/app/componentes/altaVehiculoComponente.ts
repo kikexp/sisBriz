@@ -25,22 +25,23 @@ export class altaVehiculoComponente implements OnInit{
 	public cliente: Clientes;
 	public banderaCliente = false;
 	public mensajeC;
-	public impAuto: [{}];
+	//public impAuto: [{ anio: string, cuotas: any[]}];
 	public vehiculo: Vehiculos;
 	public parmUrl;
-	impues;
-	public imp = {
-		anio: '',
-		cuotas: [{valor: false}, {valor: false}, {valor: false}, {valor: false}, {valor: false}]
-	}
+	public impues;
+	public imp: {
+		anio: string,
+		cuotas: any[]
+	};
 	after = 'after';
 
 	constructor(private _vehiculoServicio:VehiculoServicio, private _clienteServicio: ClienteServicio, private _location: Location, private route: ActivatedRoute, private router: Router){
-		this.vehiculo = new Vehiculos("","","",null,"","",null,null,false,false,false,[{}],false,false,false,false,false,false,false,false,false,false,false,"",true,null,"");
+		this.vehiculo = new Vehiculos("","","",null,"","",null,null,false,false,false,[{anio:"", cuotas:[]}],false,false,false,false,false,false,false,false,false,false,false,"",true,null,{});
 		this.cliente = new Clientes("","","","",null,null,null,null,"","","","","","","",null,"","");
 		//this.url = Ruta.url;
 		this.route.params.subscribe( params => this.parmUrl= params['id']);
-		//this.impAuto = [{}];
+		//this.impAuto = [{ anio: '', cuotas: []}];
+		this.imp = { anio: "", cuotas: []}
 		
 	}
 
@@ -52,23 +53,9 @@ export class altaVehiculoComponente implements OnInit{
 			res=> {
 				
 				this.vehiculo = res.vehiculo;
-				this._clienteServicio.getCliente(this.vehiculo.vendedor).subscribe(
+				
 
-					res=> {
-						console.log(res)
-						this.cliente = res.cliente;
-						this.banderaCliente = true
-
-					},
-					err =>{
-						console.log(err);
-						this.mensajeC = JSON.parse(err._body).mensaje;
-						this.cliente = new Clientes("","","","",null,null,null,null,"","","","","","","",null,"","");
-					}
-
-				);
-
-				this.impAuto = this.vehiculo.impParque;
+				//this.impAuto = this.vehiculo.impParque;
 				
 			},
 			err =>{
@@ -84,7 +71,7 @@ export class altaVehiculoComponente implements OnInit{
 	altaVehiculo(){
 		
 		delete this.vehiculo._id;
-		this.vehiculo.impParque = this.impAuto;
+		//this.vehiculo.impParque = this.impAuto;
 		this._vehiculoServicio.postVehiculos(this.vehiculo).subscribe(
 			res => {
 				alert("Vehiculo guardado");
@@ -100,8 +87,8 @@ export class altaVehiculoComponente implements OnInit{
 	}
 
 	guardarDetalleVehiculo(vehiculo){
-		this.vehiculo.impParque = this.impAuto;
-		this.vehiculo.vendedor = this.cliente._id;
+		//this.vehiculo.impParque = this.impAuto;
+		//this.vehiculo.vendedor = this.cliente._id;
 		this._vehiculoServicio.putVehiculo(vehiculo).subscribe(
 			res =>{
 				alert("Vehiculo modificado");
@@ -115,14 +102,22 @@ export class altaVehiculoComponente implements OnInit{
 	}
 
 	guardarImp(prm){
-		prm.cuotas=[{valor: false}, {valor: false}, {valor: false}, {valor: false}, {valor: false}];
-		console.log(this.impAuto);	
-		this.impAuto.push(prm);
-		console.log(this.impAuto);
-		this.imp = {
-			anio: '',
-			cuotas: [{valor: false}, {valor: false}, {valor: false}, {valor: false}, {valor: false}]
+		//prm.cuotas=[{valor: false}, {valor: false}, {valor: false}, {valor: false}, {valor: false}];
+		console.log(this.vehiculo.impParque);	
+		this.vehiculo.impParque.push(prm)
+		console.log(this.vehiculo.impParque);
+		
+	}
+	eliminarImp(){
+		//prm.cuotas=[{valor: false}, {valor: false}, {valor: false}, {valor: false}, {valor: false}];
+		console.log(this.vehiculo.impParque);
+		var index = this.vehiculo.impParque.indexOf(this.impues, 0);
+		if (index > -1) {
+		   this.vehiculo.impParque.splice(index, 1);
 		}	
+		this.impues = null;
+		console.log(this.vehiculo.impParque);
+		
 	}
 
 	buscarCliente (clientePrm){
@@ -132,7 +127,7 @@ export class altaVehiculoComponente implements OnInit{
 
 			res=> {
 				console.log(res)
-				this.cliente = res.cliente;
+				this.vehiculo.vendedor = res.cliente;
 				this.banderaCliente = true
 
 			},
