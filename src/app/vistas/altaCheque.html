@@ -10,7 +10,7 @@
 				                <div class="form-group">
 					                <label for="NumCheque">Numero</label>
 					                <input type="number" class="form-control" placeholder="Numero" name="numero" #numero="ngModel" [(ngModel)]="cheque.numero" required>
-					                <p style="color: red" *ngIf="!formCheque.valid">* Campo requerido</p>
+					                <p style="color: red" *ngIf="!formCheque.valid && !formCheque.isTouched">* Campo requerido</p>
 				                </div>
 			              	</div>
 			                <div class="col-md-6">

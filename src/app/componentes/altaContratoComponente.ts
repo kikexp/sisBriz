@@ -48,6 +48,8 @@ export class altaContratoComponente {
 		
 	}
 
+	
+
 	buscarCliente (clientePrm){
 		//console.log("entra");
 		this.mensajeC = null;
@@ -236,6 +238,8 @@ export class altaContratoComponente {
 
 
 	}
+
+
 
 	labelPosition = 'after'
 

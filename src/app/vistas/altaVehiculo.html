@@ -345,77 +345,152 @@
             <h4 class="card-title"> 
               Datos del cliente
             </h4>
-            <!--Tipo y numero-->
-            <div class="row">
-              <div class="col-md-6">
-                <div class="form-group">
-                  <label for="Dni">DNI</label>
-                    <div class="row">
-                      <div class="col-md-3">
-                        <select class="form-control form-control-sm">
-                        <option value="">DNI</option>
-                        <option value="">LC</option>
-                        <option value="">LE</option>
-                        <option value="">PASAPORTE</option>
-                        </select>
-                      </div>
-                      <div class="col-md-8">
-                        <input type="number" class="form-control" placeholder="Numero" name="dni" #dni="ngModel" [(ngModel)]="vehiculo.vendedor.dni">
-                      </div>
-                      <div class="col-md-1">
-                        <button (click)="buscarCliente(vehiculo.vendedor.dni)" type="button" class="btn btn-light"><i class="fas fa-search"></i></button>
-                        
-                      </div>
-                      <p *ngIf="mensajeC" [ngStyle]="{'color':'red',
-                        'font-size': '14px',
-                        'margin': '10px'}">{{mensajeC}}</p>
+            
+
+            <!--formulario cliente-->
+            <div *ngIf="!banderaCliente">
+              <div class="row">
+                <div class="col-md-6">
+                  <div class="form-group">
+                    <label for="Dni">DNI</label>
+                      <div class="row">
+                        <div class="col-md-3">
+                          <select class="form-control form-control-sm">
+                            <option value="dni">DNI</option>
+                            <option value="lc">LC</option>
+                            <option value="le">LE</option>
+                          </select>
+                        </div>
+                        <div class="col-md-8">
+                          <input type="number" class="form-control" placeholder="Numero" name="dni" [(ngModel)]="cliente.dni">
+                        </div>
+                        <div class="col-md-1">
+                          <button (click)="buscarCliente(cliente.dni)" type="button" class="btn btn-light"><i class="fas fa-search"></i></button>
+                          
+                        </div>
+                        <p *ngIf="mensajeC" [ngStyle]="{'color':'red',
+                          'font-size': '14px',
+                          'margin': '10px'}">{{mensajeC}}</p>
+                    </div>
                   </div>
                 </div>
               </div>
-            </div>
-
-            
-            <!--Nombre y apellido-->
-            <div class="row">
-              <div class="col-md-6">
-                <div class="form-group">
-                <label for="Nombre">Nombre</label>
-                <input type="text" class="form-control" id="Nombre" placeholder="Nombre" name="nomb"
-                [(ngModel)]="vehiculo.vendedor.nombre">
+              <div class="row">
+                <div class="col-md-6">
+                  <div class="form-group">
+                  <label for="Nombre">Nombre</label>
+                  <input type="text" class="form-control" id="Nombre" placeholder="Nombre" name="nomb"
+                  [(ngModel)]="cliente.nombre" disabled>
+                  </div>
+                </div>
+                <div class="col-md-6">
+                  <div class="form-group">
+                    <label for="Apellido">Apellido</label>
+                    <input type="text" class="form-control" id="Apellido" placeholder="Apellido" name="apellido" #apellido="ngModel" [(ngModel)]="cliente.apellido" disabled>
+                  </div>
                 </div>
               </div>
-              <div class="col-md-6">
-                <div class="form-group">
-                  <label for="Apellido">Apellido</label>
-                  <input type="text" class="form-control" id="Apellido" placeholder="Apellido" name="apellido" #apellido="ngModel" [(ngModel)]="vehiculo.vendedor.apellido">
-                </div>
-              </div>
-            </div>
-            
-            <!--Contacto-->
-            <div class="row">                 
-              <div class="col-md-6">
-                <div class="form-group">
-                  <label for="">Celular</label>
-                  <input type="number" class="form-control" id="Celular" placeholder="Celular" name="celular" #celular="ngModel" [(ngModel)]="vehiculo.vendedor.celular" >
-                </div>
-              </div>
-            </div>
-
-            <div class="row">
-              <div class="col-md-6">
-                <div class="form-group">
-                  <label for="telAlternativo2">Email</label>
-                  <input type="email" class="form-control" id="telAlternativo2" placeholder="Email" name="email" #email="ngModel" [(ngModel)]="vehiculo.vendedor.email" >
-                </div>
-              </div>
-            </div>
-            
-            <div class="form-group">
-              <label>Domicilio Actual</label>
-              <input type="text" class="form-control" placeholder="Domicilio" name="domicilio" #domicilio="ngModel" [(ngModel)]="vehiculo.vendedor.domicilio">
               
+              <!--Contacto-->
+              <div class="row">                 
+                <div class="col-md-6">
+                  <div class="form-group">
+                    <label for="">Celular</label>
+                    <input type="number" class="form-control" id="Celular" placeholder="Celular" name="celular" #celular="ngModel" [(ngModel)]="cliente.celular" disabled>
+                  </div>
+                </div>
+              </div>
+
+              <div class="row">
+                <div class="col-md-6">
+                  <div class="form-group">
+                    <label for="telAlternativo2">Email</label>
+                    <input type="email" class="form-control" id="telAlternativo2" placeholder="Email" name="email" #email="ngModel" [(ngModel)]="cliente.email" disabled>
+                  </div>
+                </div>
+              </div>
+              
+              <div class="form-group">
+                <label>Domicilio Actual</label>
+                <input type="text" class="form-control" placeholder="Domicilio" name="domicilio" #domicilio="ngModel" [(ngModel)]="cliente.domicilio" disabled>
+                
+              </div>
+
             </div>
+            
+            <!--#end-->
+            
+           
+            <!--Datos vendedor-->
+            <div *ngIf="banderaCliente">
+              <div class="row">
+                <div class="col-md-6">
+                  <div class="form-group">
+                    <label for="Dni">DNI</label>
+                      <div class="row">
+                        <div class="col-md-3">
+                          <select class="form-control form-control-sm">
+                            <option value="dni">DNI</option>
+                            <option value="lc">LC</option>
+                            <option value="le">LE</option>
+                          </select>
+                        </div>
+                        <div class="col-md-8">
+                          <input type="number" class="form-control" placeholder="Numero" name="dni" [(ngModel)]="vehiculo.vendedor.dni">
+                        </div>
+                        <div class="col-md-1">
+                          <button (click)="buscarCliente(vehiculo.vendedor.dni)" type="button" class="btn btn-light"><i class="fas fa-search"></i></button>
+                          
+                        </div>
+                        <p *ngIf="mensajeC" [ngStyle]="{'color':'red',
+                          'font-size': '14px',
+                          'margin': '10px'}">{{mensajeC}}</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-md-6">
+                  <div class="form-group">
+                  <label for="Nombre">Nombre</label>
+                  <input type="text" class="form-control" id="Nombre" placeholder="Nombre" name="nomb"
+                  [(ngModel)]="vehiculo.vendedor.nombre" disabled>
+                  </div>
+                </div>
+                <div class="col-md-6">
+                  <div class="form-group">
+                    <label for="Apellido">Apellido</label>
+                    <input type="text" class="form-control" id="Apellido" placeholder="Apellido" name="apellido" #apellido="ngModel" [(ngModel)]="vehiculo.vendedor.apellido" disabled>
+                  </div>
+                </div>
+              </div>
+              
+              <!--Contacto-->
+              <div class="row">                 
+                <div class="col-md-6">
+                  <div class="form-group">
+                    <label for="">Celular</label>
+                    <input type="number" class="form-control" id="Celular" placeholder="Celular" name="celular" #celular="ngModel" [(ngModel)]="vehiculo.vendedor.celular" disabled>
+                  </div>
+                </div>
+              </div>
+
+              <div class="row">
+                <div class="col-md-6">
+                  <div class="form-group">
+                    <label for="telAlternativo2">Email</label>
+                    <input type="email" class="form-control" id="telAlternativo2" placeholder="Email" name="email" #email="ngModel" [(ngModel)]="vehiculo.vendedor.email" disabled>
+                  </div>
+                </div>
+              </div>
+              
+              <div class="form-group">
+                <label>Domicilio Actual</label>
+                <input type="text" class="form-control" placeholder="Domicilio" name="domicilio" #domicilio="ngModel" [(ngModel)]="vehiculo.vendedor.domicilio" disabled>
+                
+              </div>
+            </div>
+            
             <hr>
                   <div class="row">
                     <div class="col-md-2">

@@ -47,23 +47,47 @@ export class altaVehiculoComponente implements OnInit{
 
 	ngOnInit(){
 		setTimeout(()=>{
-
+			//this.vehiculo.vendedor = {dni: 123 ,nombre:"",apellido:"", celular: 123, email:"", domicilio:""};
+			this.banderaCliente = false;
 			this._vehiculoServicio.getVehiculo(this.parmUrl).subscribe(
 
-			res=> {
-				
-				this.vehiculo = res.vehiculo;
-				
+				res=> {
+					console.log(res)
 
-				//this.impAuto = this.vehiculo.impParque;
-				
-			},
-			err =>{
-				console.log(err);
-			}
+					if(res.vehiculo.vendedor && res.vehiculo.impParque){
+						this.vehiculo = res.vehiculo;
+						this.vehiculo.impParque = res.vehiculo.impParque
+						this.banderaCliente = true;
+						console.log("entra");
+
+					}
+					
+					else{
+						console.log(this.vehiculo.impParque);
+						if(res.vehiculo.impParque){
+							this.banderaCliente = true;
+							this.vehiculo.vendedor = {dni:null,nombre:"",apellido:"", celular:null, email:"", domicilio:""};
+						}
+						else{
+							this.vehiculo = res.vehiculo;
+							this.banderaCliente = true;
+							this.vehiculo.vendedor = {dni:null,nombre:"",apellido:"", celular:null, email:"", domicilio:""};
+							this.vehiculo.impParque = [{anio:"", cuotas:[]}]
+						}
+
+					}
+					
+					
+
+					//this.impAuto = this.vehiculo.impParque;
+					
+				},
+				err =>{
+					console.log(err);
+				}
 
 			);
-		},10);
+		},5);
 
 	}
 
@@ -89,7 +113,9 @@ export class altaVehiculoComponente implements OnInit{
 	guardarDetalleVehiculo(vehiculo){
 		//this.vehiculo.impParque = this.impAuto;
 		//this.vehiculo.vendedor = this.cliente._id;
-		this._vehiculoServicio.putVehiculo(vehiculo).subscribe(
+		if(this.cliente){
+			vehiculo.vendedor = this.cliente;
+			this._vehiculoServicio.putVehiculo(vehiculo).subscribe(
 			res =>{
 				alert("Vehiculo modificado");
 				this.router.navigate(["/tablaVehiculos"]);
@@ -97,8 +123,21 @@ export class altaVehiculoComponente implements OnInit{
 			err => {
 				alert("Error al actualizar. " + err);
 				this._location.back();
-			}
-			)
+			})
+		}
+		else{
+			this._vehiculoServicio.putVehiculo(vehiculo).subscribe(
+			res =>{
+				alert("Vehiculo modificado");
+				this.router.navigate(["/tablaVehiculos"]);
+			},
+			err => {
+				alert("Error al actualizar. " + err);
+				this._location.back();
+			})
+		}
+		
+			
 	}
 
 	guardarImp(prm){
@@ -127,8 +166,7 @@ export class altaVehiculoComponente implements OnInit{
 
 			res=> {
 				console.log(res)
-				this.vehiculo.vendedor = res.cliente;
-				this.banderaCliente = true
+				this.cliente = res.cliente;
 
 			},
 			err =>{
