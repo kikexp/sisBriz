@@ -34,7 +34,8 @@ export class altaContratoComponente {
 	public banderaConyuge = false;
 	public mensajeC;
 	public mensajeV;
-	public mensajeCon
+	public mensajeCon;
+	public parmUrl;
 	Sena = false;
 	Contado = false;
 	Finan = false;
@@ -42,13 +43,73 @@ export class altaContratoComponente {
 		){
 		this.cliente = new Clientes("","","","",null,null,null,null,"","","","","","","",null,"","");
 		this.conyuge = new Clientes("","","","",null,null,null,null,"","","","","","","",null,"","")
-		this.vehiculo = new Vehiculos("","","",null,"","",null,null,false,false,false,[{anio:"", cuotas:[]}],false,false,false,false,false,false,false,false,false,false,false,"",true,null,{dni:null,nombre:"",apellido:"", celular:null, email:"", domicilio:""});
-		this.usado = new Vehiculos("","","",null,"","",null,null,false,false,false,[{anio:"", cuotas:[]}],false,false,false,false,false,false,false,false,false,false,false,"",true,null,{dni:null,nombre:"",apellido:"", celular:null, email:"", domicilio:""});
+		this.vehiculo = new Vehiculos("","","",null,"","",null,null,false,false,false,[{anio:"", cuotas:[]}],false,false,false,false,false,false,false,false,false,false,false,"",true,null,{dni: null, nombre: "",apellido: "",celular: null, email: "",domicilio: ""});
+		this.usado = new Vehiculos("","","",null,"","",null,null,false,false,false,[{anio:"", cuotas:[]}],false,false,false,false,false,false,false,false,false,false,false,"",true,null,{dni: null, nombre: "",apellido: "",celular: null, email: "",domicilio: ""});
 		this.contrato = new Contrato(null, "",[""], null, null, null, null,"",null,null, "","");
 		
 	}
 
-	
+	ngOnInit(){
+		setTimeout(()=>{
+			//this.vehiculo.vendedor = {dni: 123 ,nombre:"",apellido:"", celular: 123, email:"", domicilio:""};
+			this._contratoServicio.getContrato(this.parmUrl).subscribe(
+				res =>{
+					if(res.Contrato.propietarios[0] && res.Contrato.propietarios[1]){
+						this.contrato = res.Contrato;
+						this.cliente = res.Contrato.propietarios[0];
+						this.conyuge = res.Contrato.propietarios[1]; 
+					}
+					else{
+						if(res.Contrato.propietarios[0]){
+							this.contrato = res.Contrato;
+							this.cliente = res.Contrato.propietarios[0];
+						}
+					}
+				}
+
+				)
+			this.banderaCliente = false;
+			this._vehiculoServicio.getVehiculo(this.parmUrl).subscribe(
+
+				res=> {
+					console.log(res)
+
+					if(res.vehiculo.vendedor && res.vehiculo.impParque){
+						this.vehiculo = res.vehiculo;
+						this.vehiculo.impParque = res.vehiculo.impParque
+						this.banderaCliente = true;
+						console.log("entra");
+
+					}
+					
+					else{
+						console.log(this.vehiculo.impParque);
+						if(res.vehiculo.impParque){
+							this.banderaCliente = true;
+							this.vehiculo.vendedor = {dni:null,nombre:"",apellido:"", celular:null, email:"", domicilio:""};
+						}
+						else{
+							this.vehiculo = res.vehiculo;
+							this.banderaCliente = true;
+							this.vehiculo.vendedor = {dni:null,nombre:"",apellido:"", celular:null, email:"", domicilio:""};
+							this.vehiculo.impParque = [{anio:"", cuotas:[]}]
+						}
+
+					}
+					
+					
+
+					//this.impAuto = this.vehiculo.impParque;
+					
+				},
+				err =>{
+					console.log(err);
+				}
+
+			);
+		},5);
+
+	}
 
 	buscarCliente (clientePrm){
 		//console.log("entra");
@@ -239,7 +300,7 @@ export class altaContratoComponente {
 
 	}
 
-
+	
 
 	labelPosition = 'after'
 

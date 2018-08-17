@@ -36,7 +36,7 @@ export class altaVehiculoComponente implements OnInit{
 	after = 'after';
 
 	constructor(private _vehiculoServicio:VehiculoServicio, private _clienteServicio: ClienteServicio, private _location: Location, private route: ActivatedRoute, private router: Router){
-		this.vehiculo = new Vehiculos("","","",null,"","",null,null,false,false,false,[{anio:"", cuotas:[]}],false,false,false,false,false,false,false,false,false,false,false,"",true,null,{dni:null,nombre:"",apellido:"", celular:null, email:"", domicilio:""});
+		this.vehiculo = new Vehiculos("","","",null,"","",null,null,false,false,false,[{anio:"", cuotas:[]}],false,false,false,false,false,false,false,false,false,false,false,"",true,null,{dni: null, nombre: "",apellido: "",celular: null, email: "",domicilio: ""});
 		this.cliente = new Clientes("","","","",null,null,null,null,"","","","","","","",null,"","");
 		//this.url = Ruta.url;
 		this.route.params.subscribe( params => this.parmUrl= params['id']);
@@ -53,33 +53,20 @@ export class altaVehiculoComponente implements OnInit{
 
 				res=> {
 					console.log(res)
-
-					if(res.vehiculo.vendedor && res.vehiculo.impParque){
-						this.vehiculo = res.vehiculo;
-						this.vehiculo.impParque = res.vehiculo.impParque
-						this.banderaCliente = true;
+					this.vehiculo = res.vehiculo;
+					if(!this.vehiculo.vendedor){
 						console.log("entra");
-
-					}
-					
-					else{
-						console.log(this.vehiculo.impParque);
-						if(res.vehiculo.impParque){
-							this.banderaCliente = true;
-							this.vehiculo.vendedor = {dni:null,nombre:"",apellido:"", celular:null, email:"", domicilio:""};
+						this.vehiculo.vendedor = {
+							dni: null,
+							nombre: "",
+							apellido: "",
+							domicilio: "",
+							email: "",
+							celular: null
 						}
-						else{
-							this.vehiculo = res.vehiculo;
-							this.banderaCliente = true;
-							this.vehiculo.vendedor = {dni:null,nombre:"",apellido:"", celular:null, email:"", domicilio:""};
-							this.vehiculo.impParque = [{anio:"", cuotas:[]}]
-						}
-
 					}
-					
-					
 
-					//this.impAuto = this.vehiculo.impParque;
+					
 					
 				},
 				err =>{
@@ -95,9 +82,19 @@ export class altaVehiculoComponente implements OnInit{
 	altaVehiculo(){
 		
 		delete this.vehiculo._id;
-		//this.vehiculo.impParque = this.impAuto;
+		console.log(this.vehiculo);
+		if(this.vehiculo.impParque[0].anio = ""){
+			console.log("entra")
+			var index = this.vehiculo.impParque.indexOf(this.vehiculo.impParque[0],0);
+			if (index > -1) {
+			   this.vehiculo.impParque.splice(index, 1);
+			}	
+			console.log(this.vehiculo.impParque);
+		}
+
 		this._vehiculoServicio.postVehiculos(this.vehiculo).subscribe(
 			res => {
+				console.log(res)
 				alert("Vehiculo guardado");
 				this._location.back();
 				
@@ -111,11 +108,7 @@ export class altaVehiculoComponente implements OnInit{
 	}
 
 	guardarDetalleVehiculo(vehiculo){
-		//this.vehiculo.impParque = this.impAuto;
-		//this.vehiculo.vendedor = this.cliente._id;
-		if(this.cliente){
-			vehiculo.vendedor = this.cliente;
-			this._vehiculoServicio.putVehiculo(vehiculo).subscribe(
+		this._vehiculoServicio.putVehiculo(vehiculo).subscribe(
 			res =>{
 				alert("Vehiculo modificado");
 				this.router.navigate(["/tablaVehiculos"]);
@@ -124,18 +117,7 @@ export class altaVehiculoComponente implements OnInit{
 				alert("Error al actualizar. " + err);
 				this._location.back();
 			})
-		}
-		else{
-			this._vehiculoServicio.putVehiculo(vehiculo).subscribe(
-			res =>{
-				alert("Vehiculo modificado");
-				this.router.navigate(["/tablaVehiculos"]);
-			},
-			err => {
-				alert("Error al actualizar. " + err);
-				this._location.back();
-			})
-		}
+		
 		
 			
 	}
@@ -166,13 +148,18 @@ export class altaVehiculoComponente implements OnInit{
 
 			res=> {
 				console.log(res)
-				this.cliente = res.cliente;
+				this.vehiculo.vendedor.dni = res.cliente.dni;
+				this.vehiculo.vendedor.nombre = res.cliente.nombre;
+				this.vehiculo.vendedor.apellido = res.cliente.apellido;
+				
+				this.vehiculo.vendedor.domicilio = res.cliente.domicilio;
+				this.vehiculo.vendedor.email = res.cliente.email;
 
 			},
 			err =>{
 				console.log(err);
 				this.mensajeC = JSON.parse(err._body).mensaje;
-				this.cliente = new Clientes("","","","",null,null,null,null,"","","","","","","",null,"","");
+				//this.cliente = new Clientes("","","","",null,null,null,null,"","","","","","","",null,"","");
 			}
 
 			);

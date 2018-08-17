@@ -26,8 +26,6 @@ import { MatSelectModule } from '@angular/material';
 //Componentes de la aplicación
 import { AppComponent } from './app.component';
 import { index } from './componentes/indexComponente';
-import { barraSideComponente} from './componentes/barraSideComponente';
-import { barraTopComponente } from './componentes/barraTopComponente';
 
 import { tablaClientesComponente } from './componentes/tablaClientesComponente';
 import { tablaVehiculosComponente } from './componentes/tablaVehiculosComponente';
@@ -50,8 +48,6 @@ import { routing, appRoutingProviders } from './app.rutas';
   declarations: [
     AppComponent,
     index,
-    barraSideComponente,
-    barraTopComponente,
     tablaClientesComponente,
     tablaVehiculosComponente,
     altaClienteComponente,

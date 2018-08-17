@@ -32,6 +32,7 @@ const appRoutes: Routes = [
 	
 	{ path: "tablaContratos", component: tablaContratoComponente},
 	{ path: "altaContrato", component: altaContratoComponente},
+	{ path: "detalleContrato/:id", component: altaContratoComponente},
 
 	{ path: "tablaCheques", component: tablaChequesComponente},
 	{ path: "altaCheque", component: altaChequeComponente}
