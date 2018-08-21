@@ -24,7 +24,7 @@ export class tablaContratoComponente implements OnInit{
 
 	public url: string;
 
-	displayedColumns = ['indice','vehiculo', 'propietarios', 'fechaVenta','detalle'];
+	displayedColumns = ['indice','vehiculo', 'propietarios', 'fechaVenta','detalle', 'eliminar'];
 
 	dataSource: MatTableDataSource<Contrato>;
 	
@@ -53,8 +53,22 @@ export class tablaContratoComponente implements OnInit{
 
 
 	
-	detalleCliente(contrato){
+	detalleContrato(contrato){
 		this.router.navigate(['/detalleContrato/'+ contrato]);
+	}
+
+	eliminarContrato(contrato){
+		if(confirm("Seguro desea eliminar?")){
+			contrato.estado = false;
+			this._contratoServicio.putContrato(contrato).subscribe(
+			res=> {
+				alert("Cheque eliminado");
+				window.location.reload();
+				console.log("guardado", res);
+
+			}
+			)
+		}
 	}
 
 	applyFilter(filterValue: string) {

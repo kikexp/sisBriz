@@ -34,6 +34,7 @@ export class altaVehiculoComponente implements OnInit{
 		cuotas: any[]
 	};
 	after = 'after';
+	public clienteEncontrado = false;
 
 	constructor(private _vehiculoServicio:VehiculoServicio, private _clienteServicio: ClienteServicio, private _location: Location, private route: ActivatedRoute, private router: Router){
 		this.vehiculo = new Vehiculos("","","",null,"","",null,null,false,false,false,[{anio:"", cuotas:[]}],false,false,false,false,false,false,false,false,false,false,false,"",true,null,{dni: null, nombre: "",apellido: "",celular: null, email: "",domicilio: ""});
@@ -64,6 +65,17 @@ export class altaVehiculoComponente implements OnInit{
 							email: "",
 							celular: null
 						}
+					}else{
+						this.clienteEncontrado = true;
+					}
+					if(res.vehiculo.impParque = [null]){
+						console.log("entra a impuesto")
+						this.vehiculo.impParque = [
+						 {
+						 	anio: null,
+						 	cuotas: []
+						 }
+						]
 					}
 
 					
@@ -92,7 +104,32 @@ export class altaVehiculoComponente implements OnInit{
 			console.log(this.vehiculo.impParque);
 		}
 
-		this._vehiculoServicio.postVehiculos(this.vehiculo).subscribe(
+		if(!this.clienteEncontrado){
+			console.log("entra a cliente nuevo")
+			this._clienteServicio.postCliente(this.vehiculo.vendedor).subscribe(
+				resp => {
+					console.log(resp);
+
+					this.vehiculo.vendedor = resp.clienteGuardado;
+
+					this._vehiculoServicio.postVehiculos(this.vehiculo).subscribe(
+						res => {
+							console.log(res)
+							alert("Vehiculo guardado");
+							this._location.back();
+							
+
+
+						},
+						err => {
+							console.log("error", err);
+						}
+					);
+				}
+				)
+			
+		}else{
+			this._vehiculoServicio.postVehiculos(this.vehiculo).subscribe(
 			res => {
 				console.log(res)
 				alert("Vehiculo guardado");
@@ -105,6 +142,9 @@ export class altaVehiculoComponente implements OnInit{
 				console.log("error", err);
 			}
 			);
+		}
+
+		
 	}
 
 	guardarDetalleVehiculo(vehiculo){
@@ -144,9 +184,11 @@ export class altaVehiculoComponente implements OnInit{
 	buscarCliente (clientePrm){
 		//console.log("entra");
 		this.mensajeC = null;
+		this.clienteEncontrado = false;
 		this._clienteServicio.getCliente(clientePrm).subscribe(
 
 			res=> {
+				this.clienteEncontrado =true
 				console.log(res)
 				this.vehiculo.vendedor.dni = res.cliente.dni;
 				this.vehiculo.vendedor.nombre = res.cliente.nombre;
@@ -163,6 +205,9 @@ export class altaVehiculoComponente implements OnInit{
 			}
 
 			);
+		if(!this.clienteEncontrado){
+			this.vehiculo.vendedor = {dni: null, nombre: "",apellido: "",celular: null, email: "",domicilio: ""}
+		}
 	}
 
 

@@ -37,7 +37,11 @@
   
             <ng-container matColumnDef="detalle">
               <th mat-header-cell *matHeaderCellDef mat-sort-header> </th>
-              <td mat-cell *matCellDef="let element"> <button type="button" class="btn btn-primary btn-fw">Detalle</button> </td>
+              <td mat-cell *matCellDef="let element" > <button (click)="detalleContrato(element._id)" type="button" class="btn btn-primary btn-fw">Detalle</button> </td>
+            </ng-container>
+            <ng-container matColumnDef="eliminar">
+              <th mat-header-cell *matHeaderCellDef mat-sort-header> </th>
+              <td mat-cell *matCellDef="let element"> <button type="button" class="btn btn-danger btn-fw" (click)="eliminarContrato(element)">Eliminar</button> </td>
             </ng-container>
            
 

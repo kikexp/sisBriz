@@ -52,12 +52,11 @@ export class ContratoServicio {
 		return this._http.post(this.url + "altaContrato", parametros, {headers: headers}).map(resultado => resultado.json())	
 	}
 
-	putContrato(Contrato){
-		let parametros = JSON.stringify(Contrato);
-		
+	putContrato(contrato){
+		let parametros = JSON.stringify(contrato);
 		let headers = new Headers({"Content-Type":"application/json","Authorization": localStorage.getItem("id")});
 
-		return this._http.put(this.url + "actualizarContrato/" + Contrato._id, Contrato, {headers: headers}).map(resultado => resultado.json())	
+		return this._http.put(this.url + "actualizarContrato/" + contrato._id, contrato, {headers: headers}).map(resultado => resultado.json())	
 	}
 
 	

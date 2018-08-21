@@ -40,22 +40,26 @@ export class altaContratoComponente {
 	Contado = false;
 	Finan = false;
 	constructor(private _vehiculoServicio:VehiculoServicio,private _location: Location,private _clienteServicio: ClienteServicio, private _contratoServicio: ContratoServicio
-		){
+		,private route: ActivatedRoute, private router: Router){
+		this.route.params.subscribe( params => this.parmUrl= params['id']);
 		this.cliente = new Clientes("","","","",null,null,null,null,"","","","","","","",null,"","");
 		this.conyuge = new Clientes("","","","",null,null,null,null,"","","","","","","",null,"","")
 		this.vehiculo = new Vehiculos("","","",null,"","",null,null,false,false,false,[{anio:"", cuotas:[]}],false,false,false,false,false,false,false,false,false,false,false,"",true,null,{dni: null, nombre: "",apellido: "",celular: null, email: "",domicilio: ""});
 		this.usado = new Vehiculos("","","",null,"","",null,null,false,false,false,[{anio:"", cuotas:[]}],false,false,false,false,false,false,false,false,false,false,false,"",true,null,{dni: null, nombre: "",apellido: "",celular: null, email: "",domicilio: ""});
-		this.contrato = new Contrato(null, "",[""], null, null, null, null,"",null,null, "","");
+		this.contrato = new Contrato("",null, "",[""], null, null, null, null,"",null,null, "","");
 		
 	}
 
 	ngOnInit(){
 		setTimeout(()=>{
 			//this.vehiculo.vendedor = {dni: 123 ,nombre:"",apellido:"", celular: 123, email:"", domicilio:""};
+			console.log(this.parmUrl);
 			this._contratoServicio.getContrato(this.parmUrl).subscribe(
 				res =>{
+					console.log(res)
 					if(res.Contrato.propietarios[0] && res.Contrato.propietarios[1]){
 						this.contrato = res.Contrato;
+						this.vehiculo = res.Contrato.vehiculo;
 						this.cliente = res.Contrato.propietarios[0];
 						this.conyuge = res.Contrato.propietarios[1]; 
 					}
@@ -68,45 +72,6 @@ export class altaContratoComponente {
 				}
 
 				)
-			this.banderaCliente = false;
-			this._vehiculoServicio.getVehiculo(this.parmUrl).subscribe(
-
-				res=> {
-					console.log(res)
-
-					if(res.vehiculo.vendedor && res.vehiculo.impParque){
-						this.vehiculo = res.vehiculo;
-						this.vehiculo.impParque = res.vehiculo.impParque
-						this.banderaCliente = true;
-						console.log("entra");
-
-					}
-					
-					else{
-						console.log(this.vehiculo.impParque);
-						if(res.vehiculo.impParque){
-							this.banderaCliente = true;
-							this.vehiculo.vendedor = {dni:null,nombre:"",apellido:"", celular:null, email:"", domicilio:""};
-						}
-						else{
-							this.vehiculo = res.vehiculo;
-							this.banderaCliente = true;
-							this.vehiculo.vendedor = {dni:null,nombre:"",apellido:"", celular:null, email:"", domicilio:""};
-							this.vehiculo.impParque = [{anio:"", cuotas:[]}]
-						}
-
-					}
-					
-					
-
-					//this.impAuto = this.vehiculo.impParque;
-					
-				},
-				err =>{
-					console.log(err);
-				}
-
-			);
 		},5);
 
 	}
@@ -166,7 +131,9 @@ export class altaContratoComponente {
 	
 
 	altaContrato(){
+		console.log("entra a guardar contrato")
 		//let arrayC = [];
+		delete this.contrato._id;
 		this.contrato.propietarios.pop();
 		let idUsado;
 		console.log(this.banderaCliente);
@@ -298,6 +265,41 @@ export class altaContratoComponente {
 
 
 
+	}
+
+	guardarDetalleContrato(contrato){		
+		
+		contrato.vehiculo =this.vehiculo;
+		if(this.usado){
+			contrato.usado = this.usado._id;
+		}
+		if(this.cliente){
+			contrato.propietarios[0] = this.cliente;
+		}
+		if(this.conyuge)
+		{
+			contrato.propietarios[1] = this.conyuge;
+		}
+		console.log(this.usado)
+		if(!this.usado._id){
+			delete contrato.usado;
+		}
+		else{
+			contrato.usado = this.usado;
+		}
+		console.log(contrato);
+		this._contratoServicio.putContrato(contrato).subscribe(
+			res =>{
+				alert("Contrato modificado");
+				this.router.navigate(["/tablaContratos"]);
+			},
+			err => {
+				alert("Error al actualizar. " + err);
+				this._location.back();
+			})
+		
+		
+			
 	}
 
 	

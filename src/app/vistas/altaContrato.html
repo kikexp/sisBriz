@@ -6,7 +6,7 @@
 				<div class="card-body">
 					
 
-					<form class="form-sample"  #formContrato="ngForm" (ngSubmit)="altaContrato()">
+					<form class="form-sample"  #formContrato="ngForm">
 						<div class="form-group">
 			              <div class="form-group">
 			                <label for="FechaIngreso">Fecha de ingreso</label>
@@ -640,7 +640,8 @@
                 	</div>
 
 				    <span style="float: right;">
-				        <button type="submit" class="btn btn-success mr-2">Guardar</button>
+				    	<button *ngIf="parmUrl" class="btn btn-success mr-2" (click)="guardarDetalleContrato(contrato)" >Guardar detalle</button>
+				        <button *ngIf="!parmUrl" (click)="altaContrato()" class="btn btn-success mr-2">Guardar</button>
 				    	<button class="btn btn-light" [routerLink]="['/tablaContratos']">Cancelar</button>
 				    </span>      
 				   

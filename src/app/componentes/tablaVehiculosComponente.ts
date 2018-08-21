@@ -23,7 +23,7 @@ export class tablaVehiculosComponente implements OnInit{
 
 	public url: string;
 
-	displayedColumns = ['indice','Marca', 'Modelo', 'Dominio', 'NumerodeChasis', 'Anio', 'Precio', 'detalle'];
+	displayedColumns = ['indice','Marca', 'Modelo', 'Dominio', 'NumerodeChasis', 'Anio', 'Precio', 'detalle','eliminar'];
 
 	dataSource: MatTableDataSource<Vehiculos>
 	
@@ -55,6 +55,21 @@ export class tablaVehiculosComponente implements OnInit{
 		    filterValue = filterValue.trim(); // Remove whitespace
 		    filterValue = filterValue.toLowerCase(); // MatTableDataSource defaults to lowercase matches
 		    this.dataSource.filter = filterValue;
+	}
+
+	eliminarVehiculo(vehiculo){
+		if(confirm("Seguro desea eliminar?")){
+			vehiculo.estado = false;
+			console.log(vehiculo)
+			this._vehiculoServicio.putVehiculo(vehiculo).subscribe(
+			res=> {
+				alert("Vehiculo eliminado");
+				window.location.reload();
+				console.log("guardado", res);
+
+			}
+			)
+		}
 	}
 
 	detalleVehiculo(vehiculo){
