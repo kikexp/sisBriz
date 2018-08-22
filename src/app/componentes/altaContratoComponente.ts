@@ -140,6 +140,7 @@ export class altaContratoComponente {
 		console.log(this.banderaConyuge);
 		if(this.banderaCliente){
 			this.contrato.propietarios.push(this.cliente._id);
+			//this.vehiculo.vendedor = this.cliente._id;
 			if(this.hConyuge && this.banderaConyuge){
 				this.contrato.propietarios.push(this.conyuge._id);
 			}
@@ -151,7 +152,7 @@ export class altaContratoComponente {
 						res => {						
 							console.log("conyuge guardado");
 							this.contrato.propietarios.push(res.cliente._id);
-							this.vehiculo.vendedor = res.cliente._id;
+							//this.vehiculo.vendedor = res.cliente._id;
 						},
 						err => {
 							console.log("error", err);

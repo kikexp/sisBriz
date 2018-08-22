@@ -114,8 +114,8 @@ export class altaVehiculoComponente implements OnInit{
 
 					this._vehiculoServicio.postVehiculos(this.vehiculo).subscribe(
 						res => {
-							console.log(res)
-							alert("Vehiculo guardado");
+							console.log(res.mensaje)
+							alert(res.mensaje);
 							this._location.back();
 							
 
@@ -131,9 +131,10 @@ export class altaVehiculoComponente implements OnInit{
 		}else{
 			this._vehiculoServicio.postVehiculos(this.vehiculo).subscribe(
 			res => {
-				console.log(res)
-				alert("Vehiculo guardado");
+				console.log(res.mensaje)
+				alert(res.mensaje);
 				this._location.back();
+				
 				
 
 
