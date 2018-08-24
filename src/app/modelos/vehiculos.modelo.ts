@@ -28,6 +28,7 @@ export class Vehiculos {
 		public estado: boolean,
 		public precioCompra: number,
 		public vendedor: {
+			_id: string,
 			dni: number, 
 			nombre: string,
 			apellido: string,

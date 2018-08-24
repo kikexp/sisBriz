@@ -37,7 +37,7 @@ export class altaVehiculoComponente implements OnInit{
 	public clienteEncontrado = false;
 
 	constructor(private _vehiculoServicio:VehiculoServicio, private _clienteServicio: ClienteServicio, private _location: Location, private route: ActivatedRoute, private router: Router){
-		this.vehiculo = new Vehiculos("","","",null,"","",null,null,false,false,false,[{anio:"", cuotas:[]}],false,false,false,false,false,false,false,false,false,false,false,"",true,null,{dni: null, nombre: "",apellido: "",celular: null, email: "",domicilio: ""});
+		this.vehiculo = new Vehiculos("","","",null,"","",null,null,false,false,false,[{anio:"", cuotas:[]}],false,false,false,false,false,false,false,false,false,false,false,"",true,null,{dni: null, nombre: "",apellido: "",celular: null, email: "",domicilio: "",_id: ""});
 		this.cliente = new Clientes("","","","",null,null,null,null,"","","","","","","",null,"","");
 		//this.url = Ruta.url;
 		this.route.params.subscribe( params => this.parmUrl= params['id']);
@@ -63,10 +63,12 @@ export class altaVehiculoComponente implements OnInit{
 							apellido: "",
 							domicilio: "",
 							email: "",
-							celular: null
+							celular: null,
+							_id: ""
 						}
 					}else{
 						this.clienteEncontrado = true;
+
 					}
 					if(res.vehiculo.impParque = [null]){
 						console.log("entra a impuesto")
@@ -116,6 +118,9 @@ export class altaVehiculoComponente implements OnInit{
 						res => {
 							console.log(res.mensaje)
 							alert(res.mensaje);
+							if(res.mensaje = "vehiculo existente"){
+								window.location.reload();
+							}
 							this._location.back();
 							
 
@@ -129,11 +134,18 @@ export class altaVehiculoComponente implements OnInit{
 				)
 			
 		}else{
+
 			this._vehiculoServicio.postVehiculos(this.vehiculo).subscribe(
 			res => {
 				console.log(res.mensaje)
 				alert(res.mensaje);
-				this._location.back();
+				if(res.mensaje = "vehiculo existente"){
+					window.location.reload();
+				}else{
+
+					this._location.back();								
+				}
+				
 				
 				
 
@@ -191,6 +203,7 @@ export class altaVehiculoComponente implements OnInit{
 			res=> {
 				this.clienteEncontrado =true
 				console.log(res)
+				this.vehiculo.vendedor._id = res.cliente._id;
 				this.vehiculo.vendedor.dni = res.cliente.dni;
 				this.vehiculo.vendedor.nombre = res.cliente.nombre;
 				this.vehiculo.vendedor.apellido = res.cliente.apellido;
@@ -207,7 +220,7 @@ export class altaVehiculoComponente implements OnInit{
 
 			);
 		if(!this.clienteEncontrado){
-			this.vehiculo.vendedor = {dni: null, nombre: "",apellido: "",celular: null, email: "",domicilio: ""}
+			this.vehiculo.vendedor = {_id: "",dni: null, nombre: "",apellido: "",celular: null, email: "",domicilio: ""}
 		}
 	}
 

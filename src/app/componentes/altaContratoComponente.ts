@@ -36,16 +36,16 @@ export class altaContratoComponente {
 	public mensajeV;
 	public mensajeCon;
 	public parmUrl;
-	Sena = false;
-	Contado = false;
-	Finan = false;
+	public Sena = false;
+	public Contado = false;
+	public Finan = false;
 	constructor(private _vehiculoServicio:VehiculoServicio,private _location: Location,private _clienteServicio: ClienteServicio, private _contratoServicio: ContratoServicio
 		,private route: ActivatedRoute, private router: Router){
 		this.route.params.subscribe( params => this.parmUrl= params['id']);
 		this.cliente = new Clientes("","","","",null,null,null,null,"","","","","","","",null,"","");
 		this.conyuge = new Clientes("","","","",null,null,null,null,"","","","","","","",null,"","")
-		this.vehiculo = new Vehiculos("","","",null,"","",null,null,false,false,false,[{anio:"", cuotas:[]}],false,false,false,false,false,false,false,false,false,false,false,"",true,null,{dni: null, nombre: "",apellido: "",celular: null, email: "",domicilio: ""});
-		this.usado = new Vehiculos("","","",null,"","",null,null,false,false,false,[{anio:"", cuotas:[]}],false,false,false,false,false,false,false,false,false,false,false,"",true,null,{dni: null, nombre: "",apellido: "",celular: null, email: "",domicilio: ""});
+		this.vehiculo = new Vehiculos("","","",null,"","",null,null,false,false,false,[{anio:"", cuotas:[]}],false,false,false,false,false,false,false,false,false,false,false,"",true,null,{_id: "",dni: null, nombre: "",apellido: "",celular: null, email: "",domicilio: ""});
+		this.usado = new Vehiculos("","","",null,"","",null,null,false,false,false,[{anio:"", cuotas:[]}],false,false,false,false,false,false,false,false,false,false,false,"",true,null,{_id: "",dni: null, nombre: "",apellido: "",celular: null, email: "",domicilio: ""});
 		this.contrato = new Contrato("",null, "",[""], null, null, null, null,"",null,null, "","");
 		
 	}
@@ -56,18 +56,34 @@ export class altaContratoComponente {
 			console.log(this.parmUrl);
 			this._contratoServicio.getContrato(this.parmUrl).subscribe(
 				res =>{
+
 					console.log(res)
 					if(res.Contrato.propietarios[0] && res.Contrato.propietarios[1]){
 						this.contrato = res.Contrato;
 						this.vehiculo = res.Contrato.vehiculo;
 						this.cliente = res.Contrato.propietarios[0];
-						this.conyuge = res.Contrato.propietarios[1]; 
+						this.conyuge = res.Contrato.propietarios[1];
+						this.usado = res.Contrato.usado;
 					}
 					else{
 						if(res.Contrato.propietarios[0]){
 							this.contrato = res.Contrato;
+							this.vehiculo = res.Contrato.vehiculo;
+							this.usado = res.Contrato.usado;
 							this.cliente = res.Contrato.propietarios[0];
 						}
+					}
+					if(this.usado){
+						this.Usado = true;
+					}
+					if(this.contrato.sena){
+						this.Sena = true;
+					}
+					if(this.contrato.montoFinanc){
+						this.Finan = true;
+					}
+					if(this.contrato.contado){
+						this.Contado = true;
 					}
 				}
 
@@ -116,8 +132,14 @@ export class altaContratoComponente {
 		this._vehiculoServicio.getVehiculo(vehiculoPrm).subscribe(
 
 			res=> {
-				console.log(res);
-				this.vehiculo = res.vehiculo;			
+				console.log(res.vehiculo);
+				Object.assign(this.vehiculo, res.vehiculo)
+				/*this.vehiculo._id = res.vehiculo._id;
+				this.vehiculo.precioVenta = res.vehiculo.precioVenta;
+				this.vehiculo.modelo = res.vehiculo.modelo;
+				this.vehiculo.marca = res.vehiculo.marca
+				this.vehiculo.precioCompra = res.vehiculo.precioCompra;*/
+				console.log(this.vehiculo)			
 				
 			},
 			err =>{
@@ -202,6 +224,7 @@ export class altaContratoComponente {
 		if(this.Usado){
 			delete this.usado._id;
 			console.log(this.usado);
+			this.usado.vendedor = this.cliente;
 			
 			this._vehiculoServicio.postVehiculos(this.usado).subscribe(
 				res => {
@@ -269,7 +292,7 @@ export class altaContratoComponente {
 	}
 
 	guardarDetalleContrato(contrato){		
-		
+		console.log(contrato);
 		contrato.vehiculo =this.vehiculo;
 		if(this.usado){
 			contrato.usado = this.usado._id;
@@ -281,14 +304,14 @@ export class altaContratoComponente {
 		{
 			contrato.propietarios[1] = this.conyuge;
 		}
-		console.log(this.usado)
+		//console.log(this.usado)
 		if(!this.usado._id){
 			delete contrato.usado;
 		}
 		else{
 			contrato.usado = this.usado;
 		}
-		console.log(contrato);
+		//console.log(contrato);
 		this._contratoServicio.putContrato(contrato).subscribe(
 			res =>{
 				alert("Contrato modificado");
