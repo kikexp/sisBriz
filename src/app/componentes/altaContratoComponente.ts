@@ -231,7 +231,7 @@ export class altaContratoComponente {
 					console.log("usado guardado", res);
 					idUsado = res.vehiculoGuardado._id;
 					this.vehiculo.estado = false;
-					
+					delete this.vehiculo.vendedor;
 					this._vehiculoServicio.putVehiculo(this.vehiculo).subscribe(
 						res =>{
 							console.log("vehiculo dado de baja",res);
