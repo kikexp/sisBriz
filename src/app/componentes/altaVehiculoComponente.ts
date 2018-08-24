@@ -161,10 +161,15 @@ export class altaVehiculoComponente implements OnInit{
 	}
 
 	guardarDetalleVehiculo(vehiculo){
+		console.log(vehiculo);
+		if(!vehiculo.vendedor.dni){
+			delete vehiculo.vendedor
+			console.log(vehiculo)
+		}
 		this._vehiculoServicio.putVehiculo(vehiculo).subscribe(
 			res =>{
 				alert("Vehiculo modificado");
-				this.router.navigate(["/tablaVehiculos"]);
+				window.location.reload();
 			},
 			err => {
 				alert("Error al actualizar. " + err);
