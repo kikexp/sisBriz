@@ -173,7 +173,7 @@ export class altaContratoComponente {
 					this._clienteServicio.postCliente(this.conyuge).subscribe(
 						res => {						
 							console.log("conyuge guardado");
-							this.contrato.propietarios.push(res.cliente._id);
+							this.contrato.propietarios.push(res.clienteGuardado._id);
 							//this.vehiculo.vendedor = res.cliente._id;
 						},
 						err => {
@@ -191,7 +191,7 @@ export class altaContratoComponente {
 					console.log("cliente guardado", res);
 
 					this.contrato.propietarios.push(res.clienteGuardado._id);
-					this.vehiculo.vendedor = res.cliente._id;
+					this.vehiculo.vendedor = res.clienteGuardado._id;
 					
 				},
 				err => {
