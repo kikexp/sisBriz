@@ -63,6 +63,7 @@ export class tablaVehiculosComponente implements OnInit{
 			console.log(vehiculo)
 			this._vehiculoServicio.putVehiculo(vehiculo).subscribe(
 			res=> {
+				console.log(res)
 				alert("Vehiculo eliminado");
 				window.location.reload();
 				console.log("guardado", res);

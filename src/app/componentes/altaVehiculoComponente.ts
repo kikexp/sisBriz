@@ -48,7 +48,7 @@ export class altaVehiculoComponente implements OnInit{
 
 	ngOnInit(){
 		setTimeout(()=>{
-			//this.vehiculo.vendedor = {dni: 123 ,nombre:"",apellido:"", celular: 123, email:"", domicilio:""};
+			this.vehiculo.vendedor = {_id:"",dni: null ,nombre:"",apellido:"", celular: null, email:"", domicilio:""};
 			this.banderaCliente = false;
 			this._vehiculoServicio.getVehiculo(this.parmUrl).subscribe(
 
@@ -162,7 +162,8 @@ export class altaVehiculoComponente implements OnInit{
 
 	guardarDetalleVehiculo(vehiculo){
 		console.log(vehiculo);
-		if(!vehiculo.vendedor.dni){
+		console.log(vehiculo.vendedor)
+		if(vehiculo.vendedor.dni == null){
 			delete vehiculo.vendedor
 			console.log(vehiculo)
 		}
