@@ -39,6 +39,7 @@ export class altaContratoComponente {
 	public Sena = false;
 	public Contado = false;
 	public Finan = false;
+	public vehiculoBuscar = "";
 	constructor(private _vehiculoServicio:VehiculoServicio,private _location: Location,private _clienteServicio: ClienteServicio, private _contratoServicio: ContratoServicio
 		,private route: ActivatedRoute, private router: Router){
 		this.route.params.subscribe( params => this.parmUrl= params['id']);
@@ -64,6 +65,7 @@ export class altaContratoComponente {
 						this.cliente = res.Contrato.propietarios[0];
 						this.conyuge = res.Contrato.propietarios[1];
 						this.usado = res.Contrato.usado;
+						this.hConyuge = true;
 					}
 					else{
 						if(res.Contrato.propietarios[0]){

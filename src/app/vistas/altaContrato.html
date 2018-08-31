@@ -31,10 +31,10 @@
 									<label for="dominio">Chasis/Dominio</label>
 									<div class="row">
 		                        	    <div class="col-md-8">
-				                          <input type="text" class="form-control" placeholder="Numero" name="numeroChasis" #numeroChasis="ngModel" [(ngModel)]="vehiculo.numeroChasis">
+				                          <input type="text" class="form-control" placeholder="Numero" name="vehiculoBuscar" [(ngModel)]="vehiculoBuscar">
 				                        </div>
 				                        <div class="col-md-1">
-				                        	<button (click)="buscarVehiculo(vehiculo.numeroChasis)" type="button" class="btn btn-light"><i class="fas fa-search"></i></button>
+				                        	<button (click)="buscarVehiculo(vehiculoBuscar)" type="button" class="btn btn-light"><i class="fas fa-search"></i></button>
 				                        	
 				                        </div>
 				                        <p *ngIf="mensajeV" [ngStyle]="{'color':'red',
@@ -44,6 +44,22 @@
 								</div>
 							</div>
 						</div>
+
+						<div class="row">
+				          <div class="col-md-2">
+			                <div class="form-group">
+			                  <label for="Marca">Dominio</label>
+			                  <input type="text" class="form-control" id="Marca" placeholder="dominio" name="dominio" [(ngModel)]="vehiculo.dominio" disabled>
+			                </div>
+			              </div>
+			              <div class="col-md-4">
+			                <div class="form-group">
+			                  <label for="Modelo">Numero de Chasis</label>
+			                  <input type="text" class="form-control" id="Modelo" placeholder="Modelo" name="numeroChasis" [(ngModel)]="vehiculo.numeroChasis" disabled>
+			                </div>
+			              </div>
+			              
+			            </div>
 						          
 				        <div class="row">
 				          <div class="col-md-2">
@@ -563,13 +579,13 @@
 	                		  <div class="col-md-6">
 	                		 	<div class="form-group">
 						              <label for="Dominio">Dominio</label>
-						              <input type="text" class="form-control" id="Dominio" placeholder="Dominio" name="dominio" [(ngModel)]="usado.dominio" required>
+						              <input type="text" class="form-control" id="DominioUsado" placeholder="Dominio" name="dominioUsado" [(ngModel)]="usado.dominio" required>
 						        </div>
 	                		  </div>
 	                		  <div class="col-md-6">
 	                		 	<div class="form-group">
 						              <label for="numChasis">Numero de Chasis</label>
-						              <input type="text" class="form-control" id="numChasis" placeholder="numChasis" name="numeroChasis" [(ngModel)]="usado.numeroChasis" required>
+						              <input type="text" class="form-control" id="numChasisUsado" placeholder="Numero de chasis" name="numeroChasisUsado" [(ngModel)]="usado.numeroChasis" required>
 						        </div>
 	                		  </div>
 	                		</div>
@@ -577,7 +593,7 @@
 	                		  <div class="col-md-6">
 	                		 	<div class="form-group">
 						              <label for="Marca">Marca</label>
-						              <input type="text" class="form-control" id="Marca" placeholder="Marca" name="marca" [(ngModel)]="usado.marca" required>
+						              <input type="text" class="form-control" id="MarcaUsado" placeholder="Marca" name="marcaUsado" [(ngModel)]="usado.marca" required>
 						        </div>
 	                		  </div>
 	                		</div>
@@ -585,13 +601,13 @@
 				              <div class="col-md-6">
 				                <div class="form-group">
 				                  <label for="Modelo">Modelo</label>
-				                  <input type="text" class="form-control" id="Modelo" placeholder="Modelo" name="modelo" [(ngModel)]="usado.modelo" required>
+				                  <input type="text" class="form-control" id="ModeloUsado" placeholder="Modelo" name="modeloUsado" [(ngModel)]="usado.modelo" required>
 				                </div>
 				              </div>
 				              <div class="col-md-3">
 				                <div class="form-group">
 				                  <label for="Año">Año</label>
-				                  <input type="number" class="form-control" id="Año" placeholder="Año" name="year" [(ngModel)]="usado.year" required>
+				                  <input type="number" class="form-control" id="AñoUsado" placeholder="Año" name="yearUsado" [(ngModel)]="usado.year" required>
 				                </div>
 				              </div>
 				            </div>
@@ -600,7 +616,7 @@
 				              <div class="col-md-6">
 				                <div class="form-group">
 				                  <label for="PrecioCompra">Valor usado</label>
-				                  <input type="number" class="form-control" id="PrecioCompre" placeholder="Marca" name="precioCompra" [(ngModel)]="usado.precioCompra" required>
+				                  <input type="number" class="form-control" id="PrecioCompraUsado" placeholder="Valor" name="precioCompraUsado" [(ngModel)]="usado.precioCompra" required>
 				                </div>
 				              </div>
 				            </div>
@@ -622,16 +638,16 @@
 		                <div class="column" *ngIf="Finan">		                	
 		                	<div class="row form-group col-md-5">
 			          			<label for="monto">Monto a financiar</label>
-			          			<input type="number" class="form-control" id="monto" placeholder="Monto" name="montoFinanc" [(ngModel)]="contrato.montoFinanc" >
+			          			<input type="text" class="form-control"Usado id="monto" placeholder="Monto" name="montoFinanc" [(ngModel)]="contrato.montoFinanc" >
 			          		</div>
 			          		<div class="row">				          		
 				          		<div class="form-group col-md-5">
 				          			<label for="financ">Cant. Cuotas</label>
-				          			<input type="number" class="form-control" id="financ" placeholder="Cant. Cuotas" name="cantCuotas" [(ngModel)]="contrato.cantCuotas" >
+				          			<input type="text" class="form-control" id="financ" placeholder="Cant. Cuotas" name="cantCuotas" [(ngModel)]="contrato.cantCuotas" >
 				          		</div>
 				          		<div class="form-group col-md-5">
 				          			<label for="import">Importe Cuotas $</label>
-				          			<input type="number" class="form-control" id="import" placeholder="Importe Cuotas" name="importeCuotas" [(ngModel)]="contrato.importeCuotas" >
+				          			<input type="text" class="form-control" id="import" placeholder="Importe Cuotas" name="importeCuotas" [(ngModel)]="contrato.importeCuotas" >
 				          		</div>
 				          	</div>
 				          	<div class="row">
