@@ -81,7 +81,7 @@ export class altaContratoComponente {
 					if(this.contrato.sena){
 						this.Sena = true;
 					}
-					if(this.contrato.montoFinanc){
+					if(this.contrato.montoFinanc && this.contrato.adicional){
 						this.Finan = true;
 					}
 					if(this.contrato.contado){
@@ -305,6 +305,9 @@ export class altaContratoComponente {
 		if(this.conyuge)
 		{
 			contrato.propietarios[1] = this.conyuge;
+		}
+		else{
+			delete contrato.propietarios[1];
 		}
 		//console.log(this.usado)
 		if(!this.usado._id){
