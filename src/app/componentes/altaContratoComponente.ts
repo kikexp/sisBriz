@@ -307,13 +307,6 @@ export class altaContratoComponente {
 			console.log("entra aqui")
 			contrato.propietarios[1] = this.conyuge;
 		}
-		else{
-			console.log("entra aqui por el else")
-			if (contrato.propietarios[1]._id=="") {
-				 contrato.propietarios.splice(1, 1);
-			}
-			
-		}
 		//console.log(this.usado)
 		if(!this.usado._id){
 			delete contrato.usado;
