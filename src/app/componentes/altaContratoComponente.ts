@@ -302,7 +302,7 @@ export class altaContratoComponente {
 		if(this.cliente){
 			contrato.propietarios[0] = this.cliente;
 		}
-		if(this.conyuge)
+		if(this.conyuge._id != "")
 		{
 			contrato.propietarios[1] = this.conyuge;
 		}
