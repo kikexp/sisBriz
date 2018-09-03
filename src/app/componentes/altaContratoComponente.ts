@@ -312,7 +312,7 @@ export class altaContratoComponente {
 			if (contrato.propietarios[1]._id="") {
 				var index = contrato.propietarios[1];
 				if (index > -1) {
-				   this.vehiculo.impParque.splice(index, 1);
+				   contrato.propietarios.splice(index, 1);
 				}	
 			}
 			
