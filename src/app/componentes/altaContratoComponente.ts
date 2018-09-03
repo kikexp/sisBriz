@@ -304,9 +304,11 @@ export class altaContratoComponente {
 		}
 		if(this.conyuge._id != "")
 		{
+			console.log("entra aqui")
 			contrato.propietarios[1] = this.conyuge;
 		}
 		else{
+			console.log("entra aqui por el else")
 			if (contrato.propietarios[1]._id="") {
 				var index = contrato.propietarios[1];
 				if (index > -1) {
