@@ -73,10 +73,70 @@ export class altaContratoComponente {
 							this.vehiculo = res.Contrato.vehiculo;
 							this.usado = res.Contrato.usado;
 							this.cliente = res.Contrato.propietarios[0];
+							this.conyuge = {
+								_id: "",
+								nombre: "",
+								apellido:"",
+								docTipo:"",
+								dni: null,
+								telefono: null,
+								celular: null,
+								telAlternativo: null,
+								email:"",
+								domicilio:"",
+								ciudad:"",
+								cPostal:"",
+								cuit:"",
+								estadoCivil:"",
+								profesion:"",
+								fecNac: null,
+								condIva:"",
+								obs: ""
+
+
+							}
 						}
 					}
 					if(this.usado){
 						this.Usado = true;
+					}
+					else{
+						this.usado = {
+							_id: "",
+							marca: "",
+							modelo: "",
+							year: null,
+							dominio: "",
+							numeroChasis: "",
+							fechaIngreso: null,
+							precioVenta: null,
+							titulo: false,
+							cedulaVerde: false,
+							formularioFirmado: false,
+							impParque: [{ anio: "", cuotas: [""]}],
+							verPolicial: false,
+							estadoDom: false,
+							prenda:  false,
+							rto: false,
+							cedulaGnc: false,
+							duplicadoLlave: false,
+							manuales: false,
+							codigoRadio: false,
+							ruedaAuxilio: false,
+							llaveRueda: false,
+							gato: false,
+							observaciones: "",
+							estado: false,
+							precioCompra: null,
+							vendedor: {
+								_id: "",
+								dni: null, 
+								nombre: "",
+								apellido: "",
+								celular: null, 
+								email:  "",
+								domicilio:  ""}
+						}
 					}
 					if(this.contrato.sena){
 						this.Sena = true;
@@ -299,22 +359,26 @@ export class altaContratoComponente {
 		if(this.usado){
 			contrato.usado = this.usado._id;
 		}
+		console.log(this.cliente)
 		if(this.cliente){
 			contrato.propietarios[0] = this.cliente;
 		}
+		console.log("id de conyuge", this.conyuge)
+		console.log("propietario 2", contrato.propietarios[1])
 		if(this.conyuge._id != "")
 		{
 			console.log("entra aqui")
 			contrato.propietarios[1] = this.conyuge;
 		}
 		//console.log(this.usado)
-		if(!this.usado._id){
+		if(this.usado._id == ""){
+			console.log("entra a usado")
 			delete contrato.usado;
 		}
 		else{
 			contrato.usado = this.usado;
 		}
-		//console.log(contrato);
+		console.log("contrato que se manda a la bd",contrato);
 		this._contratoServicio.putContrato(contrato).subscribe(
 			res =>{
 				alert("Contrato modificado");
