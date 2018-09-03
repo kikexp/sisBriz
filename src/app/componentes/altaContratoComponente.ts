@@ -308,7 +308,10 @@ export class altaContratoComponente {
 		}
 		else{
 			if (contrato.propietarios[1]._id="") {
-				delete contrato.propietarios[1];
+				var index = contrato.propietarios[1];
+				if (index > -1) {
+				   this.vehiculo.impParque.splice(index, 1);
+				}	
 			}
 			
 		}
