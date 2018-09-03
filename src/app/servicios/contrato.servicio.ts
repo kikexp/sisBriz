@@ -29,7 +29,7 @@ export class ContratoServicio {
 	getContratos(){
 		let headers = new Headers({"Content-Type":"application/json",
                                "Authorization": localStorage.getItem("id")});
-		return this._http.get( this.url + "/verContratos", {headers: headers}).map(res => res.json());
+		return this._http.get( this.url + "verContratos", {headers: headers}).map(res => res.json());
 
 	}
 

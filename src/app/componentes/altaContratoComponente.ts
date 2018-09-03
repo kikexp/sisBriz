@@ -307,7 +307,10 @@ export class altaContratoComponente {
 			contrato.propietarios[1] = this.conyuge;
 		}
 		else{
-			delete contrato.propietarios[1];
+			if (contrato.propietarios[1]._id="") {
+				delete contrato.propietarios[1];
+			}
+			
 		}
 		//console.log(this.usado)
 		if(!this.usado._id){

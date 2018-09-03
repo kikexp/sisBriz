@@ -27,7 +27,7 @@ export class VehiculoServicio {
 	getVehiculos(){
 		let headers = new Headers({"Content-Type":"application/json",
                                "Authorization": localStorage.getItem("id")});
-		return this._http.get( this.url + "/verVehiculos", {headers: headers}).map(res => res.json());
+		return this._http.get( this.url + "verVehiculos", {headers: headers}).map(res => res.json());
 
 	}
 
