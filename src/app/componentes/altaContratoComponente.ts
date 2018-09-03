@@ -309,11 +309,8 @@ export class altaContratoComponente {
 		}
 		else{
 			console.log("entra aqui por el else")
-			if (contrato.propietarios[1]._id="") {
-				var index = contrato.propietarios[1];
-				if (index > -1) {
-				   contrato.propietarios.splice(index, 1);
-				}	
+			if (contrato.propietarios[1]._id=="") {
+				 contrato.propietarios.splice(1, 1);
 			}
 			
 		}
