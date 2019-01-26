@@ -1,8 +1,8 @@
 import { BrowserModule } from '@angular/platform-browser';
-import { NgModule } from '@angular/core';
-
+import { LOCALE_ID,NgModule } from '@angular/core';
+import { registerLocaleData } from '@angular/common';
 import { HttpModule } from '@angular/http';
-
+import localeEsAR from '@angular/common/locales/es-AR';
 
 //Clases de material
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -43,7 +43,7 @@ import { loginComponente } from './componentes/loginComponente';
 //Importamos los módulos de ruta
 import { routing, appRoutingProviders } from './app.rutas';
 
-
+registerLocaleData(localeEsAR, 'es-Ar');
 @NgModule({
   declarations: [
     AppComponent,
@@ -77,7 +77,7 @@ import { routing, appRoutingProviders } from './app.rutas';
     ReactiveFormsModule,
     MatSelectModule
   ],
-  providers: [appRoutingProviders],
+  providers: [appRoutingProviders, { provide: LOCALE_ID, useValue: 'es-Ar' }],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

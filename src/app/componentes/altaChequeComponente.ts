@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core'
+import { LOCALE_ID,Component, OnInit } from '@angular/core'
 import {Location} from '@angular/common';
 import {MatDatepickerModule} from '@angular/material/datepicker';
 import { Ruta } from '../rutaglobal';
@@ -19,7 +19,7 @@ import { ClienteServicio } from '../servicios/cliente.servicio';
 @Component({
 	selector: "altaChequeComponente",
 	templateUrl: "../vistas/altaCheque.html",
-	providers: [ChequesServicio, ClienteServicio]
+	providers: [ChequesServicio, ClienteServicio,  { provide: LOCALE_ID, useValue: 'es-Ar' }]
 
 })
 
@@ -44,7 +44,7 @@ export class altaChequeComponente {
 
 	form = this.fb.group({
 		numero: ['', Validators.required],
-		banco: [''],
+		banco: ['',Validators.required],
 		monto: [''],
 		vencimiento: [''],
 		concepto: ['']
@@ -70,7 +70,7 @@ export class altaChequeComponente {
 	}
 
 
-	altaCheque(){
+	onSubmit(){
 
 		this.cheque.librador = this.librador;
 		this.cheque.entregador = this.cliente._id;

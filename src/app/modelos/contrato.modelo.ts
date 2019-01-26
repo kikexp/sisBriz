@@ -1,6 +1,7 @@
 export class Contrato {
 	constructor(
 		public _id: string,
+		public numeroVenta: string,
 		public fechaIngreso: Date,
 		public vehiculo: string,
 		public propietarios: [any],

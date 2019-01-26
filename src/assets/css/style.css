@@ -7566,9 +7566,9 @@ img {
 svg:not(:root) {
   overflow: hidden; }
 
-table {
+/*table {
   width: 100%;
-}
+}*/
 
 .mat-form-field {
   font-size: 14px;
@@ -7576,9 +7576,9 @@ table {
   margin-bottom: 12px;
 }
 
-td, th {
+/*td, th {
   width: 25%;
-}
+}*/
 
 /*table {
   border-collapse: collapse; }*/
@@ -8441,7 +8441,7 @@ pre {
   .offset-xl-11 {
     margin-left: 91.66667%; } }
 
-.table {
+/*.table {
   width: 100%;
   max-width: 100%;
   margin-bottom: 1rem;
@@ -8660,7 +8660,7 @@ pre {
   -ms-overflow-style: -ms-autohiding-scrollbar; }
   .table-responsive > .table-bordered {
     border: 0; }
-
+*/
 .form-control {
   display: block;
   width: 100%;

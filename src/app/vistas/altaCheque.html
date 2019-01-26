@@ -4,20 +4,20 @@
 			<div class="card">
 				<div class="card-body">
 					<h4 class="card-title">Ingreso de cheque</h4>
-					<form class="forms-sample" #formCheque="ngForm" (ngSubmit)="altaCheque()">
+					<form class="forms-sample" #form="ngForm" (ngSubmit)="onSubmit()">
 						<div class="row">
 							<div class="col-md-6">
 				                <div class="form-group">
 					                <label for="NumCheque">Numero</label>
 					                <input type="number" class="form-control" placeholder="Numero" name="numero" #numero="ngModel" [(ngModel)]="cheque.numero" required>
-					                <p style="color: red" *ngIf="!formCheque.valid && !formCheque.isTouched">* Campo requerido</p>
+					                <p style="color: red" *ngIf="!numero.valid && numero.touched">* Campo requerido</p>
 				                </div>
 			              	</div>
 			                <div class="col-md-6">
 			                    <div class="form-group">
 					                <label for="banco">Banco</label>
-					                <input type="text" class="form-control" id="banco" placeholder="Banco" name="banco" ([ngModel])="cheque.banco" required>
-					                <p style="color: red" *ngIf="!formCheque.valid">* Campo requerido</p>
+					                <input type="text" class="form-control" placeholder="Banco" name="banco" #banco="ngModel" [(ngModel)]="cheque.banco" required>
+					                <p style="color: red" *ngIf="!banco.valid && banco.touched">* Campo requerido</p>
 			                	</div>
 			              	</div>
 						</div>
@@ -26,7 +26,7 @@
 				                <div class="form-group">
 					                <label for="Monto">Monto $</label>
 					                <input type="number" class="form-control" id="Monto" placeholder="Monto" name="monto" #monto="ngModel"  [(ngModel)]="cheque.monto" required>
-					                <p style="color: red" *ngIf="!formCheque.valid">* Campo requerido</p>
+					                <p style="color: red" *ngIf="!monto.valid && monto.touched">* Campo requerido</p>
 				                </div>
 			              	</div>
 			              <div class="col-md-6">
@@ -37,7 +37,7 @@
 				                <mat-datepicker-toggle matSuffix [for]="picker4" ></mat-datepicker-toggle>
 				                <mat-datepicker #picker4></mat-datepicker>
 				              </mat-form-field> 
-				              <p style="color: red" *ngIf="!formCheque.valid">* Campo requerido</p>
+				              <p style="color: red" *ngIf="!vencimiento.valid && vencimiento.touched">* Campo requerido</p>
 				              
 				            </div>
 			              </div>
@@ -50,7 +50,7 @@
 					                <mat-datepicker-toggle matSuffix [for]="picker5"></mat-datepicker-toggle>
 					                <mat-datepicker #picker5></mat-datepicker>
 					              </mat-form-field>
-					              <p style="color: red" *ngIf="!formCheque.valid">* Campo requerido</p> 
+					              <p style="color: red" *ngIf="!recepcion.valid && recepcion.touched">* Campo requerido</p> 
 				              </div>
 					              
 				              
@@ -62,7 +62,7 @@
 			              </div>
 			              <div class="col-md-4">
 			                <textarea name="obs" id="" cols="20" rows="7" name="concepto" #concepto="ngModel" [(ngModel)]="cheque.concepto" required></textarea>
-			                <p style="color: red" *ngIf="!formCheque.valid">* Campo requerido</p>
+			                <p style="color: red" *ngIf="!concepto.valid && concepto.touched">* Campo requerido</p>
 			              </div>
 
 			            </div>
@@ -83,7 +83,7 @@
 				                        </div>
 				                        <div class="col-md-8">
 				                          <input type="number" class="form-control" placeholder="Numero" name="dni" #dni="ngModel" [(ngModel)]="cliente.dni" required>
-				                          <p style="color: red" *ngIf="!formCheque.valid">* Campo requerido</p>
+				                          <p style="color: red" *ngIf="!dni.valid && dni.touched">* Campo requerido</p>
 				                        </div>
 				                        <div class="col-md-1">
 				                        	<button (click)="buscarCliente(cliente.dni)" type="button" class="btn btn-light"><i class="fas fa-search"></i></button>
@@ -157,9 +157,9 @@
 
 			            </div>
 			            <span style="float: right;">
-			              <button *ngIf="parmUrl" class="btn btn-success mr-2" (click)="guardarDetalleCliente(cliente)" [disabled]="!formCheque.valid">Guardar detalle</button>
+			              <button *ngIf="parmUrl" class="btn btn-success mr-2" (click)="guardarDetalleCliente(cliente)" [disabled]="!form.valid">Guardar detalle</button>
 			              
-			              <input [disabled]="!formCheque.valid" *ngIf="!parmUrl" type="submit" value="Guardar" class="btn btn-success mr-2">
+			              <input [disabled]="!form.valid" *ngIf="!parmUrl" type="submit" value="Guardar" class="btn btn-success mr-2">
 			            
 			              <button class="btn btn-light" [routerLink]="['/tablaCheques']">Cancelar</button>
 			            </span>

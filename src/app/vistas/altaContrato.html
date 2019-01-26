@@ -5,18 +5,28 @@
 			<div class="card">
 				<div class="card-body">
 					
-
+					
 					<form class="form-sample"  #formContrato="ngForm">
-						<div class="form-group">
-			              <div class="form-group">
-			                <label for="FechaIngreso">Fecha de ingreso</label>
-			              </div>
-			              <mat-form-field>
-			                <input matInput id="fechaIngreso" [matDatepicker]="picker3" placeholder="Seleccionar" name="fechaIngreso" #fechaIngreso="ngModel" [(ngModel)]="contrato.fechaIngreso">
-			                <mat-datepicker-toggle matSuffix [for]="picker3"></mat-datepicker-toggle>
-			                <mat-datepicker #picker3></mat-datepicker>
-			              </mat-form-field> 
-			            </div>
+
+						<div class="row form-group	">
+													
+							<div class="col-md-4 column">
+								<div class="form-group">
+										<p>Fecha de Ingreso</p>
+								</div>
+								
+								<mat-form-field>
+									<input matInput id="fechaIngreso" [matDatepicker]="picker3" placeholder="Seleccionar" name="fechaIngreso" #fechaIngreso="ngModel" [(ngModel)]="contrato.fechaIngreso">
+									<mat-datepicker-toggle matSuffix [for]="picker3"></mat-datepicker-toggle>
+									<mat-datepicker #picker3></mat-datepicker>
+								</mat-form-field>
+							</div>
+							<div class="col-md-6">
+								<label>N° de Venta</label>
+								<input type="number" class="form-control" placeholder="Numero de venta" name="numeroVenta" [(ngModel)]="contrato.numeroVenta">
+							</div>
+						</div>
+						
 						
 				        
 		
@@ -25,22 +35,22 @@
 
 					    <h4>Detalle de la unidad solicitada</h4>
 					    <br>
-				        <div class="row">
+						<div class="row">
 							<div class="col-md-6">
 								<div class="form-group">
 									<label for="dominio">Chasis/Dominio</label>
 									<div class="row">
-		                        	    <div class="col-md-8">
-				                          <input type="text" class="form-control" placeholder="Numero" name="vehiculoBuscar" [(ngModel)]="vehiculoBuscar">
-				                        </div>
-				                        <div class="col-md-1">
-				                        	<button (click)="buscarVehiculo(vehiculoBuscar)" type="button" class="btn btn-light"><i class="fas fa-search"></i></button>
-				                        	
-				                        </div>
-				                        <p *ngIf="mensajeV" [ngStyle]="{'color':'red',
+																	<div class="col-md-8">
+																	<input type="text" class="form-control" placeholder="Numero" name="vehiculoBuscar" [(ngModel)]="vehiculoBuscar">
+																</div>
+																<div class="col-md-1">
+																	<button (click)="buscarVehiculo(vehiculoBuscar)" type="button" class="btn btn-light"><i class="fas fa-search"></i></button>
+																	
+																</div>
+																<p *ngIf="mensajeV" [ngStyle]="{'color':'red',
 																	'font-size': '14px',
 																	'margin': '10px'}">{{mensajeV}}</p>
-				                    </div>
+														</div>
 								</div>
 							</div>
 						</div>
@@ -218,7 +228,8 @@
 			                  <select class="form-control form-control-sm" name="estadoCivil" value="cliente.estadoCivil" #estadoCivil="ngModel" [(ngModel)]="cliente.estadoCivil">
 				                  <option value="Casado">Casado</option>
 				                  <option value="Soltero">Soltero</option>
-				                  <option value="Divorciado">Divorciado</option>                
+													<option value="Divorciado">Divorciado</option> 
+													<option value="Viudo">Viudo</option>               
 			                  </select>                  
 			                </div>
 
@@ -326,7 +337,7 @@
 				                  <label for="Documento">Documento</label>
 				                    <div class="row">
 				                        <div class="col-md-3">
-				                          <select name="docTipo" #docTipo="ngModel" [(ngModel)]="conyuge.docTipo"  class="form-control form-control-sm">
+				                          <select name="docTipoCon" #docTipoCon="ngModel" [(ngModel)]="conyuge.docTipo"  class="form-control form-control-sm">
 				                          <option value="dni">DNI</option>
 				                          <option value="lc">LC</option>
 				                          <option value="le">LE</option>
@@ -334,7 +345,7 @@
 				                          </select>
 				                        </div>
 				                        <div class="col-md-8">
-				                          <input type="number" class="form-control" placeholder="Numero" name="dni" #dni="ngModel" [(ngModel)]="conyuge.dni">
+				                          <input type="number" class="form-control" placeholder="Numero" name="dniCon" #dniCon="ngModel" [(ngModel)]="conyuge.dni">
 				                        </div>
 				                        <div class="col-md-1">
 				                        	<button (click)="buscarConyuge(conyuge.dni)" type="button" class="btn btn-light"><i class="fas fa-search"></i></button>
@@ -351,14 +362,14 @@
 				              <div class="col-md-6">
 				                <div class="form-group">
 				                <label for="Nombre">Nombre</label>
-				                <input type="text" class="form-control" id="Nombre" placeholder="Nombre" name="nomb"
+				                <input type="text" class="form-control" id="Nombre" placeholder="Nombre" name="nombCon" #nombCon="ngModel"
 				                [(ngModel)]="conyuge.nombre">
 				                </div>
 				              </div>
 				              <div class="col-md-6">
 				                <div class="form-group">
 				                  <label for="Apellido">Apellido</label>
-				                  <input type="text" class="form-control" id="Apellido" placeholder="Apellido" name="apellido" #apellido="ngModel" [(ngModel)]="conyuge.apellido">
+				                  <input type="text" class="form-control" id="Apellido" placeholder="Apellido" name="apellidoCon" #apellidoCon="ngModel" [(ngModel)]="conyuge.apellido">
 				                </div>
 				              </div>
 				            </div>
@@ -367,7 +378,7 @@
 				              <div class="col-md-6">
 				                <div class="form-group">
 				                  <label for="">Celular</label>
-				                  <input type="number" class="form-control" id="Celular" placeholder="Celular" name="celular" #celular="ngModel" [(ngModel)]="conyuge.celular" >
+				                  <input type="number" class="form-control" id="Celular" placeholder="Celular" name="celularCon" #celularCon="ngModel" [(ngModel)]="conyuge.celular" >
 				                </div>
 				              </div>
 				            </div>
@@ -377,48 +388,49 @@
 				                <div class="form-group">
 				                  
 				                  <label for="telAlternativo">Telefono Alternativo 1</label>
-				                  <input type="number" class="form-control" id="telAlternativo" placeholder="Telefono Alternativo 1" name="telefono" #telefono="ngModel" [(ngModel)]="conyuge.telefono" >
+				                  <input type="number" class="form-control" id="telAlternativo" placeholder="Telefono Alternativo 1" name="telefonoCon" #telefonoCon="ngModel" [(ngModel)]="conyuge.telefono" >
 				                </div>
 				              </div>
 				              <div class="col-md-6">
 				                <div class="form-group">
 				                  <label for="telAlternativo2">Email</label>
-				                  <input type="email" class="form-control" id="telAlternativo2" placeholder="Email" name="email" #email="ngModel" [(ngModel)]="conyuge.email" >
+				                  <input type="email" class="form-control" id="telAlternativo2" placeholder="Email" name="emailCon" #emailCon="ngModel" [(ngModel)]="conyuge.email" >
 				                </div>
 				              </div>
 				            </div>
 				            
 				            <div class="form-group">
 				              <label>Domicilio Actual</label>
-				              <input type="text" class="form-control" placeholder="Domicilio" name="domicilio" #domicilio="ngModel" [(ngModel)]="conyuge.domicilio">
+				              <input type="text" class="form-control" placeholder="Domicilio" name="domicilioCon" #domicilioCon="ngModel" [(ngModel)]="conyuge.domicilio">
 				              
 				            </div>
 				            <div class="row">
 				              <div class="col-md-8">
 				                <div class="form-group">
 				                  <label for="Ciudad">Cuidad</label>
-				                  <input type="text" class="form-control" id="Cuidad" placeholder="Cuidad" name="ciudad" #ciudad="ngModel" [(ngModel)]="conyuge.ciudad">
+				                  <input type="text" class="form-control" id="Cuidad" placeholder="Cuidad" name="ciudadCon" #ciudadCon="ngModel" [(ngModel)]="conyuge.ciudad">
 				                </div>
 				              </div>
 				              <div class="col-md-4">
 				                <div class="form-group">
 				                  <label for="cp">CP</label>
-				                  <input type="text" class="form-control" id="cp" placeholder="Codigo Postal" name="cPostal" #cPostal="ngModel" [(ngModel)]="conyuge.cPostal"> 
+				                  <input type="text" class="form-control" id="cp" placeholder="Codigo Postal" name="cPostalCon" #cPostalCon="ngModel" [(ngModel)]="conyuge.cPostal"> 
 				                </div>
 				              </div>
 				            </div>
 				            <div class="row form-group col-md-4">
 				              <label for="cuit">C.U.I.T</label>
-				              <input type="text" class="form-control" id="cuit" placeholder="Numero" name="cuit" #cuit="ngModel" [(ngModel)]="conyuge.cuit">
+				              <input type="text" class="form-control" id="cuit" placeholder="Numero" name="cuitCon" #cuitCon="ngModel" [(ngModel)]="conyuge.cuit">
 				            </div>
 				            <div class="row">
 				              <div class="col-md-3">
 				                <div class="form-group">
 				                  <label for="Estado Civil">Estado Civil</label>
-				                  <select class="form-control form-control-sm" name="estadoCivil" value="conyuge.estadoCivil" #estadoCivil="ngModel" [(ngModel)]="conyuge.estadoCivil">
+				                  <select class="form-control form-control-sm" name="estadoCivilCon" value="conyuge.estadoCivil" #estadoCivilCon="ngModel" [(ngModel)]="conyuge.estadoCivil">
 					                  <option value="Casado">Casado</option>
 					                  <option value="Soltero">Soltero</option>
-					                  <option value="Divorciado">Divorciado</option>                
+														<option value="Divorciado">Divorciado</option> 
+														<option value="Viudo">Viudo</option>               
 				                  </select>                  
 				                </div>
 
@@ -426,7 +438,7 @@
 				              <div class="col-md-4">
 				                <div class="form-group">                  
 				                  <label for="cp">Profesión</label>
-				                  <input type="text" class="form-control" id="cp" placeholder="Profesion" name="profesion" #profesion="ngModel" [(ngModel)]="conyuge.profesion"> 
+				                  <input type="text" class="form-control" id="cp" placeholder="Profesion" name="profesionCon" #profesionCon="ngModel" [(ngModel)]="conyuge.profesion"> 
 				                </div>
 				              </div>           
 				            </div>
@@ -436,7 +448,7 @@
 				                  <label for="fecNac">Fecha de nacimiento</label>
 				              </div>
 				              <mat-form-field>
-				                <input matInput id="fecNac" [matDatepicker]="picker" placeholder="Seleccionar" name="fecNac" #fecNac="ngModel" [(ngModel)]="conyuge.fecNac">
+				                <input matInput id="fecNac" [matDatepicker]="picker" placeholder="Seleccionar" name="fecNacCon" #fecNacCon="ngModel" [(ngModel)]="conyuge.fecNac">
 				                <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
 				                <mat-datepicker #picker></mat-datepicker>
 				              </mat-form-field> 
@@ -445,7 +457,7 @@
 				            <div class="form-group">
 		                      <label for="iva">Condición frente al IVA</label>
 		                      <div class="row">
-		                        <mat-radio-group name="condIva" #condIva="ngModel" [(ngModel)]="conyuge.condIva">
+		                        <mat-radio-group name="condIvaCon" #condIvaCon="ngModel" [(ngModel)]="conyuge.condIva">
 		                         <div>  
 		                            <mat-radio-button
 		                                  class="example-margin"
@@ -506,7 +518,7 @@
 				                <label for="obs">Observaciones</label>
 				              </div>
 				              <div class="col-md-4">
-				                <textarea name="obs" id="" cols="20" rows="7" name="obs" #obs="ngModel" [(ngModel)]="conyuge.obs"></textarea>
+				                <textarea name="obs" id="" cols="20" rows="7" name="obsCon" #obsCon="ngModel" [(ngModel)]="conyuge.obs"></textarea>
 				              </div>
 
 				            </div>
@@ -662,7 +674,8 @@
 
 				    <span style="float: right;">
 				    	<button *ngIf="parmUrl" class="btn btn-success mr-2" (click)="guardarDetalleContrato(contrato)" >Guardar detalle</button>
-				        <button *ngIf="!parmUrl" (click)="altaContrato()" class="btn btn-success mr-2">Guardar</button>
+								<button *ngIf="!parmUrl" (click)="altaContrato()" class="btn btn-success mr-2">Guardar</button>
+								
 				    	<button class="btn btn-light" [routerLink]="['/tablaContratos']">Cancelar</button>
 				    </span>      
 				   

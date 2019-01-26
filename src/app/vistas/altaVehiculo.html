@@ -7,45 +7,59 @@
           <h4 class="card-title">Nuevo Vehiculo</h4>
           
           <form class="forms-sample" #formVehiculo="ngForm">
-            <div class="form-group">
-              <div class="form-group">
+            <div class="column form-group">
+              <div class="">
                 <label for="FechaIngreso">Fecha de ingreso</label>
               </div>
-              <mat-form-field>
-                <input matInput id="FechaIngresoVehiculo" [matDatepicker]="picker" placeholder="Seleccionar" name="fechaIngresoVehiculo" #fechaIngresoVehiculo="ngModel" [(ngModel)]="vehiculo.fechaIngreso" required>
-                <mat-datepicker-toggle matSuffix [for]="picker" ></mat-datepicker-toggle>
-                <mat-datepicker #picker></mat-datepicker>
-              </mat-form-field> 
+              
+              <div class="col-md-5">
+                <div class="form-group">
+                  <mat-form-field>
+                    <input matInput required id="FechaIngresoVehiculo" [matDatepicker]="picker" placeholder="Seleccionar" name="fechaIngresoVehiculo" #fechaIngresoVehiculo="ngModel" [(ngModel)]="vehiculo.fechaIngreso" required>
+                    <mat-datepicker-toggle matSuffix [for]="picker" ></mat-datepicker-toggle>
+                    <mat-datepicker #picker></mat-datepicker>
+                  </mat-form-field>
+                </div>
+                  
+              </div>
+              <p style="color: red" *ngIf="!fechaIngresoVehiculo.valid && fechaIngresoVehiculo.touched">* Campo requerido</p>
             </div>
             <div class="row">
               <div class="col-md-5">
                 <div class="form-group">
                   <label for="Dominio">Dominio</label>
-                  <input type="text" class="form-control" id="Dominio" placeholder="Dominio" name="dominio" [(ngModel)]="vehiculo.dominio" required>
+                  <input type="text" class="form-control" id="Dominio" placeholder="Dominio" name="dominio" #dominio="ngModel" [(ngModel)]="vehiculo.dominio" required>
+                  <p style="color: red" *ngIf="!dominio.valid && dominio.touched">* Campo requerido</p>
                 </div>     
               </div>
               <div class="col-md-5">
                 <div class="form-group">
                   <label for="Numero de Chasis">Numero de Chasis</label>
-                  <input type="text" class="form-control" id="Numero de Chasis" placeholder="Numero de Chasis" name="numeroChasis" [(ngModel)]="vehiculo.numeroChasis" required>
+                  <input type="text" class="form-control" id="Numero de Chasis" placeholder="Numero de Chasis" #numeroChasis="ngModel" name="numeroChasis" [(ngModel)]="vehiculo.numeroChasis" required>
+                  <p style="color: red" *ngIf="!numeroChasis.valid && numeroChasis.touched">* Campo requerido</p>
                 </div>
               </div>
             </div>
-            <div class="form-group">
-              <label for="Marca">Marca</label>
-              <input type="text" class="form-control" id="Marca" placeholder="Marca" name="marca" [(ngModel)]="vehiculo.marca" required>
+            <div class="row form-group">
+              <div class="col-md-6">
+                <label for="Marca">Marca</label>
+                <input type="text" class="form-control" id="Marca" placeholder="Marca" name="marca" #marca="ngModel" [(ngModel)]="vehiculo.marca" required>
+                <p style="color: red" *ngIf="!marca.valid && marca.touched">* Campo requerido</p>
+              </div>
             </div>
             <div class="row">
               <div class="col-md-6">
                 <div class="form-group">
                   <label for="Modelo">Modelo</label>
-                  <input type="text" class="form-control" id="Modelo" placeholder="Modelo" name="modelo" [(ngModel)]="vehiculo.modelo" required>
+                  <input type="text" class="form-control" id="Modelo" placeholder="Modelo" name="modelo" #modelo="ngModel" [(ngModel)]="vehiculo.modelo" required>
+                  <p style="color: red" *ngIf="!modelo.valid && modelo.touched">* Campo requerido</p>
                 </div>
               </div>
               <div class="col-md-3">
                 <div class="form-group">
                   <label for="Año">Año</label>
-                  <input type="number" class="form-control" id="Año" placeholder="Año" name="year" [(ngModel)]="vehiculo.year" required>
+                  <input type="number" class="form-control" id="Año" placeholder="Año" name="year" #year="ngModel" [(ngModel)]="vehiculo.year" required>
+                  <p style="color: red" *ngIf="!year.valid && year.touched">* Campo requerido</p>
                 </div>
               </div>
             </div>
@@ -53,14 +67,14 @@
               <div class="col-md-6">
                 <div class="form-group">
                   <label for="PrecioVenta">Precio de venta</label>
-                  <input type="texto" class="form-control" id="PrecioVenta" placeholder="Marca" name="precioVenta" [(ngModel)]="vehiculo.precioVenta" required>
+                  <input type="texto" class="form-control" id="PrecioVenta" placeholder="Marca" name="precioVenta" [(ngModel)]="vehiculo.precioVenta" >
                 </div>
               </div>
               
               <div class="col-md-6">
                 <div class="form-group">
                   <label for="PrecioCompre">Precio de compra</label>
-                  <input type="texto" class="form-control" id="PrecioCompre" placeholder="Marca" name="precioCompra" [(ngModel)]="vehiculo.precioCompra" required>
+                  <input type="texto" class="form-control" id="PrecioCompre" placeholder="Marca" name="precioCompra" [(ngModel)]="vehiculo.precioCompra" >
                 </div>
               </div>
             </div>
@@ -435,7 +449,7 @@
             <span style="float: right;">
               <button *ngIf="parmUrl" value="guardarDetalle" class="btn btn-success mr-2" (click)="guardarDetalleVehiculo(vehiculo)">Guardar detalle</button>
 
-              <button *ngIf="!parmUrl" value="Guardar" class="btn btn-success mr-2" (click)="altaVehiculo()">Guardar</button>
+              <button *ngIf="!parmUrl" value="Guardar" class="btn btn-success mr-2" [disabled]="!formVehiculo.valid" (click)="altaVehiculo()">Guardar</button>
             
               <button class="btn btn-light" [routerLink]="['/tablaVehiculos']">Cancelar</button>
             </span>

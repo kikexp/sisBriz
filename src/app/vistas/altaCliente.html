@@ -5,44 +5,49 @@
         <div class="card-body">
           <h4 class="card-title">Nuevo Cliente</h4>
           
-          <form class="forms-sample" #formCliente="ngForm" (ngSubmit)="altaCliente()">
-            <div class="col-md-6">
-              <div class="form-group">
-                <label for="Documento">Documento</label>
-                  <div class="row">
-                      <div class="col-md-3">
-                        <select name="docTipo" #docTipo="ngModel" [(ngModel)]="cliente.docTipo"  class="form-control form-control-sm">
-                        <option value="dni">DNI</option>
-                        <option value="lc">LC</option>
-                        <option value="le">LE</option>
-                        <option value="pasaporte">PASAPORTE</option>
-                        </select>
-                      </div>
-                      <div class="col-md-8">
-                        <input type="number" class="form-control" placeholder="Numero" name="dni" #dni="ngModel" [(ngModel)]="cliente.dni">
-                      </div>
-                      <div class="col-md-1">
-                        <button (click)="buscarCliente(cliente.dni)" type="button" class="btn btn-light"><i class="fas fa-search"></i></button>
-                        
-                      </div>
-                      <p *ngIf="mensajeC" [ngStyle]="{'color':'red',
-                                  'font-size': '14px',
-                                  'margin': '10px'}">{{mensajeC}}</p>
+          <form class="forms-sample" #formCliente="ngForm" (ngSubmit)="onSubmit()">
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="form-group">
+                      <label for="Documento">Documento</label>
+                        <div class="row">
+                            <div class="col-md-3">
+                              <select name="docTipo" #docTipo="ngModel" [(ngModel)]="cliente.docTipo"  class="form-control form-control-sm">
+                              <option value="dni">DNI</option>
+                              <option value="lc">LC</option>
+                              <option value="le">LE</option>
+                              <option value="pasaporte">PASAPORTE</option>
+                              </select>
+                            </div>
+                            <div class="col-md-8">
+                              <input type="number" class="form-control" placeholder="Numero" name="dni" #dni="ngModel" [(ngModel)]="cliente.dni" required>
+                              <p style="color: red" *ngIf="!dni.valid && dni.touched">* Campo requerido</p>
+                            </div>
+                            <div class="col-md-1">
+                              <button (click)="buscarCliente(cliente.dni)" type="button" class="btn btn-light"><i class="fas fa-search"></i></button>
+                              
+                            </div>
+                            <p *ngIf="mensajeC" [ngStyle]="{'color':'red',
+                                        'font-size': '14px',
+                                        'margin': '10px'}">{{mensajeC}}</p>
+                        </div>
+                    </div>
                   </div>
-              </div>
             </div>
             <div class="row">
               <div class="col-md-6">
                 <div class="form-group">
                 <label for="Nombre">Nombre</label>
-                <input type="text" class="form-control" id="Nombre" placeholder="Nombre" name="nomb"
-                [(ngModel)]="cliente.nombre">
+                <input type="text" class="form-control" id="Nombre" #nombre="ngModel" placeholder="Nombre" name="nomb"
+                [(ngModel)]="cliente.nombre" required>
+                <p style="color: red" *ngIf="!nombre.valid && nombre.touched">* Campo requerido</p>
                 </div>
               </div>
               <div class="col-md-6">
                 <div class="form-group">
                   <label for="Apellido">Apellido</label>
-                  <input type="text" class="form-control" id="Apellido" placeholder="Apellido" name="apellido" #apellido="ngModel" [(ngModel)]="cliente.apellido" >
+                  <input required type="text" class="form-control" id="Apellido" placeholder="Apellido" name="apellido" #apellido="ngModel" [(ngModel)]="cliente.apellido" >
+                  <p style="color: red" *ngIf="!apellido.valid && apellido.touched">* Campo requerido</p>
                 </div>
               </div>
             </div>
@@ -52,7 +57,8 @@
               <div class="col-md-6">
                 <div class="form-group">
                   <label for="">Celular</label>
-                  <input type="number" class="form-control" id="Celular" placeholder="Celular" name="celular" #celular="ngModel" [(ngModel)]="cliente.celular">
+                  <input type="number" class="form-control" id="Celular" placeholder="Celular" name="celular" #celular="ngModel" [(ngModel)]="cliente.celular" required>
+                  <p style="color: red" *ngIf="!celular.valid && celular.touched">* Campo requerido</p>
                 </div>
               </div>
             </div>
@@ -75,8 +81,8 @@
             
             <div class="form-group">
               <label>Domicilio Actual</label>
-              <input type="text" class="form-control" placeholder="Domicilio" name="domicilio" #domicilio="ngModel" [(ngModel)]="cliente.domicilio">
-              
+              <input type="text" class="form-control" placeholder="Domicilio" name="domicilio" #domicilio="ngModel" [(ngModel)]="cliente.domicilio" required>
+              <p style="color: red" *ngIf="!domicilio.valid && domicilio.touched">* Campo requerido</p>
             </div>
             <div class="row">
               <div class="col-md-8">
@@ -103,7 +109,8 @@
                   <select class="form-control form-control-sm" name="estadoCivil" value="cliente.estadoCivil" #estadoCivil="ngModel" [(ngModel)]="cliente.estadoCivil">
                   <option value="Casado">Casado</option>
                   <option value="Soltero">Soltero</option>
-                  <option value="Divorciado">Divorciado</option>                
+                  <option value="Divorciado">Divorciado</option> 
+                  <option value="Viudo">Viudo</option>                
                   </select>                  
                 </div>
 
@@ -199,7 +206,7 @@
             <span style="float: right;">
               <button *ngIf="parmUrl" class="btn btn-success mr-2" (click)="guardarDetalleCliente(cliente)">Guardar detalle</button>
 
-              <input *ngIf="!parmUrl" type="submit" value="Guardar" class="btn btn-success mr-2">
+              <input [disabled]="!formCliente.valid" *ngIf="!parmUrl" type="submit" value="Guardar" class="btn btn-success mr-2">
             
               <button class="btn btn-light" [routerLink]="['/tablaClientes']">Cancelar</button>
             </span>

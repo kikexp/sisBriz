@@ -26,7 +26,7 @@ export class tablaContratoComponente implements OnInit{
 
 	displayedColumns = ['indice','vehiculo', 'propietarios', 'fechaVenta','detalle', 'eliminar'];
 
-	dataSource: MatTableDataSource<Contrato>;
+	public contratos;
 	
 
 	constructor(private _contratoServicio: ContratoServicio, private router: Router){		
@@ -36,13 +36,14 @@ export class tablaContratoComponente implements OnInit{
 	@ViewChild(MatSort) sort: MatSort;
 
 	ngOnInit() {
+		
 		this._contratoServicio.getContratos().subscribe(
 			res => {
 
-				this.dataSource = new MatTableDataSource<Contrato>(res.mostrarContratos);
-				this.dataSource.paginator = this.paginator;
-				this.dataSource.sort = this.sort;
-				console.log(this.dataSource);
+				this.contratos = new MatTableDataSource(res.mostrarContratos);
+				this.contratos.paginator = this.paginator;
+				this.contratos.sort = this.sort;
+				console.log(this.contratos);
 				
 			},
 			err => {
@@ -74,6 +75,6 @@ export class tablaContratoComponente implements OnInit{
 	applyFilter(filterValue: string) {
 	    filterValue = filterValue.trim(); // Remove whitespace
 	    filterValue = filterValue.toLowerCase(); // MatTableDataSource defaults to lowercase matches
-	    this.dataSource.filter = filterValue;
+	    this.contratos.filter = filterValue;
 	}
 }
