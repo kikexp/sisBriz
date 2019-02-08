@@ -38,29 +38,6 @@ table {
   font-size: 14px;
   width: 100%;
 }
-
-.mat-column-indice{
-	width: 10%;
-}
-
-.mat-column-entregador{
-	padding-left: 20px;
-	margin-right: 10%;
-}
-.mat-column-numero{
-	width: 15%;
-}
-
-.mat-column-monto{
-	width: 10%;
-}
-
-.mat-column-fechaentrega{
-	width: 10%;
-	padding-left: 40px;
-	padding-right: 50px;
-}
-
 .mat-column-detalle{
 	width: 10%;
 

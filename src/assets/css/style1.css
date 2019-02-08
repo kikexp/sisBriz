@@ -13778,7 +13778,7 @@ input:focus {
 /* Sidebar */
 .sidebar {
   min-height: calc(100vh - 58px);
-  background: #ffffff;
+  background: #e52d27;
   font-family: "Poppins", sans-serif;
   padding: 0;
   width: 255px;
@@ -13804,7 +13804,7 @@ input:focus {
       padding: 1rem 1.875rem;
       white-space: nowrap;
       height: 52px;
-      color: #4a4949; }
+      color: #fcfcfc; }
       .sidebar .nav .nav-item .nav-link[aria-expanded="true"] {
         background: #f1f6ff; }
       .sidebar .nav .nav-item .nav-link .menu-icon {
@@ -13866,7 +13866,7 @@ input:focus {
           line-height: 1.5;
           font-weight: 500; }
         .sidebar .nav .nav-item.nav-profile .profile-name .name {
-          color: #404852; }
+          color: #ffffff; }
         .sidebar .nav .nav-item.nav-profile .profile-name .designation {
           color: #8d9498;
           font-size: 0.75rem; }
@@ -14358,6 +14358,8 @@ html {
 
 .main-panel {
   transition: width 0.25s ease, margin 0.25s ease;
+  background: url("../images/brizuela.png");
+  background-size: cover;
   width: calc(100% - 255px);
   min-height: calc(100vh - 58px);
   display: -webkit-flex;
@@ -14368,6 +14370,7 @@ html {
     .main-panel {
       margin-left: 0;
       width: 100%; } }
+
 
 .content-wrapper {
   background: #333B4E ;
@@ -15383,26 +15386,7 @@ select.form-control {
   background: transparent; }
 
 /* Icons */
-.icons-list {
-  border-left: 1px solid #f3f3f3;
-  border-bottom: 1px solid #f3f3f3; }
-  .icons-list > div {
-    background: #ffffff;
-    border-top: 1px solid #f3f3f3;
-    border-right: 1px solid #f3f3f3;
-    display: -webkit-flex;
-    display: flex;
-    -webkit-align-items: center;
-    align-items: center;
-    padding: 15px;
-    font-family: "Poppins", sans-serif;
-    font-size: 0.875rem; }
-    .icons-list > div i {
-      display: inline-block;
-      font-size: 20px;
-      width: 40px;
-      text-align: left;
-      color: #1991EB; }
+
 
 /* Preview */
 .preview-list .preview-item {

@@ -7,17 +7,8 @@ import localeEsAR from '@angular/common/locales/es-AR';
 //Clases de material
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
-import {MatDatepickerModule} from '@angular/material/datepicker';
-import {MatFormFieldModule} from '@angular/material/form-field';
-import {MatNativeDateModule } from '@angular/material';
-import {MatInputModule} from '@angular/material';
-import {MatCheckboxModule} from '@angular/material/checkbox';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import {MatRadioModule} from '@angular/material/radio';
-import {MatTableModule} from '@angular/material/table';
-import {MatPaginatorModule} from '@angular/material/paginator';
-import {MatSortModule} from '@angular/material/sort';
-import { MatSelectModule } from '@angular/material';
+import { MaterialModule } from './material/material.module';
 
 
 //import {MatToolbarModule} from '@angular/material/toolbar';
@@ -64,20 +55,11 @@ registerLocaleData(localeEsAR, 'es-Ar');
     FormsModule,
     HttpModule,
     BrowserAnimationsModule,
-    NoopAnimationsModule,
-    MatDatepickerModule,
-    MatFormFieldModule,
-    MatNativeDateModule,
-    MatInputModule,
-    MatCheckboxModule,
-    MatRadioModule,
-    MatTableModule,
-    MatPaginatorModule,
-    MatSortModule,
     ReactiveFormsModule,
-    MatSelectModule
+    MaterialModule
   ],
   providers: [appRoutingProviders, { provide: LOCALE_ID, useValue: 'es-Ar' }],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
+  entryComponents: [altaChequeComponente, altaVehiculoComponente, altaClienteComponente]
 })
 export class AppModule { }

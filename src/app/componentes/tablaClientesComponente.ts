@@ -1,5 +1,5 @@
 import { Component,OnInit, ViewChild } from '@angular/core';
-import {MatPaginator, MatSort, MatTableDataSource} from '@angular/material';
+import {MatPaginator, MatSort, MatTableDataSource, MatDialog, MatDialogConfig} from '@angular/material';
 
 //MODELOS
 import { Clientes } from '../modelos/clientes.modelo';
@@ -8,8 +8,9 @@ import { Clientes } from '../modelos/clientes.modelo';
 import { ClienteServicio } from '../servicios/cliente.servicio';
 
 //RUTAS
-import { Ruta } from '../rutaglobal';
+
 import {Router} from '@angular/router';
+import { altaClienteComponente } from './altaClienteComponente';
 
 
 @Component({
@@ -29,7 +30,7 @@ export class tablaClientesComponente implements OnInit {
 	dataSource: MatTableDataSource<Clientes>
 	
 
-	constructor(private _clienteServicio: ClienteServicio, private router: Router){		
+	constructor(private dialog: MatDialog,private _clienteServicio: ClienteServicio, private router: Router){		
 	}
 
 	@ViewChild(MatPaginator) paginator: MatPaginator;
@@ -60,4 +61,24 @@ export class tablaClientesComponente implements OnInit {
 		this.router.navigate(['/detalleCliente/'+ cliente]);
 	}
 	
+	nuevoCliente(){
+		const dialogConfig = new MatDialogConfig();
+		dialogConfig.disableClose = false;
+		dialogConfig.autoFocus = true;
+		dialogConfig.width = "80%";
+		const dialogRef =  this.dialog.open(altaClienteComponente, dialogConfig);
+		dialogRef.afterClosed().subscribe(result => {
+			this._clienteServicio.getClientes().subscribe(
+				res => {
+	
+					this.dataSource = new MatTableDataSource<Clientes>(res.mostrarClientes);
+					this.dataSource.paginator = this.paginator;
+					this.dataSource.sort = this.sort;
+				},
+				err => {
+					var msj = <any>err;
+				})
+		})
+	}
+
 }

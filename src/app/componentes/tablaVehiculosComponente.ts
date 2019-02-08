@@ -1,5 +1,5 @@
 import { Component,OnInit, ViewChild } from '@angular/core';
-import {MatPaginator, MatSort, MatTableDataSource} from '@angular/material';
+import {MatPaginator, MatSort, MatTableDataSource, MatDialog, MatDialogConfig} from '@angular/material';
 
 //MODELOS
 import { Vehiculos } from '../modelos/vehiculos.modelo';
@@ -8,8 +8,8 @@ import { Vehiculos } from '../modelos/vehiculos.modelo';
 import { VehiculoServicio } from '../servicios/vehiculo.servicio';
 
 //RUTAS
-import { Ruta } from '../rutaglobal';
 import {Router} from '@angular/router';
+import { altaVehiculoComponente } from './altaVehiculoComponente';
 
 @Component({
 	selector: "tablaVehiculosComponente",
@@ -23,12 +23,12 @@ export class tablaVehiculosComponente implements OnInit{
 
 	public url: string;
 
-	displayedColumns = ['indice','Marca', 'Modelo', 'Dominio', 'NumerodeChasis', 'Anio', 'Precio', 'detalle','eliminar'];
+	displayedColumns = ['indice','marca', 'modelo', 'dominio', 'numeroChasis', 'year', 'precioVenta', 'actions'];
 
 	dataSource: MatTableDataSource<Vehiculos>
 	
 
-	constructor(private _vehiculoServicio: VehiculoServicio, private router: Router){		
+	constructor(private dialog: MatDialog,private _vehiculoServicio: VehiculoServicio, private router: Router){		
 	}
 	@ViewChild(MatPaginator) paginator: MatPaginator;
 	@ViewChild(MatSort) sort: MatSort;
@@ -51,10 +51,10 @@ export class tablaVehiculosComponente implements OnInit{
 		
 	 }
 
-	 applyFilter(filterValue: string) {
-		    filterValue = filterValue.trim(); // Remove whitespace
-		    filterValue = filterValue.toLowerCase(); // MatTableDataSource defaults to lowercase matches
-		    this.dataSource.filter = filterValue;
+	applyFilter(filterValue: string) {
+		filterValue = filterValue.trim(); // Remove whitespace
+		filterValue = filterValue.toLowerCase(); // MatTableDataSource defaults to lowercase matches
+		this.dataSource.filter = filterValue;
 	}
 
 	eliminarVehiculo(vehiculo){
@@ -75,5 +75,30 @@ export class tablaVehiculosComponente implements OnInit{
 
 	detalleVehiculo(vehiculo){
 		this.router.navigate(['/detalleVehiculo/'+ vehiculo]);
+	}
+
+	nuevoVehiculo(){
+		const dialogConfig = new MatDialogConfig();
+		dialogConfig.disableClose = false;
+		dialogConfig.autoFocus = true;
+		dialogConfig.width = "60%";
+		const dialogRef =  this.dialog.open(altaVehiculoComponente, dialogConfig);
+		
+		dialogRef.afterClosed().subscribe(result => {
+			this._vehiculoServicio.getVehiculos().subscribe(
+				res => {
+	
+					console.log(res);
+	
+					this.dataSource = new MatTableDataSource<Vehiculos>(res.mostrarVehiculos);
+					this.dataSource.paginator = this.paginator;
+					this.dataSource.sort = this.sort;
+	
+					
+				},
+				err => {
+					var msj = <any>err;
+				})
+		})
 	}
 }

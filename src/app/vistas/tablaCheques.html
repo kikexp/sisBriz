@@ -1,63 +1,76 @@
-<div class="content-wrapper">
-  <div class="row">
-    <div class="col-lg-12 grid-margin">
-      <div class="card">
-        <div class="card-body">
-          <span class="d-flex align-items-center" style="float: right;">
-                    
-            <button type="button" class="btn btn-primary btn-fw" [routerLink]="['/altaCheque']">Ingreso de cheque</button>
-          </span>
-          <mat-form-field>
+<div class="row">
+  <div class="col-lg-12 grid-margin">
+    <div class="card">
+      <div class="card-body">
+        
+        <div class="search-div">
+          <button  (click)="nuevoCheque()" mat-raised-button>
+            <mat-icon>add</mat-icon>Ingresar cheque
+          </button>
+          <mat-form-field class="search-form-field" floatLabel="never">
             <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Buscar">
+            <button mat-button matSuffix mat-icon-button aria-label="Clear" *ngIf="searchKey"  (click)="onSearchClear()">
+              <mat-icon>close</mat-icon>
+            </button>
           </mat-form-field>
-
-          <table mat-table matSort [dataSource]="dataSource" class="mat-elevation-z8 col-md-12 col-sm-12">
+        </div>
+        <div class="mat-elevation-z8">
+          <mat-table matSort [dataSource]="dataSource" >
 
             <!-- Position Column -->
-            <ng-container matColumnDef="indice">
-              <th mat-header-cell *matHeaderCellDef mat-sort-header>  # </th>
-              <td mat-cell *matCellDef="let i = index"> {{i+1}} </td>
+            <ng-container matColumnDef="i">
+              <mat-header-cell *matHeaderCellDef mat-sort-header>  # </mat-header-cell>
+              <mat-cell *matCellDef="let i = index"> {{i+1}} </mat-cell>
             </ng-container>
             <ng-container matColumnDef="numero">
-              <th mat-header-cell *matHeaderCellDef mat-sort-header>  Numero </th>
-              <td mat-cell *matCellDef="let element"> {{element.numero}} </td>
+              <mat-header-cell *matHeaderCellDef mat-sort-header>  Numero </mat-header-cell>
+              <mat-cell *matCellDef="let element"> {{element.numero}} </mat-cell>
             </ng-container>
 
             <!-- Name Column -->
-             <ng-container matColumnDef="entregador">
-                <th mat-header-cell *matHeaderCellDef mat-sort-header> Entregador </th>
-                <td mat-cell *matCellDef="let element"> {{element.entregador.apellido}}, {{element.entregador.nombre}} </td>
+             <ng-container matColumnDef="apellido">
+                <mat-header-cell  *matHeaderCellDef mat-sort-header> Entregador </mat-header-cell>
+                <mat-cell *matCellDef="let element"> {{element.entregador.apellido}}, {{element.entregador.nombre}} </mat-cell>
               </ng-container>
            
               <ng-container matColumnDef="monto">
-                <th mat-header-cell *matHeaderCellDef mat-sort-header> Monto </th>
-                <td mat-cell *matCellDef="let element"> ${{element.monto}} </td>
+                <mat-header-cell *matHeaderCellDef mat-sort-header> Monto </mat-header-cell>
+                <mat-cell *matCellDef="let element"> ${{element.monto}} </mat-cell>
               </ng-container>
               
-              <ng-container matColumnDef="fechaentrega">
-                <th mat-header-cell *matHeaderCellDef mat-sort-header> Fecha </th>
-                <td mat-cell *matCellDef="let element"> {{element.recepcion | date: 'dd/MM/yyyy'}} </td>
+              <ng-container matColumnDef="recepcion">
+                <mat-header-cell *matHeaderCellDef mat-sort-header> Fecha </mat-header-cell>
+                <mat-cell *matCellDef="let element"> {{element.recepcion | date: 'dd/MM/yyyy'}} </mat-cell >
               </ng-container>
 
-              <ng-container matColumnDef="detalle">
+              <!-- <ng-container matColumnDef="detalle">
                 <th mat-header-cell *matHeaderCellDef mat-sort-header> </th>
-                <td mat-cell *matCellDef="let element"> <button type="button" class="btn btn-primary btn-fw" [routerLink]="['/detalleCheque']">Detalle</button> </td>
+                <td mat-cell *matCellDef="let element"> <button type="button" class="btn btn-primary btn-fw" >Detalle</button> </td>
               </ng-container>
               <ng-container matColumnDef="eliminar">
                 <th mat-header-cell *matHeaderCellDef mat-sort-header> </th>
                 <td mat-cell *matCellDef="let element"> <button type="button" class="btn btn-danger btn-fw" (click)="eliminarCheque(element)">Eliminar</button> </td>
+              </ng-container> -->
+
+              <ng-container matColumnDef="actions">
+                <mat-header-cell *matHeaderCellDef></mat-header-cell>
+                <mat-cell *matCellDef="let element">
+                  <button mat-icon-button [routerLink]="['/detalleCheque']"><mat-icon>launch</mat-icon></button>
+                  <button mat-icon-button color="warn" (click)="eliminarCheque(element)"><mat-icon>delete_outline</mat-icon></button>
+                </mat-cell>
               </ng-container>
+          
            
 
-            <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-            <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
-          </table>
+            <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+            <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+          </mat-table>
           <mat-paginator [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons></mat-paginator>
-
         </div>
+        
+
       </div>
     </div>
-
   </div>
-  
+
 </div>

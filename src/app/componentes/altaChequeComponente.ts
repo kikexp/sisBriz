@@ -4,7 +4,7 @@ import {MatDatepickerModule} from '@angular/material/datepicker';
 import { Ruta } from '../rutaglobal';
 import {ActivatedRoute, Router} from "@angular/router";
 import { FormGroup, FormBuilder, Validators, FormControl } from '@angular/forms';
-
+import {MatDialog, MatDialogRef, MAT_DIALOG_DATA} from '@angular/material';
 
 
 //MODELOS
@@ -32,7 +32,7 @@ export class altaChequeComponente {
 	public librador;
 	
 
-	constructor(private fb:FormBuilder, private _chequeServicio:ChequesServicio, private _clienteServicio: ClienteServicio, private _location: Location, private route: ActivatedRoute, private router: Router){
+	constructor(public dialogRef: MatDialogRef<altaChequeComponente>,private fb:FormBuilder, private _chequeServicio:ChequesServicio, private _clienteServicio: ClienteServicio, private _location: Location, private route: ActivatedRoute, private router: Router){
 		this.cheque = new Cheques("",null,"","",null,null,"",{},"","","", true);
 		this.cliente = new Clientes("","","","",null,null,null,null,"","","","","","","",null,"","");
 		this.librador = {nombre: null, contacto: null,direccion: null}
@@ -79,7 +79,8 @@ export class altaChequeComponente {
 		this._chequeServicio.postCheque(this.cheque).subscribe(
 			res => {
 				alert("Cheque guardado");
-				this._location.back();
+				this.dialogRef.close();
+				//this._location.back();
 				console.log("guardado", res);
 
 
@@ -110,11 +111,11 @@ export class altaChequeComponente {
 		this._chequeServicio.putCheque(cheque).subscribe(
 			res =>{
 				alert("Cheque modificado");
-				this.router.navigate(["/tablaCheques"]);
+				//this.router.navigate(["/tablaCheques"]);
 			},
 			err => {
 				alert("Error al actualizar. " + err);
-				this._location.back();
+				//this._location.back();
 			}
 			)
 	}

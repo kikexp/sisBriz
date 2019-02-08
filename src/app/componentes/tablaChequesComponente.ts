@@ -1,5 +1,5 @@
 import { Component,OnInit, ViewChild } from '@angular/core';
-import {MatPaginator, MatSort, MatTableDataSource} from '@angular/material';
+import {MatPaginator, MatSort, MatTableDataSource, MatDialog, MatDialogConfig} from '@angular/material';
 import {Location} from '@angular/common';
 
 //MODELOS
@@ -9,14 +9,14 @@ import { Cheques } from '../modelos/cheque.modelo';
 import { ChequesServicio } from '../servicios/cheques.servicio';
 
 //RUTAS
-import { Ruta } from '../rutaglobal';
 import {Router} from '@angular/router';
+import { altaChequeComponente } from './altaChequeComponente';
 
 
 @Component({
 	selector: "tablaCheques",
 	templateUrl: "../vistas/tablaCheques.html",
-	styleUrls: ["../styleTables/styleTables.css"],
+	//styleUrls: ["../styleTables/styleTables.css"],
 	providers: [ChequesServicio]
 	
 })
@@ -25,12 +25,12 @@ export class tablaChequesComponente implements OnInit {
 
 	public url: string;
 
-	displayedColumns = ['indice','numero','entregador', 'monto', 'fechaentrega', 'detalle', 'eliminar'];
+	displayedColumns = ['i','numero','apellido', 'monto', 'recepcion', 'actions'];
 
 	dataSource: MatTableDataSource<Cheques>
 	
 
-	constructor(private _chequesServicio: ChequesServicio, private router: Router, private _location: Location){		
+	constructor(private dialog: MatDialog,private _chequesServicio: ChequesServicio, private router: Router, private _location: Location){		
 	}
 
 	@ViewChild(MatPaginator) paginator: MatPaginator;
@@ -65,18 +65,52 @@ export class tablaChequesComponente implements OnInit {
 	}
 
 	eliminarCheque(cheque){
+		console.log(cheque);
 		if(confirm("Seguro desea eliminar?")){
+			
 			cheque.estado = false;
 			this._chequesServicio.putCheque(cheque).subscribe(
 			res=> {
-				alert("Cheque eliminado");
-				window.location.reload();
-				console.log("guardado", res);
+				this._chequesServicio.getCheques().subscribe(
+					res => {
+						console.log(res);
+		
+						this.dataSource = new MatTableDataSource<Cheques>(res.mostrarCheques);
+						this.dataSource.paginator = this.paginator;
+						this.dataSource.sort = this.sort;
+						
+					},
+					err => {
+						var msj = <any>err;
+					})
 
 			}
 			)
 		}
 		
+	}
+
+	nuevoCheque(){
+		const dialogConfig = new MatDialogConfig();
+		dialogConfig.disableClose = false;
+		dialogConfig.autoFocus = true;
+		dialogConfig.width = "60%";
+		const dialogRef =  this.dialog.open(altaChequeComponente, dialogConfig);
+		
+		dialogRef.afterClosed().subscribe(result => {
+			this._chequesServicio.getCheques().subscribe(
+				res => {
+					console.log(res);
+	
+					this.dataSource = new MatTableDataSource<Cheques>(res.mostrarCheques);
+					this.dataSource.paginator = this.paginator;
+					this.dataSource.sort = this.sort;
+					
+				},
+				err => {
+					var msj = <any>err;
+				})
+		})
 	}
 
 }
