@@ -8,9 +8,9 @@
           </button>
           <mat-form-field class="search-form-field" floatLabel="never">
             <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Buscar">
-            <button mat-button matSuffix mat-icon-button aria-label="Clear" *ngIf="searchKey"  (click)="onSearchClear()">
+            <!-- <button mat-button matSuffix mat-icon-button aria-label="Clear" *ngIf="searchKey"  (click)="onSearchClear()">
               <mat-icon>close</mat-icon>
-            </button>
+            </button> -->
           </mat-form-field>
         </div>
 
