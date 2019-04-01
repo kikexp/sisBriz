@@ -17,11 +17,12 @@ import { altaContratoComponente } from './componentes/altaContratoComponente';
 
 import { tablaChequesComponente } from './componentes/tablaChequesComponente';
 import { altaChequeComponente } from './componentes/altaChequeComponente';
+import { LoginGuardGuard } from './servicios/guards/login-guard.guard';
 
 
 const appRoutes: Routes = [
 
-	{ path: '', component: tablaClientesComponente},
+	{ path: '', component: tablaClientesComponente, canActivate: [ LoginGuardGuard ]},
 	{ path: "tablaClientes", component: tablaClientesComponente},
 	{ path: "altaCliente", component: altaClienteComponente},
 	{ path: "detalleCliente/:id", component: altaClienteComponente},

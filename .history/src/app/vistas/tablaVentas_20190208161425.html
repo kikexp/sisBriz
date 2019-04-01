@@ -1,0 +1,65 @@
+<div class="content-wrapper">
+  <div class="row">
+    <div class="col-lg-12 grid-margin">
+        <div class="card">
+
+          <div class="card-body">
+                        
+            <span class="d-flex align-items-center" style="float: right;">
+                    
+              <button type="button" class="btn btn-primary btn-fw" [routerLink]="['/altaVehiculo']">Nuevo Vehiculo</button>
+            </span>
+            <mat-form-field>
+              <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Buscar">
+            </mat-form-field>
+
+            <table mat-table matSort [dataSource]="dataSource" class="mat-elevation-z8">
+
+              <!-- Position Column -->
+              <ng-container matColumnDef="Marca">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header>  Marca </th>
+                <td mat-cell *matCellDef="let element"> {{element.marca}} </td>
+              </ng-container>
+
+              <!-- Name Column -->
+               <ng-container matColumnDef="Modelo">
+                  <th mat-header-cell *matHeaderCellDef mat-sort-header> Modelo </th>
+                  <td mat-cell *matCellDef="let element"> {{element.modelo}} </td>
+                </ng-container>
+
+              <!-- Weight Column -->
+               <ng-container matColumnDef="Año">
+                  <th mat-header-cell *matHeaderCellDef mat-sort-header> Año </th>
+                  <td mat-cell *matCellDef="let element"> {{element.year}} </td>
+                </ng-container>
+                <ng-container matColumnDef="Dominio">
+                  <th mat-header-cell *matHeaderCellDef mat-sort-header> Dominio </th>
+                  <td mat-cell *matCellDef="let element"> {{element.dominio}} </td>
+                </ng-container>
+                <ng-container matColumnDef="Numero de Chasis">
+                  <th mat-header-cell *matHeaderCellDef mat-sort-header> Numero de chasis </th>
+                  <td mat-cell *matCellDef="let element"> {{element.numeroChasis}} </td>
+                </ng-container>
+                <ng-container matColumnDef="Precio">
+                  <th mat-header-cell *matHeaderCellDef mat-sort-header> Precio </th>
+                  <td mat-cell *matCellDef="let element"> {{element.precioVenta}} </td>
+                </ng-container>
+
+                <ng-container matColumnDef="detalle">
+                  <th mat-header-cell *matHeaderCellDef mat-sort-header> </th>
+                  <td mat-cell *matCellDef="let element"> <button type="button" class="btn btn-primary btn-fw" [routerLink]="['/altaCliente']">Detalle</button> </td>
+                </ng-container>
+             
+
+              <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+              <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+            </table>
+            <mat-paginator [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons></mat-paginator>
+
+          </div>
+        </div>
+   </div>
+
+  </div>
+  
+</div>

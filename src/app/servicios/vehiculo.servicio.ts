@@ -51,10 +51,9 @@ export class VehiculoServicio {
 
 	putVehiculo(vehiculo){
 		let parametros = JSON.stringify(vehiculo);
-		
 		let headers = new Headers({"Content-Type":"application/json","Authorization": localStorage.getItem("id")});
 
-		return this._http.put(this.url + "actualizarVehiculo/" + vehiculo._id, vehiculo, {headers: headers}).map(resultado => resultado.json())	
+		return this._http.put(this.url + "actualizarVehiculo/" + vehiculo._id, parametros, {headers: headers}).map(resultado => resultado.json())	
 	}
 
 

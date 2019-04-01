@@ -1,0 +1,774 @@
+<div *ngIf="!parmUrl">
+    <h1 mat-dialog-title>
+        Nuevo Vehiculo
+    </h1>
+    <mat-dialog-content>
+        <form class="forms-sample" #formVehiculo="ngForm">
+            <div class="column form-group">
+                <div class="">
+                    <label for="FechaIngreso">Fecha de ingreso*</label>
+                </div>
+
+                <div class="col-md-5">
+                    <div class="form-group">
+                        <mat-form-field>
+                            <input matInput required id="FechaIngresoVehiculo" [matDatepicker]="picker" placeholder="Seleccionar" name="fechaIngresoVehiculo" #fechaIngresoVehiculo="ngModel" [(ngModel)]="vehiculo.fechaIngreso" required>
+                            <mat-error *ngIf="!fechaIngresoVehiculo.valid && fechaIngresoVehiculo.touched">*Campo requerido</mat-error>
+                            <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                            <mat-datepicker #picker></mat-datepicker>
+                        </mat-form-field>
+                    </div>
+
+                </div>
+
+            </div>
+            <div class="row">
+                <div class="col-md-5">
+                    <div class="form-group">
+                        <label for="Dominio">Dominio*</label>
+                        <input type="text" class="form-control" id="Dominio" placeholder="Dominio" name="dominio" #dominio="ngModel" [(ngModel)]="vehiculo.dominio" required>
+                        <p style="color: red" *ngIf="!dominio.valid && dominio.touched">* Campo requerido</p>
+                    </div>
+                </div>
+                <div class="col-md-5">
+                    <div class="form-group">
+                        <label for="Numero de Chasis">Numero de Chasis*</label>
+                        <input type="text" class="form-control" id="Numero de Chasis" placeholder="Numero de Chasis" #numeroChasis="ngModel" name="numeroChasis" [(ngModel)]="vehiculo.numeroChasis" required>
+                        <p style="color: red" *ngIf="!numeroChasis.valid && numeroChasis.touched">* Campo requerido</p>
+                    </div>
+                </div>
+            </div>
+            <div class="row form-group">
+                <div class="col-md-6">
+                    <label for="Marca">Marca*</label>
+                    <input type="text" class="form-control" id="Marca" placeholder="Marca" name="marca" #marca="ngModel" [(ngModel)]="vehiculo.marca" required>
+                    <p style="color: red" *ngIf="!marca.valid && marca.touched">* Campo requerido</p>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label for="Modelo">Modelo*</label>
+                        <input type="text" class="form-control" id="Modelo" placeholder="Modelo" name="modelo" #modelo="ngModel" [(ngModel)]="vehiculo.modelo" required>
+                        <p style="color: red" *ngIf="!modelo.valid && modelo.touched">* Campo requerido</p>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="form-group">
+                        <label for="Año">Año*</label>
+                        <input type="number" class="form-control" id="Año" placeholder="Año" name="year" #year="ngModel" [(ngModel)]="vehiculo.year" required>
+                        <p style="color: red" *ngIf="!year.valid && year.touched">* Campo requerido</p>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label for="PrecioVenta">Precio de venta</label>
+                        <input type="texto" class="form-control" id="PrecioVenta" placeholder="Marca" name="precioVenta" [(ngModel)]="vehiculo.precioVenta">
+                    </div>
+                </div>
+
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label for="PrecioCompre">Precio de compra</label>
+                        <input type="texto" class="form-control" id="PrecioCompre" placeholder="Marca" name="precioCompra" [(ngModel)]="vehiculo.precioCompra">
+                    </div>
+                </div>
+            </div>
+
+
+
+            <br>
+            <hr>
+            <h4>Documentación recibida</h4>
+
+            <div class="form-sample">
+                <div class="col-md-7">
+                    <div class="form-group">
+                        <div class="row">
+                            <div class="column">
+                                <div>
+                                    <mat-checkbox class="example-margin" name="titulo" [(ngModel)]="vehiculo.titulo" [labelPosition]="labelPosition" [disabled]="false">
+                                        Titulo
+                                    </mat-checkbox>
+                                </div>
+                                <div>
+                                    <mat-checkbox class="example-margin" name="cedulaVerde" [(ngModel)]="vehiculo.cedulaVerde" [(indeterminate)]="indeterminate" [labelPosition]="labelPosition" [disabled]="disabled">
+                                        Cedula Verde
+                                    </mat-checkbox>
+                                </div>
+                                <div>
+                                    <mat-checkbox class="example-margin" name="formularioFirmado" [(ngModel)]="vehiculo.formularioFirmado" [(indeterminate)]="indeterminate" [labelPosition]="labelPosition" [disabled]="disabled">
+                                        Formulario 08 Firmado
+                                    </mat-checkbox>
+                                </div>
+
+                            </div>
+
+                            <div class="column">
+                                <div>
+                                    <mat-checkbox class="example-margin" name="verPolicial" [(ngModel)]="vehiculo.verPolicial" [(indeterminate)]="indeterminate" [labelPosition]="labelPosition" [disabled]="disabled">
+                                        Verificación policial
+                                    </mat-checkbox>
+                                </div>
+                                <div>
+                                    <mat-checkbox class="example-margin" name="estadoDom" [(ngModel)]="vehiculo.estadoDom" [(indeterminate)]="indeterminate" [labelPosition]="labelPosition" [disabled]="disabled">
+                                        Estado Dominio c/13i
+                                    </mat-checkbox>
+                                </div>
+                                <div>
+                                    <mat-checkbox class="example-margin" name="prenda" [(ngModel)]="vehiculo.prenda" [(indeterminate)]="indeterminate" [labelPosition]="labelPosition" [disabled]="disabled">
+                                        Prenda
+                                    </mat-checkbox>
+                                </div>
+                                <div>
+                                    <mat-checkbox class="example-margin" name="rto" [(ngModel)]="vehiculo.rto" [(indeterminate)]="indeterminate" [labelPosition]="labelPosition" [disabled]="disabled">
+                                        RTO
+                                    </mat-checkbox>
+                                </div>
+                                <br>
+
+
+                            </div>
+                            <div class="column example-margin">
+                                <p>Imp. Parque Automotor</p>
+                                <br>
+                                <div class="row">
+                                    <div class="column">
+                                        <mat-form-field>
+                                            <input type="number" matInput placeholder="Año" [(ngModel)]="imp.anio" name="anio">
+                                        </mat-form-field>
+                                    </div>
+                                    <div class="column">
+
+                                        <div>
+                                            <mat-checkbox [(ngModel)]="imp.cuotas[0]" name="cuota0">
+                                                Cuota 1
+                                            </mat-checkbox>
+                                        </div>
+
+                                        <div>
+                                            <mat-checkbox [(ngModel)]="imp.cuotas[1]" name="cuota1">
+                                                Cuota 2
+                                            </mat-checkbox>
+                                        </div>
+                                        <div>
+                                            <mat-checkbox [(ngModel)]="imp.cuotas[2]" name="cuota2">
+                                                Cuota 3
+                                            </mat-checkbox>
+                                        </div>
+                                        <div>
+                                            <mat-checkbox [(ngModel)]="imp.cuotas[3]" name="cuota3">
+                                                Cuota 4
+                                            </mat-checkbox>
+                                        </div>
+                                        <div>
+                                            <mat-checkbox [(ngModel)]="imp.cuotas[4]" name="cuota4">
+                                                Cuota 5
+                                            </mat-checkbox>
+                                        </div>
+
+                                        <div>
+                                            <mat-checkbox [(ngModel)]="imp.cuotas[5]" name="cuota5">
+                                                Cuota 6
+                                            </mat-checkbox>
+                                        </div>
+
+                                    </div>
+                                    <div class="column col-md-4">
+                                        <button (click)="guardarImp()" class="btn btn-success mr-2">Agregar año</button>
+                                    </div>
+
+                                </div>
+
+                            </div>
+
+
+                        </div>
+
+                    </div>
+
+                </div>
+                <div class="column col-lg-12">
+                    <mat-table [dataSource]="dataSource">
+                        <ng-container matColumnDef="year">
+                            <mat-header-cell *matHeaderCellDef> Año </mat-header-cell>
+                            <mat-cell *matCellDef="let element"> {{element.anio}} </mat-cell>
+                        </ng-container>
+                        <ng-container matColumnDef="1">
+                            <mat-header-cell *matHeaderCellDef> 1° </mat-header-cell>
+                            <mat-cell *matCellDef="let element"> {{element.cuotas[0]}} </mat-cell>
+
+                        </ng-container>
+                        <ng-container matColumnDef="2">
+                            <mat-header-cell *matHeaderCellDef> 2° </mat-header-cell>
+                            <mat-cell *matCellDef="let element"> {{element.cuotas[1]}} </mat-cell>
+                        </ng-container>
+                        <ng-container matColumnDef="3">
+                            <mat-header-cell *matHeaderCellDef> 3° </mat-header-cell>
+                            <mat-cell *matCellDef="let element"> {{element.cuotas[2]}} </mat-cell>
+                        </ng-container>
+                        <ng-container matColumnDef="4">
+                            <mat-header-cell *matHeaderCellDef> 4° </mat-header-cell>
+                            <mat-cell *matCellDef="let element"> {{element.cuotas[3]}} </mat-cell>
+                        </ng-container>
+                        <ng-container matColumnDef="5">
+                            <mat-header-cell *matHeaderCellDef> 5° </mat-header-cell>
+                            <mat-cell *matCellDef="let element"> {{element.cuotas[4]}} </mat-cell>
+                        </ng-container>
+                        <ng-container matColumnDef="6">
+                            <mat-header-cell *matHeaderCellDef> 6° </mat-header-cell>
+                            <mat-cell *matCellDef="let element"> {{element.cuotas[5]}} </mat-cell>
+                        </ng-container>
+                        <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+                        <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+                    </mat-table>
+                </div>
+
+            </div>
+            <hr>
+            <div class="row">
+                <div class="column" style="padding-right: 20%">
+
+                    <div class="form-sample">
+                        <div class="col-md-7">
+                            <h4>Vehículo</h4>
+                            <div class="form-group">
+                                <div>
+                                    <mat-checkbox class="example-margin" name="cedulaGnc" [(ngModel)]="vehiculo.cedulaGnc" [labelPosition]="after" [disabled]="false">
+                                        Cedula GNC
+                                    </mat-checkbox>
+                                </div>
+                                <div>
+                                    <mat-checkbox class="example-margin" name="duplicadoLlave" [(ngModel)]="vehiculo.duplicadoLlave" [labelPosition]="after" [disabled]="false">
+                                        Duplicado Llave
+                                    </mat-checkbox>
+                                </div>
+                                <div>
+                                    <mat-checkbox class="example-margin" name="manuales" [(ngModel)]="vehiculo.manuales" [labelPosition]="after" [disabled]="false">
+                                        Manuales
+                                    </mat-checkbox>
+                                </div>
+                                <div>
+                                    <mat-checkbox class="example-margin" name="codigoRadio" [(ngModel)]="vehiculo.codigoRadio" [labelPosition]="after" [disabled]="false">
+                                        Codigo de Radio
+                                    </mat-checkbox>
+                                </div>
+                            </div>
+
+                        </div>
+
+                    </div>
+                </div>
+                <div class="column">
+                    <h4>Herramientas</h4>
+                    <div class="form-sample">
+                        <div class="col-md-7">
+                            <div class="form-group">
+                                <div>
+                                    <mat-checkbox class="example-margin" name="ruedaAuxilio" [(ngModel)]="vehiculo.ruedaAuxilio" [labelPosition]="after" [disabled]="false">
+                                        Rueda de Auxilio
+                                    </mat-checkbox>
+                                </div>
+                                <div>
+                                    <mat-checkbox class="example-margin" name="llaveRueda" [(ngModel)]="vehiculo.llaveRueda" [labelPosition]="after" [disabled]="false">
+                                        Llave rueda
+                                    </mat-checkbox>
+                                </div>
+
+                                <div>
+                                    <mat-checkbox class="example-margin" name="gato" [(ngModel)]="vehiculo.gato" [labelPosition]="after" [disabled]="false">
+                                        Gato
+                                    </mat-checkbox>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <hr>
+            <h4 class="card-title">
+                Datos del propietario anterior
+            </h4>
+
+
+            <!--Datos vendedor-->
+
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label for="Dni">DNI</label>
+                        <div class="row">
+                            <div class="col-md-3">
+                                <select class="form-control form-control-sm">
+                          <option value="dni">DNI</option>
+                          <option value="lc">LC</option>
+                          <option value="le">LE</option>
+                        </select>
+                            </div>
+                            <div class="col-md-8">
+                                <input type="number" class="form-control" placeholder="Numero" name="dni" [(ngModel)]="vehiculo.vendedor.dni">
+                            </div>
+                            <div class="col-md-1">
+                                <button (click)="buscarCliente(vehiculo.vendedor.dni)" type="button" class="btn btn-light"><i class="fas fa-search"></i></button>
+
+                            </div>
+                            <p *ngIf="mensajeC" [ngStyle]="{'color':'red',
+                        'font-size': '14px',
+                        'margin': '10px'}">{{mensajeC}}</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label for="Nombre">Nombre</label>
+                        <input type="text" class="form-control" id="Nombre" placeholder="Nombre" name="nomb" [(ngModel)]="vehiculo.vendedor.nombre" disabled>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label for="Apellido">Apellido</label>
+                        <input type="text" class="form-control" id="Apellido" placeholder="Apellido" name="apellido" #apellido="ngModel" [(ngModel)]="vehiculo.vendedor.apellido" disabled>
+                    </div>
+                </div>
+            </div>
+
+            <!--Contacto-->
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label for="">Celular</label>
+                        <input type="number" class="form-control" id="Celular" placeholder="Celular" name="celular" #celular="ngModel" [(ngModel)]="vehiculo.vendedor.celular" disabled>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label for="telAlternativo2">Email</label>
+                        <input type="email" class="form-control" id="telAlternativo2" placeholder="Email" name="email" #email="ngModel" [(ngModel)]="vehiculo.vendedor.email" disabled>
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label>Domicilio Actual</label>
+                <input type="text" class="form-control" placeholder="Domicilio" name="domicilio" #domicilio="ngModel" [(ngModel)]="vehiculo.vendedor.domicilio" disabled>
+
+            </div>
+
+
+            <hr>
+            <div class="row">
+                <div class="col-md-2">
+                    <label for="obs">Observaciones</label>
+                </div>
+                <div class="col-md-4">
+                    <textarea name="obs" id="" cols="20" rows="7" name="observaciones" [(ngModel)]="vehiculo.observaciones"></textarea>
+                </div>
+
+            </div>
+            <br>
+            <hr>
+            <h5>(*) Campos requeridos</h5>
+
+
+        </form>
+    </mat-dialog-content>
+    <mat-dialog-actions *ngIf="!parmUrl" align="end">
+
+
+        <button *ngIf="!parmUrl" value="Guardar" class="btn btn-success mr-2" [disabled]="!formVehiculo.valid" (click)="altaVehiculo()">Guardar</button>
+
+        <button class="btn btn-light" mat-dialog-close>Cancelar</button>
+    </mat-dialog-actions>
+</div>
+
+
+<mat-card class="mat-elevation-z8 card" *ngIf="parmUrl">
+
+    <mat-card-content class="card-body">
+        <h1>Detalle</h1>
+        <form class="forms-sample" #formVehiculo="ngForm">
+            <div class="column form-group">
+                <div class="">
+                    <label for="FechaIngreso">Fecha de ingreso*</label>
+                </div>
+
+                <div class="col-md-5">
+                    <div class="form-group">
+                        <mat-form-field>
+                            <input matInput required id="FechaIngresoVehiculo" [matDatepicker]="picker" placeholder="Seleccionar" name="fechaIngresoVehiculo" #fechaIngresoVehiculo="ngModel" [(ngModel)]="vehiculo.fechaIngreso" required>
+                            <mat-error *ngIf="!fechaIngresoVehiculo.valid && fechaIngresoVehiculo.touched">*Campo requerido</mat-error>
+                            <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                            <mat-datepicker #picker></mat-datepicker>
+                        </mat-form-field>
+                    </div>
+
+                </div>
+
+            </div>
+            <div class="row">
+                <div class="col-md-5">
+                    <div class="form-group">
+                        <label for="Dominio">Dominio*</label>
+                        <input type="text" class="form-control" id="Dominio" placeholder="Dominio" name="dominio" #dominio="ngModel" [(ngModel)]="vehiculo.dominio" required>
+                        <p style="color: red" *ngIf="!dominio.valid && dominio.touched">* Campo requerido</p>
+                    </div>
+                </div>
+                <div class="col-md-5">
+                    <div class="form-group">
+                        <label for="Numero de Chasis">Numero de Chasis*</label>
+                        <input type="text" class="form-control" id="Numero de Chasis" placeholder="Numero de Chasis" #numeroChasis="ngModel" name="numeroChasis" [(ngModel)]="vehiculo.numeroChasis" required>
+                        <p style="color: red" *ngIf="!numeroChasis.valid && numeroChasis.touched">* Campo requerido</p>
+                    </div>
+                </div>
+            </div>
+            <div class="row form-group">
+                <div class="col-md-6">
+                    <label for="Marca">Marca*</label>
+                    <input type="text" class="form-control" id="Marca" placeholder="Marca" name="marca" #marca="ngModel" [(ngModel)]="vehiculo.marca" required>
+                    <p style="color: red" *ngIf="!marca.valid && marca.touched">* Campo requerido</p>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label for="Modelo">Modelo*</label>
+                        <input type="text" class="form-control" id="Modelo" placeholder="Modelo" name="modelo" #modelo="ngModel" [(ngModel)]="vehiculo.modelo" required>
+                        <p style="color: red" *ngIf="!modelo.valid && modelo.touched">* Campo requerido</p>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="form-group">
+                        <label for="Año">Año*</label>
+                        <input type="number" class="form-control" id="Año" placeholder="Año" name="year" #year="ngModel" [(ngModel)]="vehiculo.year" required>
+                        <p style="color: red" *ngIf="!year.valid && year.touched">* Campo requerido</p>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label for="PrecioVenta">Precio de venta</label>
+                        <input type="texto" class="form-control" id="PrecioVenta" placeholder="Marca" name="precioVenta" [(ngModel)]="vehiculo.precioVenta">
+                    </div>
+                </div>
+
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label for="PrecioCompre">Precio de compra</label>
+                        <input type="texto" class="form-control" id="PrecioCompre" placeholder="Marca" name="precioCompra" [(ngModel)]="vehiculo.precioCompra">
+                    </div>
+                </div>
+            </div>
+
+
+
+            <br>
+            <hr>
+            <h4>Documentación recibida</h4>
+
+            <div class="form-sample">
+                <div class="col-md-7">
+                    <div class="form-group">
+                        <div class="row">
+                            <div class="column">
+                                <div>
+                                    <mat-checkbox class="example-margin" name="titulo" [(ngModel)]="vehiculo.titulo" [labelPosition]="labelPosition" [disabled]="false">
+                                        Titulo
+                                    </mat-checkbox>
+                                </div>
+                                <div>
+                                    <mat-checkbox class="example-margin" name="cedulaVerde" [(ngModel)]="vehiculo.cedulaVerde" [(indeterminate)]="indeterminate" [labelPosition]="labelPosition" [disabled]="disabled">
+                                        Cedula Verde
+                                    </mat-checkbox>
+                                </div>
+                                <div>
+                                    <mat-checkbox class="example-margin" name="formularioFirmado" [(ngModel)]="vehiculo.formularioFirmado" [(indeterminate)]="indeterminate" [labelPosition]="labelPosition" [disabled]="disabled">
+                                        Formulario 08 Firmado
+                                    </mat-checkbox>
+                                </div>
+
+                            </div>
+
+                            <div class="column">
+                                <div>
+                                    <mat-checkbox class="example-margin" name="verPolicial" [(ngModel)]="vehiculo.verPolicial" [(indeterminate)]="indeterminate" [labelPosition]="labelPosition" [disabled]="disabled">
+                                        Verificación policial
+                                    </mat-checkbox>
+                                </div>
+                                <div>
+                                    <mat-checkbox class="example-margin" name="estadoDom" [(ngModel)]="vehiculo.estadoDom" [(indeterminate)]="indeterminate" [labelPosition]="labelPosition" [disabled]="disabled">
+                                        Estado Dominio c/13i
+                                    </mat-checkbox>
+                                </div>
+                                <div>
+                                    <mat-checkbox class="example-margin" name="prenda" [(ngModel)]="vehiculo.prenda" [(indeterminate)]="indeterminate" [labelPosition]="labelPosition" [disabled]="disabled">
+                                        Prenda
+                                    </mat-checkbox>
+                                </div>
+                                <div>
+                                    <mat-checkbox class="example-margin" name="rto" [(ngModel)]="vehiculo.rto" [(indeterminate)]="indeterminate" [labelPosition]="labelPosition" [disabled]="disabled">
+                                        RTO
+                                    </mat-checkbox>
+                                </div>
+                                <br>
+                                <div class="column example-margin">
+                                    <p>Imp. Parque Automotor</p>
+                                    <br>
+                                    <div class="row">
+                                        <div class="column">
+                                            <mat-form-field>
+                                                <input type="number" matInput placeholder="Año" [(ngModel)]="imp.anio" name="anio">
+                                            </mat-form-field>
+                                        </div>
+                                        <div class="column">
+
+                                            <div>
+                                                <mat-checkbox [(ngModel)]="imp.cuotas[0]" name="cuota0">
+                                                    Cuota 1
+                                                </mat-checkbox>
+                                            </div>
+
+                                            <div>
+                                                <mat-checkbox [(ngModel)]="imp.cuotas[1]" name="cuota1">
+                                                    Cuota 2
+                                                </mat-checkbox>
+                                            </div>
+                                            <div>
+                                                <mat-checkbox [(ngModel)]="imp.cuotas[2]" name="cuota2">
+                                                    Cuota 3
+                                                </mat-checkbox>
+                                            </div>
+                                            <div>
+                                                <mat-checkbox [(ngModel)]="imp.cuotas[3]" name="cuota3">
+                                                    Cuota 4
+                                                </mat-checkbox>
+                                            </div>
+                                            <div>
+                                                <mat-checkbox [(ngModel)]="imp.cuotas[4]" name="cuota4">
+                                                    Cuota 5
+                                                </mat-checkbox>
+                                            </div>
+
+
+                                        </div>
+                                        <div class="column col-md-4">
+                                            <button (click)="guardarImp()" class="btn btn-success mr-2">Agregar año</button>
+                                        </div>
+
+                                    </div>
+
+                                </div>
+
+                            </div>
+
+                        </div>
+                        <div class="column example-margin">
+                            <p>Imp. Parque Automotor</p>
+
+                            <br>
+                            <div class="column col-lg-12">
+                                <mat-table [dataSource]="dataSource">
+                                    <ng-container matColumnDef="year">
+                                        <mat-header-cell *matHeaderCellDef> Año </mat-header-cell>
+                                        <mat-cell *matCellDef="let element"> {{element.anio}} </mat-cell>
+                                    </ng-container>
+                                    <ng-container matColumnDef="1">
+                                        <mat-header-cell *matHeaderCellDef> 1° </mat-header-cell>
+                                        <mat-cell *matCellDef="let element"> {{element.cuotas[0]}} </mat-cell>
+
+                                    </ng-container>
+                                    <ng-container matColumnDef="2">
+                                        <mat-header-cell *matHeaderCellDef> 2° </mat-header-cell>
+                                        <mat-cell *matCellDef="let element"> {{element.cuotas[1]}} </mat-cell>
+                                    </ng-container>
+                                    <ng-container matColumnDef="3">
+                                        <mat-header-cell *matHeaderCellDef> 3° </mat-header-cell>
+                                        <mat-cell *matCellDef="let element"> {{element.cuotas[2]}} </mat-cell>
+                                    </ng-container>
+                                    <ng-container matColumnDef="4">
+                                        <mat-header-cell *matHeaderCellDef> 4° </mat-header-cell>
+                                        <mat-cell *matCellDef="let element"> {{element.cuotas[3]}} </mat-cell>
+                                    </ng-container>
+                                    <ng-container matColumnDef="5">
+                                        <mat-header-cell *matHeaderCellDef> 5° </mat-header-cell>
+                                        <mat-cell *matCellDef="let element"> {{element.cuotas[4]}} </mat-cell>
+                                    </ng-container>
+
+                                    <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+                                    <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+                                </mat-table>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+
+            </div>
+            <hr>
+            <div class="row">
+                <div class="column">
+                    <h4>Vehículo</h4>
+                    <div class="form-sample">
+                        <div class="col-md-7">
+
+                            <div class="form-group">
+                                <div>
+                                    <mat-checkbox class="example-margin" name="cedulaGnc" [(ngModel)]="vehiculo.cedulaGnc" [labelPosition]="after" [disabled]="false">
+                                        Cedula GNC
+                                    </mat-checkbox>
+                                </div>
+                                <div>
+                                    <mat-checkbox class="example-margin" name="duplicadoLlave" [(ngModel)]="vehiculo.duplicadoLlave" [labelPosition]="after" [disabled]="false">
+                                        Duplicado Llave
+                                    </mat-checkbox>
+                                </div>
+                                <div>
+                                    <mat-checkbox class="example-margin" name="manuales" [(ngModel)]="vehiculo.manuales" [labelPosition]="after" [disabled]="false">
+                                        Manuales
+                                    </mat-checkbox>
+                                </div>
+                                <div>
+                                    <mat-checkbox class="example-margin" name="codigoRadio" [(ngModel)]="vehiculo.codigoRadio" [labelPosition]="after" [disabled]="false">
+                                        Codigo de Radio
+                                    </mat-checkbox>
+                                </div>
+                            </div>
+
+                        </div>
+
+                    </div>
+                </div>
+                <div class="column">
+                    <h4>Herramientas</h4>
+                    <div class="form-sample">
+                        <div class="col-md-7">
+                            <div class="form-group">
+                                <div>
+                                    <mat-checkbox class="example-margin" name="ruedaAuxilio" [(ngModel)]="vehiculo.ruedaAuxilio" [labelPosition]="after" [disabled]="false">
+                                        Rueda de Auxilio
+                                    </mat-checkbox>
+                                </div>
+                                <div>
+                                    <mat-checkbox class="example-margin" name="llaveRueda" [(ngModel)]="vehiculo.llaveRueda" [labelPosition]="after" [disabled]="false">
+                                        Llave rueda
+                                    </mat-checkbox>
+                                </div>
+
+                                <div>
+                                    <mat-checkbox class="example-margin" name="gato" [(ngModel)]="vehiculo.gato" [labelPosition]="after" [disabled]="false">
+                                        Gato
+                                    </mat-checkbox>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <hr>
+            <h4 class="card-title">
+                Datos del propietario anterior
+            </h4>
+
+
+            <!--Datos vendedor-->
+
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label for="Dni">DNI</label>
+                        <div class="row">
+                            <div class="col-md-3">
+                                <select class="form-control form-control-sm">
+                      <option value="dni">DNI</option>
+                      <option value="lc">LC</option>
+                      <option value="le">LE</option>
+                    </select>
+                            </div>
+                            <div class="col-md-8">
+                                <input type="number" class="form-control" placeholder="Numero" name="dni" [(ngModel)]="vehiculo.vendedor.dni">
+                            </div>
+                            <div class="col-md-1">
+                                <button (click)="buscarCliente(vehiculo.vendedor.dni)" type="button" class="btn btn-light"><i class="fas fa-search"></i></button>
+
+                            </div>
+                            <p *ngIf="mensajeC" [ngStyle]="{'color':'red',
+                    'font-size': '14px',
+                    'margin': '10px'}">{{mensajeC}}</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label for="Nombre">Nombre</label>
+                        <input type="text" class="form-control" id="Nombre" placeholder="Nombre" name="nomb" [disabled]="clienteEncontrado" [(ngModel)]="vehiculo.vendedor.nombre" [disabled]="clienteEncontrado">
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label for="Apellido">Apellido</label>
+                        <input type="text" class="form-control" id="Apellido" placeholder="Apellido" name="apellido" [disabled]="clienteEncontrado" #apellido="ngModel" [(ngModel)]="vehiculo.vendedor.apellido" [disabled]="clienteEncontrado">
+                    </div>
+                </div>
+            </div>
+
+            <!--Contacto-->
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label for="">Celular</label>
+                        <input type="number" class="form-control" id="Celular" placeholder="Celular" name="celular" [disabled]="clienteEncontrado" #celular="ngModel" [(ngModel)]="vehiculo.vendedor.celular" [disabled]="clienteEncontrado">
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label for="telAlternativo2">Email</label>
+                        <input type="email" class="form-control" id="telAlternativo2" placeholder="Email" name="email" [disabled]="clienteEncontrado" #email="ngModel" [(ngModel)]="vehiculo.vendedor.email" [disabled]="clienteEncontrado">
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label>Domicilio Actual</label>
+                <input type="text" class="form-control" placeholder="Domicilio" name="domicilio" #domicilio="ngModel" [disabled]="clienteEncontrado" [(ngModel)]="vehiculo.vendedor.domicilio" [disabled]="clienteEncontrado">
+
+            </div>
+
+
+            <hr>
+            <div class="row">
+                <div class="col-md-2">
+                    <label for="obs">Observaciones</label>
+                </div>
+                <div class="col-md-4">
+                    <textarea name="obs" id="" cols="20" rows="7" name="observaciones" [(ngModel)]="vehiculo.observaciones"></textarea>
+                </div>
+
+            </div>
+            <br>
+            <hr>
+            <h5>(*) Campos requeridos</h5>
+            <span style="float: right;">
+        
+      </span>
+
+
+        </form>
+        <mat-card-actions align="right">
+            <button *ngIf="parmUrl" value="guardarDetalle" class="btn btn-success mr-2" (click)="guardarDetalleVehiculo(vehiculo)">Guardar detalle</button>
+            <button *ngIf="parmUrl" value="imprimirFicha" class="btn btn-success mr-2" (click)="imprimirFicha()">Imprimir Ficha</button>
+            <button class="btn btn-light" [routerLink]="['/tablaVehiculos']">Cancelar</button>
+        </mat-card-actions>
+    </mat-card-content>
+</mat-card>

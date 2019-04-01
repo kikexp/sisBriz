@@ -15,14 +15,16 @@ import { Ruta } from '../rutaglobal';
 @Injectable()
 
 export class UsuarioServicio {
-	
 
-	public url:string;
+	public token: string;
 
-	constructor(private _http:Http){
+	public url: string;
 
-		this.url = Ruta.url+"login";	
-	
+	constructor(private _http: Http) {
+
+		this.url = Ruta.url + 'login';
+		this.cargarStorage();
+
 	}
 
 	login(listaUsuarios, token){
@@ -35,6 +37,18 @@ export class UsuarioServicio {
 
 		return this._http.post(this.url, parametros, {headers: headers}).map(resultado => resultado.json())	
 
+	}
+
+	cargarStorage(){
+		if(localStorage.getItem('token')){
+			this.token = localStorage.getItem('token');
+		}
+		else{
+			this.token = '';
+		}
+	}
+	estaLogueado(){
+		return( this.token.length > 5 ) ? true : false;
 	}
 }
 

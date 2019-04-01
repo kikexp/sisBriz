@@ -43,12 +43,10 @@ export class tablaVehiculosComponente implements OnInit{
 				this.dataSource.paginator = this.paginator;
 				this.dataSource.sort = this.sort;
 
-				
 			},
 			err => {
 				var msj = <any>err;
-			})
-		
+			});
 	 }
 
 	applyFilter(filterValue: string) {
@@ -83,18 +81,15 @@ export class tablaVehiculosComponente implements OnInit{
 		dialogConfig.autoFocus = true;
 		dialogConfig.width = "60%";
 		const dialogRef =  this.dialog.open(altaVehiculoComponente, dialogConfig);
-		
 		dialogRef.afterClosed().subscribe(result => {
 			this._vehiculoServicio.getVehiculos().subscribe(
 				res => {
-	
 					console.log(res);
-	
+
 					this.dataSource = new MatTableDataSource<Vehiculos>(res.mostrarVehiculos);
 					this.dataSource.paginator = this.paginator;
 					this.dataSource.sort = this.sort;
-	
-					
+
 				},
 				err => {
 					var msj = <any>err;

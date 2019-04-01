@@ -1,0 +1,55 @@
+<div class="card">
+    <div class="card-body">
+        <div class="search-div">
+            <button (click)="nuevoCliente()" mat-raised-button>
+          <mat-icon>add</mat-icon>Nuevo Cliente
+        </button>
+            <mat-form-field class="search-form-field" floatLabel="never">
+                <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Buscar">
+            </mat-form-field>
+        </div>
+
+        <div class="mat-elevation-z8">
+            <mat-table matSort [dataSource]="dataSource">
+
+                <!-- Position Column -->
+                <ng-container matColumnDef="indice">
+                    <mat-header-cell *matHeaderCellDef mat-sort-header> # </mat-header-cell>
+                    <mat-cell *matCellDef="let i=index"> {{i+1}} </mat-cell>
+                </ng-container>
+                <ng-container matColumnDef="nombre">
+                    <mat-header-cell *matHeaderCellDef mat-sort-header> Nombre </mat-header-cell>
+                    <mat-cell *matCellDef="let element"> {{element.nombre}} </mat-cell>
+                </ng-container>
+
+                <!-- Name Column -->
+                <ng-container matColumnDef="apellido">
+                    <mat-header-cell *matHeaderCellDef mat-sort-header> Apellido </mat-header-cell>
+                    <mat-cell *matCellDef="let element"> {{element.apellido}} </mat-cell>
+                </ng-container>
+
+                <!-- Weight Column -->
+                <ng-container matColumnDef="dni">
+                    <mat-header-cell *matHeaderCellDef mat-sort-header> Dni </mat-header-cell>
+                    <mat-cell *matCellDef="let element"> {{element.dni}} </mat-cell>
+                </ng-container>
+
+                <ng-container matColumnDef="detalle">
+                    <mat-header-cell *matHeaderCellDef></mat-header-cell>
+                    <mat-cell *matCellDef="let element">
+                        <button mat-icon-button (click)="detalleCliente(element.dni)"><mat-icon>launch</mat-icon></button>
+
+                    </mat-cell>
+
+                </ng-container>
+
+
+                <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+                <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+            </mat-table>
+            <mat-paginator [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons></mat-paginator>
+
+        </div>
+
+    </div>
+</div>

@@ -1,0 +1,79 @@
+<div class="col-lg-12 grid-margin">
+    <div class="card">
+        <div class="card-body">
+            <div class="search-div" fxFlex>
+                <button (click)="nuevoVehiculo()" mat-raised-button>
+                  <mat-icon>add</mat-icon>Nuevo Vehiculo
+                </button>
+                <mat-form-field class="search-form-field" floatLabel="never">
+                    <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Buscar">
+
+                </mat-form-field>
+            </div>
+            <div class="mat-elevation-z8">
+                <mat-table matSort [dataSource]="dataSource">
+
+                    <!-- Position Column -->
+                    <ng-container matColumnDef="indice">
+                        <mat-header-cell *matHeaderCellDef mat-sort-header> # </mat-header-cell>
+                        <mat-cell *matCellDef="let i = index"> {{i + 1}} </mat-cell>
+                    </ng-container>
+
+                    <ng-container matColumnDef="marca">
+                        <mat-header-cell *matHeaderCellDef mat-sort-header> Marca </mat-header-cell>
+                        <mat-cell *matCellDef="let element"> {{element.marca}} </mat-cell>
+                    </ng-container>
+
+                    <!-- Name Column -->
+                    <ng-container matColumnDef="modelo">
+                        <mat-header-cell *matHeaderCellDef mat-sort-header> Modelo </mat-header-cell>
+                        <mat-cell *matCellDef="let element"> {{element.modelo}} </mat-cell>
+                    </ng-container>
+
+                    <!-- Weight Column -->
+                    <ng-container matColumnDef="year">
+                        <mat-header-cell *matHeaderCellDef mat-sort-header> Año </mat-header-cell>
+                        <mat-cell *matCellDef="let element"> {{element.year}} </mat-cell>
+                    </ng-container>
+                    <ng-container matColumnDef="dominio">
+                        <mat-header-cell *matHeaderCellDef mat-sort-header> Dominio </mat-header-cell>
+                        <mat-cell *matCellDef="let element"> {{element.dominio}} </mat-cell>
+                    </ng-container>
+                    <ng-container matColumnDef="numeroChasis">
+                        <mat-header-cell *matHeaderCellDef mat-sort-header> Numero de chasis </mat-header-cell>
+                        <mat-cell *matCellDef="let element"> {{element.numeroChasis}} </mat-cell>
+                    </ng-container>
+                    <ng-container matColumnDef="precioVenta">
+                        <mat-header-cell *matHeaderCellDef mat-sort-header> Precio </mat-header-cell>
+                        <mat-cell *matCellDef="let element"> $ {{element.precioVenta}} </mat-cell>
+                    </ng-container>
+
+                    <!-- <ng-container matColumnDef="detalle">
+                    <mat-header-cell  *matHeaderCellDef mat-sort-header> </mat-header-cell>
+                    <mat-cell *matCellDef="let element"> <button type="button" class="btn btn-primary btn-fw" *ngIf="element.dominio" (click)="detalleVehiculo(element.dominio)">Detalle</button>
+                    <button type="button" class="btn btn-primary btn-fw" *ngIf="!element.dominio" (click)="detalleVehiculo(element.numeroChasis)">Detalle</button> </mat-cell>
+                  </ng-container>
+                  <ng-container matColumnDef="eliminar">
+                    <mat-header-cell *matHeaderCellDef mat-sort-header> </mat-header-cell>
+                    <mat-cell *matCellDef="let element"> <button type="button" class="btn btn-danger btn-fw" (click)="eliminarVehiculo(element)">Eliminar</button> </mat-cell>
+                  </ng-container> -->
+
+                    <ng-container matColumnDef="actions">
+                        <mat-header-cell *matHeaderCellDef></mat-header-cell>
+                        <mat-cell *matCellDef="let element">
+                            <button mat-icon-button *ngIf="element.dominio" (click)="detalleVehiculo(element.dominio)"><mat-icon>launch</mat-icon></button>
+                            <button mat-icon-button *ngIf="!element.dominio" (click)="detalleVehiculo(element.numeroChasis)"><mat-icon>launch</mat-icon></button>
+                            <button mat-icon-button color="warn" (click)="eliminarVehiculo(element)"><mat-icon>delete_outline</mat-icon></button>
+                        </mat-cell>
+                    </ng-container>
+
+                    <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+                    <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+                </mat-table>
+                <mat-paginator [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons></mat-paginator>
+
+            </div>
+
+        </div>
+    </div>
+</div>
