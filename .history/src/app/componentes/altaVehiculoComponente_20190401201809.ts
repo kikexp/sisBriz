@@ -91,7 +91,7 @@ export class altaVehiculoComponente implements OnInit {
 						this.clienteEncontrado = true;
 
 					}
-					
+
 					this.dataSource = new MatTableDataSource(res.vehiculo.impParque);
 					this.impues = res.vehiculo.impParque;
 
@@ -178,12 +178,6 @@ export class altaVehiculoComponente implements OnInit {
 			delete vehiculo.vendedor;
 			console.log(vehiculo);
 		}
-		if(vehiculo.impParque.length > 0){
-			if( vehiculo.impParque[0].anio === ""){
-				vehiculo.impParque.pop();
-			}
-			
-		}
 		this._vehiculoServicio.putVehiculo(vehiculo).subscribe(
 			res => {
 				alert('Vehiculo modificado');
@@ -195,7 +189,7 @@ export class altaVehiculoComponente implements OnInit {
 			});
 	}
 
-	public impues: any[];
+	public impues = [];
 	// tslint:disable-next-line:member-ordering
 	public imp: {
 		anio: string,
@@ -210,7 +204,7 @@ export class altaVehiculoComponente implements OnInit {
 	guardarImp() {
 
 		for (let i = 0; i < this.imp.cuotas.length; i++) {
-			if (this.imp.cuotas[i] === false) {
+			if (this.	imp.cuotas[i] === false) {
 				this.imp.cuotas[i] = 'IMPAGO';
 			} else {
 				this.imp.cuotas[i] = 'PAGADO';

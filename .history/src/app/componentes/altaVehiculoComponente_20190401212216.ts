@@ -91,7 +91,7 @@ export class altaVehiculoComponente implements OnInit {
 						this.clienteEncontrado = true;
 
 					}
-					
+
 					this.dataSource = new MatTableDataSource(res.vehiculo.impParque);
 					this.impues = res.vehiculo.impParque;
 
@@ -177,12 +177,6 @@ export class altaVehiculoComponente implements OnInit {
 		if ( vehiculo.vendedor ) {
 			delete vehiculo.vendedor;
 			console.log(vehiculo);
-		}
-		if(vehiculo.impParque.length > 0){
-			if( vehiculo.impParque[0].anio === ""){
-				vehiculo.impParque.pop();
-			}
-			
 		}
 		this._vehiculoServicio.putVehiculo(vehiculo).subscribe(
 			res => {

@@ -91,7 +91,7 @@ export class altaVehiculoComponente implements OnInit {
 						this.clienteEncontrado = true;
 
 					}
-					
+
 					this.dataSource = new MatTableDataSource(res.vehiculo.impParque);
 					this.impues = res.vehiculo.impParque;
 
@@ -178,12 +178,6 @@ export class altaVehiculoComponente implements OnInit {
 			delete vehiculo.vendedor;
 			console.log(vehiculo);
 		}
-		if(vehiculo.impParque.length > 0){
-			if( vehiculo.impParque[0].anio === ""){
-				vehiculo.impParque.pop();
-			}
-			
-		}
 		this._vehiculoServicio.putVehiculo(vehiculo).subscribe(
 			res => {
 				alert('Vehiculo modificado');
@@ -195,7 +189,7 @@ export class altaVehiculoComponente implements OnInit {
 			});
 	}
 
-	public impues: any[];
+	public impues = [];
 	// tslint:disable-next-line:member-ordering
 	public imp: {
 		anio: string,
@@ -210,7 +204,7 @@ export class altaVehiculoComponente implements OnInit {
 	guardarImp() {
 
 		for (let i = 0; i < this.imp.cuotas.length; i++) {
-			if (this.imp.cuotas[i] === false) {
+			if (this.	imp.cuotas[i] === false) {
 				this.imp.cuotas[i] = 'IMPAGO';
 			} else {
 				this.imp.cuotas[i] = 'PAGADO';
@@ -313,20 +307,46 @@ export class altaVehiculoComponente implements OnInit {
 			doc.text('5', 160, 163);
 			let x = 10;
 			let y = 173;
-			for (var i = 0; i < vehiculoPrm.impParque.length; i++){
-				var anio = vehiculoPrm.impParque[i].anio;
-				doc.text(anio.toString(), x, y);
+			for (let i; i <= vehiculoPrm.impParque.length; i++){
+				doc.text(this.cambioString(vehiculoPrm.impParque[i].anio.toString()), i, y);
 				let x1 = 35;
-				for ( var j = 0; j < vehiculoPrm.impParque[i].cuotas.length; j++){
-					var cuota: String =vehiculoPrm.impParque[i].cuotas[j];
-					doc.text(cuota, x1, y);
+				for ( let j; j <= vehiculoPrm.impParque[i].cuotas.length; j++){
+					doc.text(this.cambioString(vehiculoPrm.impParque[0].cuotas[j].toString()), x1, y1);
 					x1 = x1 + 30;
 				}
 				y = y + 9;
 
 
 			}
-			
+			// doc.text(vehiculoPrm.impParque[0].cuotas[0].toString(),35,173);
+			// doc.text(vehiculoPrm.impParque[0].cuotas[1].toString(),65,173);
+			// doc.text(vehiculoPrm.impParque[0].cuotas[1].toString(),95,173);
+			// doc.text(vehiculoPrm.impParque[0].cuotas[3].toString(),125,173);
+			// doc.text(vehiculoPrm.impParque[0].cuotas[4].toString(),155,173);
+			// doc.text(this.cambioString(vehiculoPrm.impParque[1].anio.toString()),10,182);
+			// doc.text(vehiculoPrm.impParque[1].cuotas[0].toString(),35,182);
+			// doc.text(vehiculoPrm.impParque[1].cuotas[1].toString(),65,182);
+			// doc.text(vehiculoPrm.impParque[1].cuotas[2].toString(),95,182);
+			// doc.text(vehiculoPrm.impParque[1].cuotas[3].toString(),125,182);
+			// doc.text(vehiculoPrm.impParque[1].cuotas[4].toString(),155,182);
+			// doc.text(this.cambioString(vehiculoPrm.impParque[2].anio.toString()),10,194);
+			// doc.text(vehiculoPrm.impParque[2].cuotas[0].toString(),35,194);
+			// doc.text(vehiculoPrm.impParque[2].cuotas[1].toString(),65,194);
+			// doc.text(vehiculoPrm.impParque[2].cuotas[2].toString(),95,194);
+			// doc.text(vehiculoPrm.impParque[2].cuotas[3].toString(),125,194);
+			// doc.text(vehiculoPrm.impParque[2].cuotas[4].toString(),155,194);
+			// doc.text(this.cambioString(vehiculoPrm.impParque[3].anio.toString()),10,203);
+			// doc.text(vehiculoPrm.impParque[3].cuotas[0].toString(),35,203);
+			// doc.text(vehiculoPrm.impParque[3].cuotas[1].toString(),65,203);
+			// doc.text(vehiculoPrm.impParque[3].cuotas[2].toString(),95,203);
+			// doc.text(vehiculoPrm.impParque[3].cuotas[3].toString(),125,203);
+			// doc.text(vehiculoPrm.impParque[3].cuotas[4].toString(),155,203);
+			// doc.text(this.cambioString(vehiculoPrm.impParque[4].anio.toString()),10,212);
+			// doc.text(vehiculoPrm.impParque[4].cuotas[0].toString(),35,212);
+			// doc.text(vehiculoPrm.impParque[4].cuotas[1].toString(),65,212);
+			// doc.text(vehiculoPrm.impParque[4].cuotas[2].toString(),95,212);
+			// doc.text(vehiculoPrm.impParque[4].cuotas[3].toString(),125,212);
+			// doc.text(vehiculoPrm.impParque[4].cuotas[4].toString(),155,212);
 		} else {
 
 			doc.text( 'No hay impuestos cargados', 60, 156)

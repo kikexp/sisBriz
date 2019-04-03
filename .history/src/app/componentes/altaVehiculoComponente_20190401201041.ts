@@ -91,7 +91,7 @@ export class altaVehiculoComponente implements OnInit {
 						this.clienteEncontrado = true;
 
 					}
-					
+
 					this.dataSource = new MatTableDataSource(res.vehiculo.impParque);
 					this.impues = res.vehiculo.impParque;
 
@@ -178,12 +178,6 @@ export class altaVehiculoComponente implements OnInit {
 			delete vehiculo.vendedor;
 			console.log(vehiculo);
 		}
-		if(vehiculo.impParque.length > 0){
-			if( vehiculo.impParque[0].anio === ""){
-				vehiculo.impParque.pop();
-			}
-			
-		}
 		this._vehiculoServicio.putVehiculo(vehiculo).subscribe(
 			res => {
 				alert('Vehiculo modificado');
@@ -195,7 +189,7 @@ export class altaVehiculoComponente implements OnInit {
 			});
 	}
 
-	public impues: any[];
+	public impues = [];
 	// tslint:disable-next-line:member-ordering
 	public imp: {
 		anio: string,
@@ -210,7 +204,7 @@ export class altaVehiculoComponente implements OnInit {
 	guardarImp() {
 
 		for (let i = 0; i < this.imp.cuotas.length; i++) {
-			if (this.imp.cuotas[i] === false) {
+			if (this.	imp.cuotas[i] === false) {
 				this.imp.cuotas[i] = 'IMPAGO';
 			} else {
 				this.imp.cuotas[i] = 'PAGADO';
@@ -313,13 +307,13 @@ export class altaVehiculoComponente implements OnInit {
 			doc.text('5', 160, 163);
 			let x = 10;
 			let y = 173;
-			for (var i = 0; i < vehiculoPrm.impParque.length; i++){
+			for (var i = 0; i <= vehiculoPrm.impParque.length; i++){
 				var anio = vehiculoPrm.impParque[i].anio;
 				doc.text(anio.toString(), x, y);
 				let x1 = 35;
-				for ( var j = 0; j < vehiculoPrm.impParque[i].cuotas.length; j++){
-					var cuota: String =vehiculoPrm.impParque[i].cuotas[j];
-					doc.text(cuota, x1, y);
+				for ( var j = 0; j <= vehiculoPrm.impParque[i].cuotas.length; j++){
+					var cuota =vehiculoPrm.impParque[i].cuotas[j];
+					doc.text(cuota.toString(), x1, y);
 					x1 = x1 + 30;
 				}
 				y = y + 9;

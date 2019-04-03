@@ -178,11 +178,8 @@ export class altaVehiculoComponente implements OnInit {
 			delete vehiculo.vendedor;
 			console.log(vehiculo);
 		}
-		if(vehiculo.impParque.length > 0){
-			if( vehiculo.impParque[0].anio === ""){
-				vehiculo.impParque.pop();
-			}
-			
+		if(vehiculo.impParque[0].anio === ""){
+			vehiculo.impParque.pop();
 		}
 		this._vehiculoServicio.putVehiculo(vehiculo).subscribe(
 			res => {
@@ -215,6 +212,9 @@ export class altaVehiculoComponente implements OnInit {
 			} else {
 				this.imp.cuotas[i] = 'PAGADO';
 			}
+		}
+		if(this.impues[0].anio === ''){
+			this.impues.pop();
 		}
 		this.impues.push(this.imp);
 		this.imp = { anio: null , cuotas: [false, false, false, false, false, false]};
