@@ -117,16 +117,17 @@ export class altaVehiculoComponente implements OnInit {
 	altaVehiculo() {
 
 		delete this.vehiculo._id;
-		if ( this.dataSource.data.length > 0 ) {
+		if ( this.dataSource.data ) {
 			for ( let i = 0; i < this.impues.length; i++) {
 				this.vehiculo.impParque[i].anio = this.impues[i].anio;
 				this.vehiculo.impParque[i].cuotas = this.impues[i].cuotas;
 			}
 		}
+		this.vehiculo.impParque = this.dataSource.data;
 		
 		console.log(this.vehiculo);
 
-		if ( this.clienteEncontrado ) {
+		if ( !this.clienteEncontrado ) {
 			console.log('entra a cliente nuevo');
 			this._clienteServicio.postCliente(this.vehiculo.vendedor).subscribe(
 				resp => {

@@ -126,7 +126,7 @@ export class altaVehiculoComponente implements OnInit {
 		
 		console.log(this.vehiculo);
 
-		if ( this.clienteEncontrado ) {
+		if ( !this.clienteEncontrado ) {
 			console.log('entra a cliente nuevo');
 			this._clienteServicio.postCliente(this.vehiculo.vendedor).subscribe(
 				resp => {
