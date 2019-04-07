@@ -181,7 +181,7 @@ export class altaContratoComponente {
 
 	buscarConyuge(conyugePrm){
 		this.mensajeCon = null;
-		this._clienteServicio.getClienteDni(conyugePrm).subscribe(
+		this._clienteServicio.getCliente(conyugePrm).subscribe(
 			res => {
 				this.conyuge = res.cliente;
 				this.banderaConyuge = true;
