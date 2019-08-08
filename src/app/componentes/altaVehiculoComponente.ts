@@ -160,14 +160,14 @@ export class altaVehiculoComponente implements OnInit {
 
 				if (res.mensaje !== 'vehiculo existente') {
 					swal('Vehiculo guardado!', 'El vehiculo fue guardado de forma exitosa', 'success').then(() => {
-						// window.location.reload();
+						this.dialogRef.close();
 						console.log(res.mensaje);
-						window.location.reload();
+						//window.location.reload();
 					});
 
 
 				} else {
-					window.location.reload();
+					//window.location.reload();
 
 				}
 

@@ -33,6 +33,13 @@ export class altaVehiculoComponente implements OnInit {
 	public vehiculo: Vehiculos;
 	public parmUrl;
 
+	public impues: any[];
+	// tslint:disable-next-line:member-ordering
+	public imp: {
+		anio: string,
+		cuotas: any[]
+	};
+
 
 	Titulo = false;
 
@@ -91,7 +98,7 @@ export class altaVehiculoComponente implements OnInit {
 						this.clienteEncontrado = true;
 
 					}
-
+					
 					this.dataSource = new MatTableDataSource(res.vehiculo.impParque);
 					this.impues = res.vehiculo.impParque;
 
@@ -110,13 +117,16 @@ export class altaVehiculoComponente implements OnInit {
 	altaVehiculo() {
 
 		delete this.vehiculo._id;
-		for ( let i = 0; i < this.impues.length; i++) {
-			this.vehiculo.impParque[i].anio = this.impues[i].anio;
-			this.vehiculo.impParque[i].cuotas = this.impues[i].cuotas;
+		if ( this.dataSource.data.length > 0 ) {
+			for ( let i = 0; i < this.impues.length; i++) {
+				this.vehiculo.impParque[i].anio = this.impues[i].anio;
+				this.vehiculo.impParque[i].cuotas = this.impues[i].cuotas;
+			}
 		}
+		
 		console.log(this.vehiculo);
 
-		if ( !this.clienteEncontrado ) {
+		if ( this.clienteEncontrado ) {
 			console.log('entra a cliente nuevo');
 			this._clienteServicio.postCliente(this.vehiculo.vendedor).subscribe(
 				resp => {
@@ -150,14 +160,14 @@ export class altaVehiculoComponente implements OnInit {
 
 				if (res.mensaje !== 'vehiculo existente') {
 					swal('Vehiculo guardado!', 'El vehiculo fue guardado de forma exitosa', 'success').then(() => {
-						// window.location.reload();
+						this.dialogRef.close();
 						console.log(res.mensaje);
-						window.location.reload();
+						//window.location.reload();
 					});
 
 
 				} else {
-					window.location.reload();
+					//window.location.reload();
 
 				}
 
@@ -178,6 +188,12 @@ export class altaVehiculoComponente implements OnInit {
 			delete vehiculo.vendedor;
 			console.log(vehiculo);
 		}
+		if(vehiculo.impParque.length > 0){
+			if( vehiculo.impParque[0].anio === ""){
+				vehiculo.impParque.pop();
+			}
+
+		}
 		this._vehiculoServicio.putVehiculo(vehiculo).subscribe(
 			res => {
 				alert('Vehiculo modificado');
@@ -189,12 +205,7 @@ export class altaVehiculoComponente implements OnInit {
 			});
 	}
 
-	public impues = [];
-	// tslint:disable-next-line:member-ordering
-	public imp: {
-		anio: string,
-		cuotas: any[]
-	};
+	
 
 
 	// #Secction funciones para impuestos
@@ -204,7 +215,7 @@ export class altaVehiculoComponente implements OnInit {
 	guardarImp() {
 
 		for (let i = 0; i < this.imp.cuotas.length; i++) {
-			if (this.	imp.cuotas[i] === false) {
+			if (this.imp.cuotas[i] === false) {
 				this.imp.cuotas[i] = 'IMPAGO';
 			} else {
 				this.imp.cuotas[i] = 'PAGADO';
@@ -307,11 +318,13 @@ export class altaVehiculoComponente implements OnInit {
 			doc.text('5', 160, 163);
 			let x = 10;
 			let y = 173;
-			for (var i = 0; i <= vehiculoPrm.impParque.length; i++){
-				doc.text(this.cambioString(vehiculoPrm.impParque[i].anio.toString()), x, y);
+			for (var i = 0; i < vehiculoPrm.impParque.length; i++){
+				var anio = vehiculoPrm.impParque[i].anio;
+				doc.text(anio.toString(), x, y);
 				let x1 = 35;
-				for ( let j; j <= vehiculoPrm.impParque[i].cuotas.length; j++){
-					doc.text(this.cambioString(vehiculoPrm.impParque[i].cuotas[j].toString()), x1, y);
+				for ( var j = 0; j < vehiculoPrm.impParque[i].cuotas.length; j++){
+					var cuota: String =vehiculoPrm.impParque[i].cuotas[j];
+					doc.text(cuota, x1, y);
 					x1 = x1 + 30;
 				}
 				y = y + 9;

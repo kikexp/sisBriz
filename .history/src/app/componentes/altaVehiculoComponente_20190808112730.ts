@@ -33,6 +33,13 @@ export class altaVehiculoComponente implements OnInit {
 	public vehiculo: Vehiculos;
 	public parmUrl;
 
+	public impues: any[];
+	// tslint:disable-next-line:member-ordering
+	public imp: {
+		anio: string,
+		cuotas: any[]
+	};
+
 
 	Titulo = false;
 
@@ -46,7 +53,7 @@ export class altaVehiculoComponente implements OnInit {
 	public clienteEncontrado = false;
 
 
-	displayedColumns = ['year', '1', '2', '3', '4', '5'];
+	displayedColumns = ['year', '1', '2', '3', '4', '5','eliminar'];
 	dataSource = new MatTableDataSource();
 
 	constructor(
@@ -55,7 +62,9 @@ export class altaVehiculoComponente implements OnInit {
 		private _clienteServicio: ClienteServicio,
 		private _location: Location, private route: ActivatedRoute,
 		private router: Router) {
-		this.vehiculo = new Vehiculos('', '', '', null, '', '', null, null, false, false, false, [{anio: '', cuotas: []}], false, false, false, false, false, false, false, false, false, false, false, '', true, null, {dni: null, nombre: '', apellido: '', celular: null, email: '', domicilio: '', _id: ''});
+		this.vehiculo = new Vehiculos('', '', '', null, '', '', null, null, false, false, false, [{anio: '', cuotas: []}],
+		false, false, false, false, false, false, false, false, false, false, false, '', true, null,
+		{dni: null, nombre: '', apellido: '', celular: null, email: '', domicilio: '', _id: ''});
 		this.cliente = new Clientes('', '', '', '', null, null, null, null, '', '', '', '', '', '', '', null, '', '','','');
 		// this.url = Ruta.url;
 		this.route.params.subscribe( params => this.parmUrl = params['id']);
@@ -89,7 +98,7 @@ export class altaVehiculoComponente implements OnInit {
 						this.clienteEncontrado = true;
 
 					}
-
+					
 					this.dataSource = new MatTableDataSource(res.vehiculo.impParque);
 					this.impues = res.vehiculo.impParque;
 
@@ -108,13 +117,16 @@ export class altaVehiculoComponente implements OnInit {
 	altaVehiculo() {
 
 		delete this.vehiculo._id;
-		for ( let i = 0; i < this.impues.length; i++) {
-			this.vehiculo.impParque[i].anio = this.impues[i].anio;
-			this.vehiculo.impParque[i].cuotas = this.impues[i].cuotas;
+		if ( this.dataSource.data.length > 0 ) {
+			for ( let i = 0; i < this.impues.length; i++) {
+				this.vehiculo.impParque[i].anio = this.impues[i].anio;
+				this.vehiculo.impParque[i].cuotas = this.impues[i].cuotas;
+			}
 		}
+		
 		console.log(this.vehiculo);
 
-		if ( !this.clienteEncontrado ) {
+		if ( this.clienteEncontrado ) {
 			console.log('entra a cliente nuevo');
 			this._clienteServicio.postCliente(this.vehiculo.vendedor).subscribe(
 				resp => {
@@ -150,12 +162,12 @@ export class altaVehiculoComponente implements OnInit {
 					swal('Vehiculo guardado!', 'El vehiculo fue guardado de forma exitosa', 'success').then(() => {
 						// window.location.reload();
 						console.log(res.mensaje);
-						window.location.reload();
+						//window.location.reload();
 					});
 
 
 				} else {
-					window.location.reload();
+					//window.location.reload();
 
 				}
 
@@ -176,10 +188,16 @@ export class altaVehiculoComponente implements OnInit {
 			delete vehiculo.vendedor;
 			console.log(vehiculo);
 		}
+		if(vehiculo.impParque.length > 0){
+			if( vehiculo.impParque[0].anio === ""){
+				vehiculo.impParque.pop();
+			}
+
+		}
 		this._vehiculoServicio.putVehiculo(vehiculo).subscribe(
 			res => {
 				alert('Vehiculo modificado');
-				this.router.navigate(['/tablaVehiculos']);
+				window.location.reload();
 			},
 			err => {
 				alert('Error al actualizar. ' + err);
@@ -187,12 +205,7 @@ export class altaVehiculoComponente implements OnInit {
 			});
 	}
 
-	public impues = [];
-	// tslint:disable-next-line:member-ordering
-	public imp: {
-		anio: string,
-		cuotas: any[]
-	};
+	
 
 
 	// #Secction funciones para impuestos
@@ -202,7 +215,7 @@ export class altaVehiculoComponente implements OnInit {
 	guardarImp() {
 
 		for (let i = 0; i < this.imp.cuotas.length; i++) {
-			if (this.	imp.cuotas[i] === false) {
+			if (this.imp.cuotas[i] === false) {
 				this.imp.cuotas[i] = 'IMPAGO';
 			} else {
 				this.imp.cuotas[i] = 'PAGADO';
@@ -297,42 +310,28 @@ export class altaVehiculoComponente implements OnInit {
 		doc.text('Prenda: '+ this.cambioValor(vehiculoPrm.prenda), 10, 142);
 		doc.text('RTO: '+ this.cambioValor(vehiculoPrm.rto), 10, 149);
 		doc.text('Imp. Parque Automotor:', 10, 156);
-		if ( vehiculoPrm.impParque.length !== 0) {
+		if ( vehiculoPrm.impParque.length > 0) {
 			doc.text('1', 40, 163);
 			doc.text('2', 70, 163);
 			doc.text('3', 100, 163);
 			doc.text('4', 130, 163);
 			doc.text('5', 160, 163);
-			doc.text(vehiculoPrm.impParque[0].anio.toString(), 10, 173);
-			doc.text(this.cambioTrue(vehiculoPrm.impParque[0].cuotas[0].toString()),35,173);
-			doc.text(this.cambioTrue(vehiculoPrm.impParque[0].cuotas[1].toString()),65,173);
-			doc.text(this.cambioTrue(vehiculoPrm.impParque[0].cuotas[2].toString()),95,173);
-			doc.text(this.cambioTrue(vehiculoPrm.impParque[0].cuotas[3].toString()),125,173);
-			doc.text(this.cambioTrue(vehiculoPrm.impParque[0].cuotas[4].toString()),155,173);
-			doc.text(vehiculoPrm.impParque[1].anio.toString(),10,182);
-			doc.text(this.cambioTrue(vehiculoPrm.impParque[1].cuotas[0].toString()),35,182);
-			doc.text(this.cambioTrue(vehiculoPrm.impParque[1].cuotas[1].toString()),65,182);
-			doc.text(this.cambioTrue(vehiculoPrm.impParque[1].cuotas[2].toString()),95,182);
-			doc.text(this.cambioTrue(vehiculoPrm.impParque[1].cuotas[3].toString()),125,182);
-			doc.text(this.cambioTrue(vehiculoPrm.impParque[1].cuotas[4].toString()),155,182);
-			doc.text(vehiculoPrm.impParque[2].anio.toString(),10,194);
-			doc.text(this.cambioTrue(vehiculoPrm.impParque[2].cuotas[0].toString()),35,194);
-			doc.text(this.cambioTrue(vehiculoPrm.impParque[2].cuotas[1].toString()),65,194);
-			doc.text(this.cambioTrue(vehiculoPrm.impParque[2].cuotas[2].toString()),95,194);
-			doc.text(this.cambioTrue(vehiculoPrm.impParque[2].cuotas[3].toString()),125,194);
-			doc.text(this.cambioTrue(vehiculoPrm.impParque[2].cuotas[4].toString()),155,194);
-			doc.text(vehiculoPrm.impParque[3].anio.toString(),10,203);
-			doc.text(this.cambioTrue(vehiculoPrm.impParque[3].cuotas[0].toString()),35,203);
-			doc.text(this.cambioTrue(vehiculoPrm.impParque[3].cuotas[1].toString()),65,203);
-			doc.text(this.cambioTrue(vehiculoPrm.impParque[3].cuotas[2].toString()),95,203);
-			doc.text(this.cambioTrue(vehiculoPrm.impParque[3].cuotas[3].toString()),125,203);
-			doc.text(this.cambioTrue(vehiculoPrm.impParque[3].cuotas[4].toString()),155,203);
-			doc.text(vehiculoPrm.impParque[4].anio.toString(),10,212);
-			doc.text(this.cambioTrue(vehiculoPrm.impParque[4].cuotas[0].toString()),35,212);
-			doc.text(this.cambioTrue(vehiculoPrm.impParque[4].cuotas[1].toString()),65,212);
-			doc.text(this.cambioTrue(vehiculoPrm.impParque[4].cuotas[2].toString()),95,212);
-			doc.text(this.cambioTrue(vehiculoPrm.impParque[4].cuotas[3].toString()),125,212);
-			doc.text(this.cambioTrue(vehiculoPrm.impParque[4].cuotas[4].toString()),155,212);
+			let x = 10;
+			let y = 173;
+			for (var i = 0; i < vehiculoPrm.impParque.length; i++){
+				var anio = vehiculoPrm.impParque[i].anio;
+				doc.text(anio.toString(), x, y);
+				let x1 = 35;
+				for ( var j = 0; j < vehiculoPrm.impParque[i].cuotas.length; j++){
+					var cuota: String =vehiculoPrm.impParque[i].cuotas[j];
+					doc.text(cuota, x1, y);
+					x1 = x1 + 30;
+				}
+				y = y + 9;
+
+
+			}
+			
 		} else {
 
 			doc.text( 'No hay impuestos cargados', 60, 156)
@@ -340,16 +339,19 @@ export class altaVehiculoComponente implements OnInit {
 		doc.setFontSize(15);
 		doc.text('Vehiculo', 10, 225);
 		doc.setFontSize(13);
-		doc.text('Cedula GNC:', 10, 235);
-		doc.text('Duplicado llaves:', 10, 242);
-		doc.text('Manuales:', 10, 249);
-		doc.text('Código Radio:', 10, 256);
+		doc.text('Cedula GNC:' + this.cambioValor(vehiculoPrm.cedulaGnc), 10, 235);
+		doc.text('Duplicado llaves:' + this.cambioValor(vehiculoPrm.duplicadoLlave), 10, 242);
+		doc.text('Manuales: '+ this.cambioValor(vehiculoPrm.manuales), 10, 249);
+		doc.text('Código Radio:' + this.cambioValor(vehiculoPrm.codigoRadio), 10, 256);
 		doc.setFontSize(15);
 		doc.text('Herramientas', 90, 225);
 		doc.setFontSize(13);
-		doc.text('Rueda de Auxilio:', 90, 235);
-		doc.text('Llave rueda:', 90, 242);
-		doc.text('Gato:', 90, 249);
+		doc.text('Rueda de Auxilio:' + this.cambioValor(vehiculoPrm.ruedaAuxilio), 90, 235);
+		doc.text('Llave rueda: ' + this.cambioValor(vehiculoPrm.llaveRueda), 90, 242);
+		doc.text('Gato: ' + this.cambioValor(vehiculoPrm.gato), 90, 249);
+
+		doc.setFontSize(18);
+		doc.text('Precio de venta: ' + vehiculoPrm.precioVenta.toString(), 120, 280);
 		doc.save('documento.pdf');
 
 	}
@@ -368,6 +370,15 @@ export class altaVehiculoComponente implements OnInit {
 		} else {
 			return 'No entregado';
 		}
+	}
+
+	cambioString(valor: any) {
+		if ( valor == null) {
+			return 'No hay datos';
+		} else {
+			return valor;
+		}
+
 	}
 }
 
