@@ -58,14 +58,13 @@ export class altaChequeComponente {
 			res=> {
 				//this.cheque = res.Cheque;
 				console.log(res);
-				
 			},
 			err =>{
 				console.log("No pasa nada");
 			}
 
 			);
-		},10);
+		}, 10);
 
 	}
 

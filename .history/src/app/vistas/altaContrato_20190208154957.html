@@ -1,0 +1,688 @@
+<div class="row mat-elevation-z8">
+	<div class="col-md-12 grid-margin stretch-card">
+		<div class="card">
+			<div class="card-body">
+				<form class="form-sample"  #formContrato="ngForm">
+
+					<div class="row form-group	">
+												
+						<div class="col-md-4 column">
+							<div class="form-group">
+									<p>Fecha de Ingreso*</p>
+							</div>
+							
+							<mat-form-field>
+								<input matInput id="fechaIngreso" [matDatepicker]="picker3" placeholder="Seleccionar" name="fechaIngreso" #fechaIngreso="ngModel" [(ngModel)]="contrato.fechaIngreso" required>
+								<mat-datepicker-toggle matSuffix [for]="picker3"></mat-datepicker-toggle>
+								<mat-datepicker #picker3></mat-datepicker>
+								<mat-error *ngIf="!fechaIngreso.valid && fechaIngreso.touched">*Campo requerido</mat-error>
+							</mat-form-field>
+						</div>
+						<div class="col-md-6">
+							<label>N° de Venta*</label>
+							<input type="number" class="form-control" placeholder="Numero de venta" #numeroVenta="ngModel" name="numeroVenta" [(ngModel)]="contrato.numeroVenta" required>
+							<p style="color: red" *ngIf="!numeroVenta.valid && numeroVenta.touched">* Campo requerido</p>
+						</div>
+					</div>
+					
+					
+							
+	
+				<!--Detalle de la unidad-->
+						<hr>
+
+					<h4>Detalle de la unidad solicitada</h4>
+					<br>
+					<div class="row">
+						<div class="col-md-6">
+							<div class="form-group">
+								<label for="dominio">Chasis/Dominio</label>
+								<div class="row">
+									<div class="col-md-8">
+										<input type="text" class="form-control" placeholder="Numero" name="vehiculoBuscar" [(ngModel)]="vehiculoBuscar">
+									</div>
+									<div class="col-md-1">
+										<button (click)="buscarVehiculo(vehiculoBuscar)" type="button" class="btn btn-light"><i class="fas fa-search"></i></button>
+									</div>
+									<p *ngIf="mensajeV" [ngStyle]="{'color':'red',
+									'font-size': '14px',
+									'margin': '10px'}">{{mensajeV}}</p>
+								</div>
+							</div>
+						</div>
+					</div>
+
+					<div class="row">
+						<div class="col-md-2">
+								<div class="form-group">
+									<label for="Marca">Dominio</label>
+									<input type="text" class="form-control" id="Marca" placeholder="dominio" name="dominio" #dominio="ngModel" [(ngModel)]="vehiculo.dominio" disabled required>
+									<p style="color: red" *ngIf="!dominio.valid && dominio.touched">* Campo requerido</p>
+								</div>
+							</div>
+							<div class="col-md-4">
+								<div class="form-group">
+									<label for="Modelo">Numero de Chasis</label>
+									<input type="text" class="form-control" id="Modelo" placeholder="Modelo" name="numeroChasis" #numeroChasis="ngModel" [(ngModel)]="vehiculo.numeroChasis" disabled required>
+									<p style="color: red" *ngIf="!numeroChasis.valid && numeroChasis.touched">* Campo requerido</p>
+								</div>
+							</div>
+							
+						</div>
+										
+						<div class="row">
+							<div class="col-md-2">
+								<div class="form-group">
+									<label for="Marca">Marca</label>
+									<input type="text" class="form-control" id="Marca" placeholder="Marca" name="marca" [(ngModel)]="vehiculo.marca" disabled>
+								</div>
+							</div>
+							<div class="col-md-4">
+								<div class="form-group">
+									<label for="Modelo">Modelo</label>
+									<input type="text" class="form-control" id="Modelo" placeholder="Modelo" name="modelo" [(ngModel)]="vehiculo.modelo" disabled>
+								</div>
+							</div>
+						
+						</div>
+						<div class="row">
+							<div class="col-md-2">
+								<div class="form-group">
+									<label for="Año">Año</label>
+									<input type="number" class="form-control" id="Año" placeholder="Año" name="year" [(ngModel)]="vehiculo.year" disabled>
+								</div>
+							</div>
+							<div class="col-md-4">
+								<div class="form-group">
+									<label for="PrecioVenta">Precio de venta</label>
+									<input type="text" class="form-control" id="PrecioVenta" placeholder="Marca" name="precioVenta" [(ngModel)]="vehiculo.precioVenta" disabled>
+								</div>
+							</div>
+						</div>
+
+							<div class="row">
+									<div class="col-md-6">
+										<div class="form-group">
+										<label for="gastos">Gastos de Patentamiento/Transferencia/Inscripción prenda</label>
+									<input type="text" class="form-control" id="gastos" placeholder="Gastos" name="gastos" [(ngModel)]="contrato.gastos">
+										</div>
+									</div>
+							</div>
+
+							<div class="row">
+									<div class="form-group col-md-6">
+								<label for="total">Total</label>
+									<input type="text" class="form-control" id="total" placeholder="Total" name="total"	 [(ngModel)]="contrato.total">
+									</div>
+							</div>
+
+			<!--Datos cliente-->
+			<hr>
+					<h4 class="card-title"> 
+						Datos del cliente
+					</h4>
+					<!--Tipo y numero-->
+					<div class="row">
+						<div class="col-md-6">
+							<div class="form-group">
+								<label for="Dni">DNI</label>
+								<div class="row">
+									<div class="col-md-3">
+										<select class="form-control form-control-sm">
+										<option value="">DNI</option>
+										<option value="">LC</option>
+										<option value="">LE</option>
+										<option value="">PASAPORTE</option>
+										</select>
+									</div>
+									<div class="col-md-8">
+										<input type="number" class="form-control" placeholder="Numero" name="dni" #dni="ngModel" [(ngModel)]="cliente.dni">
+									</div>
+									<div class="col-md-1">
+										<button (click)="buscarCliente(cliente.dni)" type="button" class="btn btn-light"><i class="fas fa-search"></i></button>
+										
+									</div>
+									<p *ngIf="mensajeC" [ngStyle]="{'color':'red',
+										'font-size': '14px',
+										'margin': '10px'}">{{mensajeC}}</p>
+								</div>
+							</div>
+						</div>
+					</div>
+
+					<!--Nombre y apellido-->
+					<div class="row">
+									<div class="col-md-6">
+										<div class="form-group">
+											<label for="Nombre">Nombre</label>
+											<input type="text" class="form-control" id="Nombre" placeholder="Nombre" name="clienteNombre"
+											[(ngModel)]="cliente.nombre" #clienteNombre="ngModel" required>
+											<p style="color: red" *ngIf="!clienteNombre.valid && clienteNombre.touched">* Campo requerido</p>
+										</div>
+									</div>
+									<div class="col-md-6">
+										<div class="form-group">
+											<label for="Apellido">Apellido</label>
+											<input type="text" class="form-control" id="Apellido" placeholder="Apellido" #clienteApellido="ngModel" name="apellido" #apellido="ngModel" [(ngModel)]="cliente.apellido" required>
+											<p style="color: red" *ngIf="!clienteApellido.valid && clienteApellido.touched">* Campo requerido</p>
+										</div>
+									</div>
+								</div>
+								
+								<!--Contacto-->
+								<div class="row">			            
+									<div class="col-md-6">
+										<div class="form-group">
+											<label for="">Celular</label>
+											<input type="number" class="form-control" id="Celular" placeholder="Celular" name="celular" #celular="ngModel" [(ngModel)]="cliente.celular" >
+										</div>
+									</div>
+								</div>
+
+								<div class="row">
+									<div class="col-md-6">
+										<div class="form-group">
+											
+											<label for="telAlternativo">Telefono Alternativo 1</label>
+											<input type="number" class="form-control" id="telAlternativo" placeholder="Telefono Alternativo 1" name="telefono" #telefono="ngModel" [(ngModel)]="cliente.telefono" >
+										</div>
+									</div>
+									<div class="col-md-6">
+										<div class="form-group">
+											<label for="telAlternativo2">Email</label>
+											<input type="email" class="form-control" id="telAlternativo2" placeholder="Email" name="email" #email="ngModel" [(ngModel)]="cliente.email" >
+										</div>
+									</div>
+								</div>
+								
+								<div class="form-group">
+									<label>Domicilio Actual</label>
+									<input type="text" class="form-control" placeholder="Domicilio" name="domicilio" #domicilio="ngModel" [(ngModel)]="cliente.domicilio">
+									
+								</div>
+								<div class="row">
+									<div class="col-md-8">
+										<div class="form-group">
+											<label for="Ciudad">Cuidad</label>
+											<input type="text" class="form-control" id="Cuidad" placeholder="Cuidad" name="ciudad" #ciudad="ngModel" [(ngModel)]="cliente.ciudad">
+										</div>
+									</div>
+									<div class="col-md-4">
+										<div class="form-group">
+											<label for="cp">CP</label>
+											<input type="text" class="form-control" id="cp" placeholder="Codigo Postal" name="cPostal" #cPostal="ngModel" [(ngModel)]="cliente.cPostal"> 
+										</div>
+									</div>
+								</div>
+								<div class="row form-group col-md-4">
+									<label for="cuit">C.U.I.T</label>
+									<input type="text" class="form-control" id="cuit" placeholder="Numero" name="cuit" #cuit="ngModel" [(ngModel)]="cliente.cuit">
+								</div>
+								<div class="row">
+									<div class="col-md-3">
+										<div class="form-group">
+											<label for="Estado Civil">Estado Civil</label>
+											<select class="form-control form-control-sm" name="estadoCivil" value="cliente.estadoCivil" #estadoCivil="ngModel" [(ngModel)]="cliente.estadoCivil">
+												<option value="Casado">Casado</option>
+												<option value="Soltero">Soltero</option>
+												<option value="Divorciado">Divorciado</option> 
+												<option value="Viudo">Viudo</option>               
+											</select>                  
+										</div>
+
+									</div>
+									<div class="col-md-4">
+										<div class="form-group">                  
+											<label for="cp">Profesión</label>
+											<input type="text" class="form-control" id="cp" placeholder="Profesion" name="profesion" #profesion="ngModel" [(ngModel)]="cliente.profesion"> 
+										</div>
+									</div>           
+								</div>
+								<div class=" form-group">
+									<br>
+									<div class="form-group">
+											<label for="fecNac">Fecha de nacimiento</label>
+									</div>
+									<mat-form-field>
+										<input matInput id="fecNac" [matDatepicker]="picker" placeholder="Seleccionar" name="fecNac" #fecNac="ngModel" [(ngModel)]="cliente.fecNac">
+										<mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+										<mat-datepicker #picker></mat-datepicker>
+									</mat-form-field> 
+									
+								</div>
+								<div class="form-group">
+													<label for="iva">Condición frente al IVA</label>
+													<div class="row">
+														<mat-radio-group name="condIva" #condIva="ngModel" [(ngModel)]="cliente.condIva">
+															<div>  
+																<mat-radio-button
+																			class="example-margin"
+																			value="Resp. Inscripto"
+																			
+																			[labelPosition]="labelPosition"
+																			[disabled]="false">
+																			Resp. Inscripto
+																	</mat-radio-button> 
+															</div>
+															<div>
+																<mat-radio-button
+																			class="example-margin"
+																			value="Resp. Monotributo"
+																			
+																			[labelPosition]="labelPosition"
+																			[disabled]="false">
+																			Resp. Monotributo
+																		</mat-radio-button> 
+															</div>
+															<div>
+																<mat-radio-button
+																			class="example-margin"
+																			value="Consumidor Final"
+																			
+																			[labelPosition]="labelPosition"
+																			[disabled]="false">
+																			Consumidor Final
+																		</mat-radio-button> 
+															</div>
+															<div>
+																<mat-radio-button
+																			class="example-margin"
+																			value="Exento"
+																			
+																			[labelPosition]="labelPosition"
+																			[disabled]="false">
+																			Exento
+																		</mat-radio-button> 
+															</div>
+															<div>
+																<mat-radio-button
+																			class="example-margin"
+																			value="No responsable"
+																			
+																			[labelPosition]="labelPosition"
+																			[disabled]="false">
+																			No responsable
+																		</mat-radio-button> 
+															</div>
+														</mat-radio-group>
+														
+													</div>
+													
+												</div>
+								<div class="row">
+									<div class="col-md-2">
+										<label for="obs">Observaciones</label>
+									</div>
+									<div class="col-md-4">
+										<textarea name="obs" id="" cols="20" rows="7" name="obs" #obs="ngModel" [(ngModel)]="cliente.obs"></textarea>
+									</div>
+
+								</div>
+					<hr>
+
+								<!--Datos Conyuge-->				            	
+								<div class="row" >
+									<button type="button" style="display:block; width: 200px;margin:0 auto;" class="btn btn-primary btn-rounded btn-fw" (click)="hConyuge = true" *ngIf="!hConyuge">Agregar Conyuge</button>
+									<button type="button" style="display:block; width: 200px;margin:0 auto;" class="btn btn-primary btn-rounded btn-fw" (click)="hConyuge = false" *ngIf="hConyuge">Ocultar Conyuge</button>
+								</div>
+								<div *ngIf="hConyuge">
+									<h4>Conyuge</h4>
+									<br>
+									<div class="row">
+							<div class="col-md-6">
+											<div class="form-group">
+												<label for="Documento">Documento</label>
+													<div class="row">
+															<div class="col-md-3">
+																<select name="docTipoCon" #docTipoCon="ngModel" [(ngModel)]="conyuge.docTipo"  class="form-control form-control-sm">
+																<option value="dni">DNI</option>
+																<option value="lc">LC</option>
+																<option value="le">LE</option>
+																<option value="pasaporte">PASAPORTE</option>
+																</select>
+															</div>
+															<div class="col-md-8">
+																<input type="number" class="form-control" placeholder="Numero" name="dniCon" #dniCon="ngModel" [(ngModel)]="conyuge.dni" required>
+																<p style="color: red" *ngIf="!dniCon.valid && dniCon.touched">* Campo requerido</p>
+															</div>
+															<div class="col-md-1">
+																<button (click)="buscarConyuge(conyuge.dni)" type="button" class="btn btn-light"><i class="fas fa-search"></i></button>
+																
+															</div>
+															<p *ngIf="mensajeCon" [ngStyle]="{'color':'red',
+																'font-size': '14px',
+																'margin': '10px'}">{{mensajeCon}}</p>
+													</div>
+											</div>
+										</div>
+						</div>
+						<div class="row">
+										<div class="col-md-6">
+											<div class="form-group">
+											<label for="Nombre">Nombre</label>
+											<input type="text" class="form-control" id="Nombre" placeholder="Nombre" name="nombCon" #nombCon="ngModel"
+											[(ngModel)]="conyuge.nombre" required>
+											<p style="color: red" *ngIf="!nombCon.valid && nombCon.touched">* Campo requerido</p>
+											</div>
+										</div>
+										<div class="col-md-6">
+											<div class="form-group">
+												<label for="Apellido">Apellido</label>
+												<input type="text" class="form-control" id="Apellido" placeholder="Apellido" name="apellidoCon" #apellidoCon="ngModel" [(ngModel)]="conyuge.apellido" required>
+												<p style="color: red" *ngIf="!apellidoCon.valid && apellidoCon.touched">* Campo requerido</p>
+											</div>
+										</div>
+									</div>
+									
+									<div class="row">			            
+										<div class="col-md-6">
+											<div class="form-group">
+												<label for="">Celular</label>
+												<input type="number" class="form-control" id="Celular" placeholder="Celular" name="celularCon" #celularCon="ngModel" [(ngModel)]="conyuge.celular" >
+											</div>
+										</div>
+									</div>
+
+									<div class="row">
+										<div class="col-md-6">
+											<div class="form-group">
+												
+												<label for="telAlternativo">Telefono Alternativo 1</label>
+												<input type="number" class="form-control" id="telAlternativo" placeholder="Telefono Alternativo 1" name="telefonoCon" #telefonoCon="ngModel" [(ngModel)]="conyuge.telefono" >
+											</div>
+										</div>
+										<div class="col-md-6">
+											<div class="form-group">
+												<label for="telAlternativo2">Email</label>
+												<input type="email" class="form-control" id="telAlternativo2" placeholder="Email" name="emailCon" #emailCon="ngModel" [(ngModel)]="conyuge.email" >
+											</div>
+										</div>
+									</div>
+									
+									<div class="form-group">
+										<label>Domicilio Actual</label>
+										<input type="text" class="form-control" placeholder="Domicilio" name="domicilioCon" #domicilioCon="ngModel" [(ngModel)]="conyuge.domicilio">
+										
+									</div>
+									<div class="row">
+										<div class="col-md-8">
+											<div class="form-group">
+												<label for="Ciudad">Cuidad</label>
+												<input type="text" class="form-control" id="Cuidad" placeholder="Cuidad" name="ciudadCon" #ciudadCon="ngModel" [(ngModel)]="conyuge.ciudad">
+											</div>
+										</div>
+										<div class="col-md-4">
+											<div class="form-group">
+												<label for="cp">CP</label>
+												<input type="text" class="form-control" id="cp" placeholder="Codigo Postal" name="cPostalCon" #cPostalCon="ngModel" [(ngModel)]="conyuge.cPostal"> 
+											</div>
+										</div>
+									</div>
+									<div class="row form-group col-md-4">
+										<label for="cuit">C.U.I.T</label>
+										<input type="text" class="form-control" id="cuit" placeholder="Numero" name="cuitCon" #cuitCon="ngModel" [(ngModel)]="conyuge.cuit">
+									</div>
+									<div class="row">
+										<div class="col-md-3">
+											<div class="form-group">
+												<label for="Estado Civil">Estado Civil</label>
+												<select class="form-control form-control-sm" name="estadoCivilCon" value="conyuge.estadoCivil" #estadoCivilCon="ngModel" [(ngModel)]="conyuge.estadoCivil">
+													<option value="Casado">Casado</option>
+													<option value="Soltero">Soltero</option>
+													<option value="Divorciado">Divorciado</option> 
+													<option value="Viudo">Viudo</option>               
+												</select>                  
+											</div>
+
+										</div>
+										<div class="col-md-4">
+											<div class="form-group">                  
+												<label for="cp">Profesión</label>
+												<input type="text" class="form-control" id="cp" placeholder="Profesion" name="profesionCon" #profesionCon="ngModel" [(ngModel)]="conyuge.profesion"> 
+											</div>
+										</div>           
+									</div>
+									<div class=" form-group">
+										<br>
+										<div class="form-group">
+												<label for="fecNac">Fecha de nacimiento</label>
+										</div>
+										<mat-form-field>
+											<input matInput id="fecNac" [matDatepicker]="picker" placeholder="Seleccionar" name="fecNacCon" #fecNacCon="ngModel" [(ngModel)]="conyuge.fecNac">
+											<mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+											<mat-datepicker #picker></mat-datepicker>
+										</mat-form-field> 
+										
+									</div>
+									<div class="form-group">
+												<label for="iva">Condición frente al IVA</label>
+												<div class="row">
+													<mat-radio-group name="condIvaCon" #condIvaCon="ngModel" [(ngModel)]="conyuge.condIva">
+														<div>  
+															<mat-radio-button
+																		class="example-margin"
+																		value="Resp. Inscripto"
+																		
+																		[labelPosition]="labelPosition"
+																		[disabled]="false">
+																		Resp. Inscripto
+																</mat-radio-button> 
+														</div>
+														<div>
+															<mat-radio-button
+																		class="example-margin"
+																		value="Resp. Monotributo"
+																		
+																		[labelPosition]="labelPosition"
+																		[disabled]="false">
+																		Resp. Monotributo
+																	</mat-radio-button> 
+														</div>
+														<div>
+															<mat-radio-button
+																		class="example-margin"
+																		value="Consumidor Final"
+																		
+																		[labelPosition]="labelPosition"
+																		[disabled]="false">
+																		Consumidor Final
+																	</mat-radio-button> 
+														</div>
+														<div>
+															<mat-radio-button
+																		class="example-margin"
+																		value="Exento"
+																		
+																		[labelPosition]="labelPosition"
+																		[disabled]="false">
+																		Exento
+																	</mat-radio-button> 
+														</div>
+														<div>
+															<mat-radio-button
+																		class="example-margin"
+																		value="No responsable"
+																		
+																		[labelPosition]="labelPosition"
+																		[disabled]="false">
+																		No responsable
+																	</mat-radio-button> 
+														</div>
+													</mat-radio-group>
+													
+												</div>
+												
+											</div>
+									<div class="row">
+										<div class="col-md-2">
+											<label for="obs">Observaciones</label>
+										</div>
+										<div class="col-md-4">
+											<textarea name="obs" id="" cols="20" rows="7" name="obsCon" #obsCon="ngModel" [(ngModel)]="conyuge.obs"></textarea>
+										</div>
+
+									</div>
+								</div>
+			<!--Datos de la compra-->
+
+						<hr>
+						<h4>Forma de Pago</h4>
+						<br>
+						<div class="column">
+							<div class="row">
+								<div class="col-md-6">
+									<div class=" row">
+										<mat-checkbox
+														class="example-margin"
+														[(ngModel)]="Sena" name="Sena"
+														
+														[labelPosition]="labelPosition"
+														[disabled]="false">
+														Seña
+													</mat-checkbox>
+									</div>
+												
+												<div class="row" *ngIf="Sena">
+												<div class="col-md-9">
+											<div class="form-group">
+											<label for="seña">Seña</label>
+												<input type="text" class="form-control" id="seña" placeholder="Seña" name="sena" #obs="ngModel" [(ngModel)]="contrato.sena">
+											</div>
+										</div>
+											</div>
+										</div>
+										<div class="col-md-6">
+											<mat-checkbox
+														class="example-margin"
+														[(ngModel)]="Contado" name="Contado"
+														
+														[labelPosition]="labelPosition"
+														[disabled]="false">
+														Contado
+													</mat-checkbox> 
+												<div class="row" *ngIf="Contado">
+												<div class="col-md-9">
+												<div class="form-group">
+													<label for="contado">Contado</label>
+													<input type="text" class="form-control" id="contado" placeholder="Contado" name="contado" #contado="ngModel" [(ngModel)]="contrato.contado">
+												</div>
+											</div>
+											</div>
+										</div>
+							</div>
+								
+					<hr>
+									
+									
+
+										<!--Datos de Usado-->
+									<div class="row">
+										<mat-checkbox
+													class="example-margin"
+													[(ngModel)]="Usado" name="Usado"
+													
+													[labelPosition]="labelPosition"
+													[disabled]="false">
+													Entrega Usado
+											</mat-checkbox> 
+									</div>
+									<div class="row" *ngIf="Usado" class="forms-sample">
+										<div class="row">
+											<div class="col-md-6">
+											<div class="form-group">
+												<label for="Dominio">Dominio</label>
+												<input type="text" class="form-control" id="DominioUsado" placeholder="Dominio" name="dominioUsado" [(ngModel)]="usado.dominio" required>
+									</div>
+											</div>
+											<div class="col-md-6">
+											<div class="form-group">
+												<label for="numChasis">Numero de Chasis</label>
+												<input type="text" class="form-control" id="numChasisUsado" placeholder="Numero de chasis" name="numeroChasisUsado" [(ngModel)]="usado.numeroChasis" required>
+									</div>
+											</div>
+										</div>
+										<div class="row">
+											<div class="col-md-6">
+											<div class="form-group">
+												<label for="Marca">Marca</label>
+												<input type="text" class="form-control" id="MarcaUsado" placeholder="Marca" name="marcaUsado" [(ngModel)]="usado.marca" required>
+									</div>
+											</div>
+										</div>
+									<div class="row">
+										<div class="col-md-6">
+											<div class="form-group">
+												<label for="Modelo">Modelo</label>
+												<input type="text" class="form-control" id="ModeloUsado" placeholder="Modelo" name="modeloUsado" [(ngModel)]="usado.modelo" required>
+											</div>
+										</div>
+										<div class="col-md-3">
+											<div class="form-group">
+												<label for="Año">Año</label>
+												<input type="number" class="form-control" id="AñoUsado" placeholder="Año" name="yearUsado" [(ngModel)]="usado.year" required>
+											</div>
+										</div>
+									</div>
+									<div class="row">				              
+										
+										<div class="col-md-6">
+											<div class="form-group">
+												<label for="PrecioCompra">Valor usado</label>
+												<input type="number" class="form-control" id="PrecioCompraUsado" placeholder="Valor" name="precioCompraUsado" [(ngModel)]="usado.precioCompra" required>
+											</div>
+										</div>
+									</div>
+									</div>
+									<hr>
+									
+									
+									<div class="row">
+										<mat-checkbox
+													class="example-margin"
+													[(ngModel)]="Finan" name="Finan"
+													
+													[labelPosition]="labelPosition"
+													[disabled]="false">
+													Financiación
+											</mat-checkbox> 
+									</div>
+									<!--Financiación-->
+									<div class="column" *ngIf="Finan">		                	
+										<div class="row form-group col-md-5">
+										<label for="monto">Monto a financiar</label>
+										<input type="text" class="form-control"Usado id="monto" placeholder="Monto" name="montoFinanc" [(ngModel)]="contrato.montoFinanc" >
+									</div>
+									<div class="row">				          		
+										<div class="form-group col-md-5">
+											<label for="financ">Cant. Cuotas</label>
+											<input type="text" class="form-control" id="financ" placeholder="Cant. Cuotas" name="cantCuotas" [(ngModel)]="contrato.cantCuotas" >
+										</div>
+										<div class="form-group col-md-5">
+											<label for="import">Importe Cuotas $</label>
+											<input type="text" class="form-control" id="import" placeholder="Importe Cuotas" name="importeCuotas" [(ngModel)]="contrato.importeCuotas" >
+										</div>
+									</div>
+									<div class="row">
+										<div class="form-group col-md-5">
+											<label for="adicional">Adicional</label>
+											<input type="text" class="form-control" id="adicional" placeholder="Adicional" name="adicional" [(ngModel)]="contrato.adicional" >
+										</div>
+									</div>
+								</div>
+								<hr>	
+								</div>
+
+					<span style="float: right;">
+						<button *ngIf="parmUrl" class="btn btn-success mr-2" (click)="guardarDetalleContrato(contrato)"  >Guardar detalle</button>
+							<button *ngIf="!parmUrl" (click)="altaContrato()" class="btn btn-success mr-2" [disabled]="!formContrato.valid">Guardar</button>
+							
+						<button class="btn btn-light" [routerLink]="['/tablaContratos']">Cancelar</button>
+					</span>      
+					
+
+
+				</form>
+			</div>
+		</div>
+	</div>
+</div>
